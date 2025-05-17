@@ -5,24 +5,25 @@ import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
 import { useApp } from '@jenesei-software/jenesei-ui-react/context-app'
 import { useForm } from '@tanstack/react-form'
+import { useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Form } from '@local/components/component-form'
 import { useValidation } from '@local/contexts/context-validation'
+import { PageRoutePublicSignUp } from '@local/core/router'
 
 export function PagePublicSignIn() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' })
   const { t: tSignIn } = useTranslation('translation', { keyPrefix: 'private.sign-in' })
 
   const { changeTitle } = useApp()
   const { validationSignIn, validationFunctions } = useValidation()
-  const { t: tPrivateSignIn } = useTranslation('translation', { keyPrefix: 'private.sign-in' })
   const { mutateAsync } = useSSOSignIn()
   useEffect(() => {
-    changeTitle(tPrivateSignIn('title-url'))
-  }, [changeTitle, tPrivateSignIn])
+    changeTitle(tSignIn('title-url'))
+  }, [changeTitle, tSignIn])
 
   const form = useForm({
     defaultValues: {
@@ -50,7 +51,7 @@ export function PagePublicSignIn() {
 
   useEffect(() => {
     form.validate('blur')
-  }, [form, tPrivateSignIn])
+  }, [form, tSignIn])
 
   return (
     <>
@@ -86,6 +87,9 @@ export function PagePublicSignIn() {
         >
           {tSignIn('title-sign-up-1')}{' '}
           <Typography
+            onClick={() => {
+              navigate({ to: PageRoutePublicSignUp.fullPath })
+            }}
             sx={{
               default: {
                 variant: 'h8',
@@ -128,7 +132,7 @@ export function PagePublicSignIn() {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={field.handleChange}
-                  genre="realebail-white"
+                  genre="grayBorder"
                   size="medium"
                   isNoSpaces
                   error={{
@@ -163,7 +167,7 @@ export function PagePublicSignIn() {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={field.handleChange}
-                  genre="realebail-white"
+                  genre="grayBorder"
                   size="medium"
                   isNoSpaces
                   error={{

@@ -76,7 +76,7 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
   const validationSignIn = useMemo(
     () =>
       yup.object({
-        nickname: yup
+        username: yup
           .string()
           .trim()
           .required(tForm('username.errors.required'))
@@ -134,6 +134,11 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
           .test('no-spaces', tForm('email.errors.no-spaces'), value => !value?.includes(' '))
           .test('email-check', tForm('email.errors.alreadyExists'), async function (v) {
             const { createError } = this
+
+            if (!v || !v.includes('@') || v.includes(' ')) {
+              return true
+            }
+
             try {
               const response = await getUserCheckEmail({ path: { email: v } })
               return !response.value
@@ -141,7 +146,7 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
               return createError({ message: tForm('email.errors.no-check') })
             }
           }),
-        nickname: yup
+        username: yup
           .string()
           .trim()
           .required(tForm('username.errors.required'))
@@ -150,6 +155,11 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
           .test('no-spaces', tForm('username.errors.no-spaces'), value => !value?.includes(' '))
           .test('login-check', tForm('username.errors.alreadyExists'), async function (v) {
             const { createError } = this
+
+            if (!v || v.length < 2 || v.length > 12 || v.includes(' ')) {
+              return true
+            }
+
             try {
               const response = await getUserCheckNickname({ path: { nickname: v } })
               return !response.value

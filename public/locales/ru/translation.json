@@ -15,7 +15,16 @@
     },
     "sign-up": {
       "title-url": "Jenesei ID - Регистрация",
-      "title-url-confirmation": "Jenesei ID - Подтверждение почты"
+      "title-url-confirmation": "Jenesei ID - Подтверждение почты",
+      "title": "Создание аккаунта",
+      "title-sign-in-1": "У вас уже есть аккаунт?",
+      "title-sign-in-2": "Войти",
+      "title-confirmation": "Проверьте свою почту",
+      "title-confirmation-description": "Мы отправили вам письмо с подтверждением на адрес",
+      "title-button": "Зарегистрироваться",
+      "title-button-continue": "Продолжить",
+      "title-button-repeat-time": "Отправить код повторно через: {{seconds}} секунд",
+      "title-button-repeat": "Отправить код повторно"
     },
     "forgot-password": {
       "title-url": "Jenesei ID - Восстановление пароля",
@@ -96,6 +105,107 @@
         "special": "Пароль должен содержать хотя бы один специальный символ",
         "mismatch": "Пароли не совпадают",
         "no-spaces": "Пароль не должен содержать пробелов"
+      }
+    }
+  },
+  "date": {
+    "months": {
+      "january": {
+        "localeLong": "Январь",
+        "localeShort": "Янв",
+        "value": "january"
+      },
+      "february": {
+        "localeLong": "Февраль",
+        "localeShort": "Фев",
+        "value": "february"
+      },
+      "march": {
+        "localeLong": "Март",
+        "localeShort": "Мар",
+        "value": "march"
+      },
+      "april": {
+        "localeLong": "Апрель",
+        "localeShort": "Апр",
+        "value": "april"
+      },
+      "may": {
+        "localeLong": "Май",
+        "localeShort": "Май",
+        "value": "may"
+      },
+      "june": {
+        "localeLong": "Июнь",
+        "localeShort": "Июн",
+        "value": "june"
+      },
+      "july": {
+        "localeLong": "Июль",
+        "localeShort": "Июл",
+        "value": "july"
+      },
+      "august": {
+        "localeLong": "Август",
+        "localeShort": "Авг",
+        "value": "august"
+      },
+      "september": {
+        "localeLong": "Сентябрь",
+        "localeShort": "Сен",
+        "value": "september"
+      },
+      "october": {
+        "localeLong": "Октябрь",
+        "localeShort": "Окт",
+        "value": "october"
+      },
+      "november": {
+        "localeLong": "Ноябрь",
+        "localeShort": "Ноя",
+        "value": "november"
+      },
+      "december": {
+        "localeLong": "Декабрь",
+        "localeShort": "Дек",
+        "value": "december"
+      }
+    },
+    "weeks": {
+      "mo": {
+        "localeLong": "Понедельник",
+        "localeShort": "Пн",
+        "value": "mo"
+      },
+      "tu": {
+        "localeLong": "Вторник",
+        "localeShort": "Вт",
+        "value": "tu"
+      },
+      "we": {
+        "localeLong": "Среда",
+        "localeShort": "Ср",
+        "value": "we"
+      },
+      "th": {
+        "localeLong": "Четверг",
+        "localeShort": "Чт",
+        "value": "th"
+      },
+      "fr": {
+        "localeLong": "Пятница",
+        "localeShort": "Пт",
+        "value": "fr"
+      },
+      "sa": {
+        "localeLong": "Суббота",
+        "localeShort": "Сб",
+        "value": "sa"
+      },
+      "su": {
+        "localeLong": "Воскресенье",
+        "localeShort": "Вс",
+        "value": "su"
       }
     }
   }

@@ -98,5 +98,106 @@
         "no-spaces": "Password must not contain spaces"
       }
     }
+  },
+  "date": {
+    "months": {
+      "january": {
+        "localeLong": "January",
+        "localeShort": "Jan",
+        "value": "january"
+      },
+      "february": {
+        "localeLong": "February",
+        "localeShort": "Feb",
+        "value": "february"
+      },
+      "march": {
+        "localeLong": "March",
+        "localeShort": "Mar",
+        "value": "march"
+      },
+      "april": {
+        "localeLong": "April",
+        "localeShort": "Apr",
+        "value": "april"
+      },
+      "may": {
+        "localeLong": "May",
+        "localeShort": "May",
+        "value": "may"
+      },
+      "june": {
+        "localeLong": "June",
+        "localeShort": "Jun",
+        "value": "june"
+      },
+      "july": {
+        "localeLong": "July",
+        "localeShort": "Jul",
+        "value": "july"
+      },
+      "august": {
+        "localeLong": "August",
+        "localeShort": "Aug",
+        "value": "august"
+      },
+      "september": {
+        "localeLong": "September",
+        "localeShort": "Sep",
+        "value": "september"
+      },
+      "october": {
+        "localeLong": "October",
+        "localeShort": "Oct",
+        "value": "october"
+      },
+      "november": {
+        "localeLong": "November",
+        "localeShort": "Nov",
+        "value": "november"
+      },
+      "december": {
+        "localeLong": "December",
+        "localeShort": "Dec",
+        "value": "december"
+      }
+    },
+    "weeks": {
+      "mo": {
+        "localeLong": "Monday",
+        "localeShort": "Mon",
+        "value": "mo"
+      },
+      "tu": {
+        "localeLong": "Tuesday",
+        "localeShort": "Tue",
+        "value": "tu"
+      },
+      "we": {
+        "localeLong": "Wednesday",
+        "localeShort": "Wed",
+        "value": "we"
+      },
+      "th": {
+        "localeLong": "Thursday",
+        "localeShort": "Thu",
+        "value": "th"
+      },
+      "fr": {
+        "localeLong": "Friday",
+        "localeShort": "Fri",
+        "value": "fr"
+      },
+      "sa": {
+        "localeLong": "Saturday",
+        "localeShort": "Sat",
+        "value": "sa"
+      },
+      "su": {
+        "localeLong": "Sunday",
+        "localeShort": "Sun",
+        "value": "su"
+      }
+    }
   }
 }
