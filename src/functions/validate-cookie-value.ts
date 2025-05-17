@@ -1,4 +1,4 @@
-import { ValidCookieObject } from '@jenesei-software/jenesei-ui-react'
+import { ValidCookieObject } from '@jenesei-software/jenesei-ui-react/context-cookie'
 
 export const validateCookieKeys: (keyof ValidCookieObject)[] = ['auth_status']
 export function getValidateCookieValue<K extends keyof ValidCookieObject>(

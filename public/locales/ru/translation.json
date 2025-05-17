@@ -1,0 +1,360 @@
+{
+  "header": {
+    "logo": "RealEbail"
+  },
+  "permission": {
+    "geolocation": {
+      "button-title-prompt": "Запросить разрешение на геолокацию",
+      "button-title-granted": "Разрешение на геолокацию предоставлено",
+      "button-title-denied": "Разрешение на геолокацию отклонено"
+    }
+  },
+  "map": {
+    "title-url": "RealEbail - Карта"
+  },
+  "settings": {
+    "title-url": "RealEbail - Настройки",
+    "title-change-language": "Выберите язык:",
+    "title-change-theme-map": "Выберите тему карты:",
+    "title-button-logout": "Выйти"
+  },
+  "units": {
+    "title-url-unit-add": "RealEbail - Создание объекта",
+    "title-url-unit-management": "RealEbail - Управление объектом",
+    "title-url-unit-list": "RealEbail - Список объектов",
+    "title-url-developer-add": "RealEbail - Создание застройщика",
+    "title-url-developer-management": "RealEbail - Управление застройщиком",
+    "title-url-developer-list": "RealEbail - Список застройщиков"
+  },
+  "sign-up": {
+    "title-url": "RealEbail - Регистрация",
+    "title-url-confirmation": "RealEbail - Подтверждение почты",
+    "title-sign-up": "Регистрация",
+    "title-or": "или",
+    "title-confirmation": "Введите код для подтверждения почты",
+    "title-button": "Зарегистрироваться",
+    "title-button-continue": "Продолжить",
+    "title-button-repeat-time": "Отправить код повторно через: {{seconds}} секунд",
+    "title-button-repeat": "Отправить код повторно",
+    "title-sign-in": "Уже есть аккаунт? (войти)"
+  },
+  "sign-in": {
+    "title-url": "RealEbail - Вход",
+    "title-sign-in": "Вход",
+    "title-or": "или",
+    "title-button": "Войти",
+    "title-sign-up": "Нет аккаунта? (зарегистрироваться)",
+    "title-forgot-password": "Забыли пароль?"
+  },
+  "forgot-password": {
+    "title-url": "RealEbail - Восстановление пароля",
+    "title-forgot-password": "Восстановление пароля",
+    "title-button-email": "Отправить код на почту",
+    "title-button-password": "Сменить пароль",
+    "title-button-sign-in": "Войти",
+    "title-sign-in": "Назад"
+  },
+  "sonner": {
+    "undo": "Закрыть",
+    "page-sign-up": {
+      "full-attempts": {
+        "title": "Ошибка",
+        "description": "Вы исчерпали все попытки регистрации. Пожалуйста, попробуйте позже."
+      }
+    },
+    "page-forgot-password": {
+      "full-attempts": {
+        "title": "Ошибка",
+        "description": "Вы исчерпали все попытки сброса пароля. Пожалуйста, попробуйте позже."
+      }
+    },
+    "auth-confirm-email": {
+      "error": {
+        "title": "Ошибка",
+        "description": "Не удалось отправить запрос на подтверждение почты."
+      }
+    },
+    "auth-confirmation": {
+      "error": {
+        "title": "Ошибка",
+        "description": "Не удалось подтвердить владение почтой."
+      }
+    },
+    "auth-sign-up": {
+      "error": {
+        "title": "Не удалось зарегистрироваться",
+        "description": "Пожалуйста, попробуйте позже."
+      },
+      "success": {
+        "title": "Успех",
+        "description": "Вы успешно зарегистрировались."
+      }
+    },
+    "auth-sign-in": {
+      "error": {
+        "title": "Ошибка",
+        "description": "Не удалось войти в систему."
+      },
+      "success": {
+        "title": "Успех",
+        "description": "Вы вошли в систему."
+      }
+    },
+    "profile-forgot-password": {
+      "error": {
+        "title": "Ошибка",
+        "description": "Не удалось отправить код на почту."
+      },
+      "success": {
+        "title": "Успех",
+        "description": "Код отправлен на почту."
+      }
+    },
+    "profile-reset-password": {
+      "error": {
+        "title": "Ошибка",
+        "description": "Не удалось изменить пароль."
+      },
+      "success": {
+        "title": "Успех",
+        "description": "Пароль успешно измене."
+      }
+    },
+    "unit-create": {
+      "error": {
+        "title": "Ошибка",
+        "description": "Не удалось создать объект."
+      },
+      "success": {
+        "title": "Успех",
+        "description": "Объект успешно создан."
+      }
+    }
+  },
+  "date": {
+    "months": {
+      "january": {
+        "localeLong": "Январь",
+        "localeShort": "Янв",
+        "value": "january"
+      },
+      "february": {
+        "localeLong": "Февраль",
+        "localeShort": "Фев",
+        "value": "february"
+      },
+      "march": {
+        "localeLong": "Март",
+        "localeShort": "Мар",
+        "value": "march"
+      },
+      "april": {
+        "localeLong": "Апрель",
+        "localeShort": "Апр",
+        "value": "april"
+      },
+      "may": {
+        "localeLong": "Май",
+        "localeShort": "Май",
+        "value": "may"
+      },
+      "june": {
+        "localeLong": "Июнь",
+        "localeShort": "Июн",
+        "value": "june"
+      },
+      "july": {
+        "localeLong": "Июль",
+        "localeShort": "Июл",
+        "value": "july"
+      },
+      "august": {
+        "localeLong": "Август",
+        "localeShort": "Авг",
+        "value": "august"
+      },
+      "september": {
+        "localeLong": "Сентябрь",
+        "localeShort": "Сен",
+        "value": "september"
+      },
+      "october": {
+        "localeLong": "Октябрь",
+        "localeShort": "Окт",
+        "value": "october"
+      },
+      "november": {
+        "localeLong": "Ноябрь",
+        "localeShort": "Ноя",
+        "value": "november"
+      },
+      "december": {
+        "localeLong": "Декабрь",
+        "localeShort": "Дек",
+        "value": "december"
+      }
+    },
+    "weeks": {
+      "mo": {
+        "localeLong": "Понедельник",
+        "localeShort": "Пн",
+        "value": "mo"
+      },
+      "tu": {
+        "localeLong": "Вторник",
+        "localeShort": "Вт",
+        "value": "tu"
+      },
+      "we": {
+        "localeLong": "Среда",
+        "localeShort": "Ср",
+        "value": "we"
+      },
+      "th": {
+        "localeLong": "Четверг",
+        "localeShort": "Чт",
+        "value": "th"
+      },
+      "fr": {
+        "localeLong": "Пятница",
+        "localeShort": "Пт",
+        "value": "fr"
+      },
+      "sa": {
+        "localeLong": "Суббота",
+        "localeShort": "Сб",
+        "value": "sa"
+      },
+      "su": {
+        "localeLong": "Воскресенье",
+        "localeShort": "Вс",
+        "value": "su"
+      }
+    }
+  },
+  "form": {
+    "unit-management": {
+      "description": {
+        "placeholder": "Напишите описание объекта",
+        "errors": {
+          "required": "Обязательное поле",
+          "minLength": "Описание должно содержать не менее {{minLength}} символов",
+          "maxLength": "Описание не должно превышать {{maxLength}} символов"
+        }
+      },
+      "type": {
+        "placeholder": "Выберите тип объекта",
+        "errors": {
+          "required": "Обязательное поле"
+        }
+      },
+      "stage": {
+        "placeholder": "Выберите стадию застройки",
+        "errors": {
+          "required": "Обязательное поле"
+        }
+      },
+      "district": {
+        "placeholder": "Выберите район",
+        "errors": {
+          "required": "Обязательное поле"
+        }
+      },
+      "developerId": {
+        "placeholder": "Выберите застройщика",
+        "errors": {
+          "required": "Обязательное поле"
+        }
+      },
+      "coords": {
+        "placeholder-latitude": "Широта",
+        "placeholder-longitude": "Долгота",
+        "errors": {
+          "required": "Обязательное поле"
+        }
+      },
+      "pricePerSqm": {
+        "placeholder": "Цена за квадратный метр",
+        "errors": {
+          "required": "Обязательное поле"
+        }
+      },
+      "totalPrice": {
+        "placeholder": "Полная цена",
+        "errors": {
+          "required": "Обязательное поле"
+        }
+      },
+      "images": {
+        "locale": {
+          "textFallbackImage": "Не удалось загрузить изображение",
+          "textAddImage": "Добавить изображение",
+          "textResetImage": "Сбросить",
+          "dragAndDrop": "Перетащите файлы сюда"
+        },
+        "description": "Размер изображения не должен превышать 1Мб",
+        "errors": {
+          "required": "Обязательное поле",
+          "minLength": "Минимум {{minLength}} изображений",
+          "maxLength": "Максимум {{maxLength}} изображений"
+        }
+      }
+    },
+    "language": {
+      "placeholder": "Выберите язык"
+    },
+    "theme-map": {
+      "placeholder": "Выберите тему карты"
+    },
+    "dateOfBirth": {
+      "placeholder": "Дата рождения",
+      "errors": {
+        "required": "Обязательное поле",
+        "invalid": "Некорректная дата рождения",
+        "minAge": "Дата рождения должна быть не менее {{minAge}} лет",
+        "maxAge": "Дата рождения должна быть не более {{maxAge}} лет",
+        "future": "Дата рождения не может быть в будущем"
+      }
+    },
+    "username": {
+      "placeholder": "Логин",
+      "errors": {
+        "no-spaces": "Логин не должен содержать пробелов",
+        "alreadyExists": "Логин уже зарегистрирован",
+        "required": "Обязательное поле",
+        "minLength": "Логин должен содержать не менее {{minLength}} символов",
+        "maxLength": "Логин не должен превышать {{maxLength}} символов"
+      }
+    },
+    "code": {
+      "errors": {
+        "required": "Обязательное поле",
+        "length": "Недостаточно символов"
+      }
+    },
+    "email": {
+      "placeholder": "Почта",
+      "errors": {
+        "required": "Обязательное поле",
+        "alreadyExists": "Почта уже зарегистрирована",
+        "invalid": "Некорректный адрес электронной почты",
+        "no-spaces": "Почта не должна содержать пробелов"
+      }
+    },
+    "password": {
+      "placeholder": "Пароль",
+      "placeholder-confirm": "Подтвердите пароль",
+      "errors": {
+        "required": "Обязательное поле",
+        "minLength": "Пароль должен содержать не менее {{minLength}} символов",
+        "maxLength": "Пароль не должен превышать {{maxLength}} символов",
+        "uppercase": "Пароль должен содержать хотя бы одну заглавную букву",
+        "lowercase": "Пароль должен содержать хотя бы одну строчную букву",
+        "digit": "Пароль должен содержать хотя бы одну цифру",
+        "special": "Пароль должен содержать хотя бы один специальный символ",
+        "mismatch": "Пароли не совпадают",
+        "no-spaces": "Пароль не должен содержать пробелов"
+      }
+    }
+  }
+}

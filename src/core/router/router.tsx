@@ -1,0 +1,101 @@
+import { QueryClient } from '@tanstack/react-query'
+import { Navigate, createRootRouteWithContext, createRoute, createRouter, redirect } from '@tanstack/react-router'
+
+import { LayoutErrorRouter } from '@local/layouts/layout-error'
+import { LayoutPrivate } from '@local/layouts/layout-private'
+import { LayoutPublic } from '@local/layouts/layout-public'
+import { LayoutRoot } from '@local/layouts/layout-root'
+import { PagePrivateHome } from '@local/pages/private/home'
+import { PagePublicForgotPassword } from '@local/pages/public/forgot-password'
+import { PagePublicSignIn } from '@local/pages/public/sign-in'
+import { PagePublicSignUp } from '@local/pages/public/sign-up'
+
+import { validateLayoutRouteRootSearch } from '.'
+
+export interface IContext {
+  queryClient: QueryClient
+}
+
+export const LayoutRouteRoot = createRootRouteWithContext<IContext>()({
+  component: LayoutRoot,
+  validateSearch: validateLayoutRouteRootSearch,
+  errorComponent: LayoutErrorRouter,
+  notFoundComponent: () => <Navigate to={LayoutRoutePublic.fullPath} />
+})
+
+export const LayoutRoutePrivate = createRoute({
+  getParentRoute: () => LayoutRouteRoot,
+  component: LayoutPrivate,
+  notFoundComponent: () => <Navigate to={PageRoutePrivateHome.fullPath} />,
+  path: '/pr',
+  beforeLoad: props => {
+    const isFirst = props.location.pathname == '/pr'
+    if (isFirst)
+      throw redirect({
+        to: PageRoutePrivateHome.fullPath
+      })
+  }
+})
+
+export const LayoutRoutePublic = createRoute({
+  getParentRoute: () => LayoutRouteRoot,
+  component: LayoutPublic,
+  notFoundComponent: () => <Navigate to={PageRoutePublicSignIn.fullPath} />,
+  path: '/pu',
+  beforeLoad: props => {
+    const isFirst = props.location.pathname == '/pu'
+    if (isFirst)
+      throw redirect({
+        to: PageRoutePublicSignIn.fullPath
+      })
+  }
+})
+
+export const PageRoutePrivateHome = createRoute({
+  getParentRoute: () => LayoutRoutePrivate,
+  component: PagePrivateHome,
+  path: '/home'
+})
+export const PageRoutePublicSignUp = createRoute({
+  getParentRoute: () => LayoutRoutePublic,
+  component: PagePublicSignUp,
+  path: '/sign-up'
+})
+
+export const PageRoutePublicSignIn = createRoute({
+  getParentRoute: () => LayoutRoutePublic,
+  component: PagePublicSignIn,
+  path: '/sign-in'
+})
+
+export const PageRoutePublicForgotPassword = createRoute({
+  getParentRoute: () => LayoutRoutePublic,
+  component: PagePublicForgotPassword,
+  path: '/forgot-password'
+})
+
+const routeTree = LayoutRouteRoot.addChildren({
+  LayoutRoutePublic: LayoutRoutePublic.addChildren({
+    PageRoutePublicSignUp,
+    PageRoutePublicSignIn,
+    PageRoutePublicForgotPassword
+  }),
+  LayoutRoutePrivate: LayoutRoutePrivate.addChildren({
+    PageRoutePrivateHome
+  })
+})
+
+export const router = createRouter({
+  routeTree: routeTree,
+  context: {
+    queryClient: undefined!
+  },
+  defaultPreload: 'intent',
+  defaultPreloadStaleTime: 0
+})
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}

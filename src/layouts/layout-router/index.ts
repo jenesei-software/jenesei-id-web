@@ -1,1 +1,1 @@
-export * from './layout-router'
+export * from './layout'
