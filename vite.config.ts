@@ -10,10 +10,10 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
-  const VITE_DEFAULT_NAME = env.VITE_DEFAULT_NAME || 'Default App Name'
-  const VITE_DEFAULT_SHORTNAME = env.VITE_DEFAULT_SHORTNAME || 'Default Shortname'
-  const VITE_DEFAULT_THEME_COLOR = env.VITE_DEFAULT_THEME_COLOR || '#ffffff'
-  const VITE_DEFAULT_DESCRIPTION = env.VITE_DEFAULT_DESCRIPTION || 'Default Description'
+  const VITE_DEFAULT_NAME = env.VITE_DEFAULT_NAME
+  const VITE_DEFAULT_SHORTNAME = env.VITE_DEFAULT_SHORTNAME
+  const VITE_DEFAULT_THEME_COLOR = env.VITE_DEFAULT_THEME_COLOR
+  const VITE_DEFAULT_DESCRIPTION = env.VITE_DEFAULT_DESCRIPTION
 
   const robotsMode = {
     prod: {

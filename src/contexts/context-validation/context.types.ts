@@ -23,6 +23,6 @@ export type ValidationContextProps = {
       fields: Record<string, string>
     }>
   }
-  validationUnitManagement: yup.ObjectSchema<any>
-  validation: yup.ObjectSchema<any>
+  validationSignUp: yup.ObjectSchema<any>
+  validationSignIn: yup.ObjectSchema<any>
 }

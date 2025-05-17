@@ -1,33 +1,32 @@
-import { useAuthSignIn } from '@jenesei-software/jenesei-realebail-web-api/api-auth'
+import { useSSOSignIn } from '@jenesei-software/jenesei-id-web-api'
 import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
 import { Input } from '@jenesei-software/jenesei-ui-react/component-input'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
 import { useApp } from '@jenesei-software/jenesei-ui-react/context-app'
-import { useSonner } from '@jenesei-software/jenesei-ui-react/context-sonner'
 import { useForm } from '@tanstack/react-form'
-import { useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Form } from '@local/components/component-form'
 import { useValidation } from '@local/contexts/context-validation'
-import { PageRoutePublicForgotPassword, PageRoutePublicSignUp } from '@local/core/router'
 
 export function PagePublicSignIn() {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
+  const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' })
+  const { t: tSignIn } = useTranslation('translation', { keyPrefix: 'private.sign-in' })
+
   const { changeTitle } = useApp()
-  const { validation, validationFunctions } = useValidation()
-  const { t } = useTranslation('translation')
-  const { mutateAsync } = useAuthSignIn()
-  const { toast } = useSonner()
+  const { validationSignIn, validationFunctions } = useValidation()
+  const { t: tPrivateSignIn } = useTranslation('translation', { keyPrefix: 'private.sign-in' })
+  const { mutateAsync } = useSSOSignIn()
   useEffect(() => {
-    changeTitle(t('sign-in.title-url'))
-  }, [changeTitle, t])
+    changeTitle(tPrivateSignIn('title-url'))
+  }, [changeTitle, tPrivateSignIn])
 
   const form = useForm({
     defaultValues: {
-      email: '',
+      nickname: '',
       password: ''
     },
 
@@ -36,62 +35,81 @@ export function PagePublicSignIn() {
         await mutateAsync({
           body: {
             password: value.password,
-            email: value.email
+            nickname: value.nickname
           }
         })
       } catch {
-        toast({
-          title: t('sonner.auth-sign-in.error.title'),
-          description: t('sonner.auth-sign-in.error.description'),
-          genre: 'redTransparent',
-          hidingTime: 3000
-        })
+        // do nothing
       }
     },
+    canSubmitWhenInvalid: false,
     validators: {
-      onChangeAsync: validationFunctions.touched(validation)
+      onBlurAsync: validationFunctions.touched(validationSignIn)
     }
   })
 
   useEffect(() => {
     form.validate('blur')
-  }, [form, t])
+  }, [form, tPrivateSignIn])
 
   return (
-    <Stack
-      sx={{
-        default: {
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexGrow: 1,
-          padding: '12px',
-          overflow: 'hidden'
-        }
-      }}
-    >
+    <>
       <Stack
         sx={{
           default: {
-            width: '490px',
-            maxWidth: '100dvw',
             flexDirection: 'column',
-            gap: '45px',
-            alignItems: 'stretch'
+            gap: '10px',
+            alignItems: 'stretch',
+            userSelect: 'none'
           }
         }}
       >
-        <Typography family="Inter" weight={700} size={24} color="black100" letterSpacing={'-0.02em'} align="center">
-          {t('sign-in.title-sign-in')}
-        </Typography>
-        <Form
-          width="100%"
-          handleSubmit={form.handleSubmit}
-          style={{
-            gap: '25px'
+        <Typography
+          sx={{
+            default: {
+              variant: 'h2',
+              weight: 700,
+              color: 'black100'
+            }
           }}
         >
-          <form.Field name="email">
-            {field => (
+          {tSignIn('title-welcome')}
+        </Typography>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h8',
+              weight: 400,
+              color: 'black100'
+            }
+          }}
+        >
+          {tSignIn('title-sign-up-1')}{' '}
+          <Typography
+            sx={{
+              default: {
+                variant: 'h8',
+                weight: 400,
+                color: 'blueRest',
+                cursor: 'pointer'
+              }
+            }}
+          >
+            {tSignIn('title-sign-up-2')}
+          </Typography>
+        </Typography>
+      </Stack>
+
+      <Form
+        width="100%"
+        handleSubmit={form.handleSubmit}
+        style={{
+          gap: '25px'
+        }}
+      >
+        <form.Field name="nickname">
+          {field => {
+            return (
               <Stack
                 sx={{
                   default: {
@@ -103,26 +121,29 @@ export function PagePublicSignIn() {
               >
                 <Input
                   variety="standard"
-                  autocomplete="email"
-                  placeholder={t('form.email.placeholder')}
-                  type="email"
+                  autocomplete="username"
+                  placeholder={tForm('username.placeholder')}
                   id={field.name}
                   name={field.name}
-                  isErrorAbsolute
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={field.handleChange}
                   genre="realebail-white"
-                  size="large"
+                  size="medium"
                   isNoSpaces
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
-                  errorMessage={field.state.meta.errors?.join(',')}
+                  error={{
+                    errorMessage: field.state.meta.errors?.join(','),
+                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
+                    isErrorAbsolute: true
+                  }}
                 />
               </Stack>
-            )}
-          </form.Field>
-          <form.Field name="password">
-            {field => (
+            )
+          }}
+        </form.Field>
+        <form.Field name="password">
+          {field => {
+            return (
               <Stack
                 sx={{
                   default: {
@@ -136,98 +157,70 @@ export function PagePublicSignIn() {
                   variety="standard"
                   autocomplete="current-password"
                   type="password"
-                  placeholder={t('form.password.placeholder')}
+                  placeholder={tForm('password.placeholder')}
                   id={field.name}
-                  isErrorAbsolute
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={field.handleChange}
                   genre="realebail-white"
-                  size="large"
+                  size="medium"
                   isNoSpaces
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
-                  errorMessage={field.state.meta.errors?.join(',')}
+                  error={{
+                    errorMessage: field.state.meta.errors?.join(','),
+                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
+                    isErrorAbsolute: true
+                  }}
                 />
               </Stack>
-            )}
-          </form.Field>
-          <form.Subscribe>
-            {state => (
-              <Button
-                width="100%"
-                type="submit"
-                isLoading={state.isSubmitting}
-                isOnlyLoading
-                isHidden={!state.canSubmit}
-                isDisabled={!state.canSubmit || state.isSubmitting}
-                genre="realebail-product"
-                size="large"
-                customFontWeight={300}
-                // onClick={() => {
-                //   form.handleSubmit()
-                // }}
-              >
-                {t('sign-in.title-button')}
-              </Button>
-            )}
-          </form.Subscribe>
-        </Form>
+            )
+          }}
+        </form.Field>
+
         <Stack
           sx={{
             default: {
-              gap: '8px',
-              alignItems: 'stretch',
-              flexDirection: 'column'
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              alignItems: 'center'
             }
           }}
         >
-          <Button
-            width="100%"
-            type="submit"
-            isOnlyLoading
-            genre="realebail-gray"
+          <Typography
             sx={{
               default: {
-                backgroundColor: 'transparent',
-                '&:hover': {
-                  backgroundColor: 'transparent'
-                }
+                variant: 'h8',
+                weight: 400,
+                color: 'blueRest',
+                cursor: 'pointer'
               }
             }}
-            size="large"
-            customFontSize={'16px'}
-            customFontWeight={400}
-            onClick={() => {
-              navigate({ to: PageRoutePublicSignUp.fullPath })
-            }}
           >
-            {t('sign-in.title-sign-up')}
-          </Button>
-          <Button
-            width="100%"
-            type="submit"
-            isOnlyLoading
-            genre="realebail-gray"
-            sx={{
-              default: {
-                backgroundColor: 'transparent',
-                '&:hover': {
-                  backgroundColor: 'transparent'
-                }
-              }
-            }}
-            size="large"
-            customFontSize={'16px'}
-            customFontWeight={400}
-            onClick={() => {
-              navigate({ to: PageRoutePublicForgotPassword.fullPath })
-            }}
-          >
-            {t('sign-in.title-forgot-password')}
-          </Button>
+            {tSignIn('title-forgot-password')}
+          </Typography>
         </Stack>
-      </Stack>
-    </Stack>
+        <form.Subscribe>
+          {state => (
+            <Button
+              type="submit"
+              isHidden={!state.canSubmit}
+              isDisabled={!state.canSubmit || state.isSubmitting}
+              genre="product"
+              size="medium"
+              isOnlyIcon={state.isSubmitting}
+              icons={[
+                {
+                  type: 'loading',
+                  name: 'Balls',
+                  isHidden: !state.isSubmitting
+                }
+              ]}
+            >
+              {tSignIn('title-button')}
+            </Button>
+          )}
+        </form.Subscribe>
+      </Form>
+    </>
   )
 }

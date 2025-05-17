@@ -25,20 +25,38 @@ export class LayoutErrorBoundary extends Component<LayoutErrorBoundaryProps, Lay
           <Stack
             sx={{
               default: {
-                gap: '8px',
+                gap: '12px',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center'
               }
             }}
           >
-            <Typography align="center" size={16} weight={700} color="black80">
-              Произошла неизвестная ошибка.
+            <Typography
+              sx={{
+                default: {
+                  variant: 'h6',
+                  align: 'center',
+                  weight: 700,
+                  color: 'black60'
+                }
+              }}
+            >
+              An unknown error occurred.
               <br />
-              Пожалуйста, попробуйте позже.
+              Please try again later.
             </Typography>
             {this?.state?.error?.message && (
-              <Typography align="center" size={16} weight={400} color="grayPatricia">
+              <Typography
+                sx={{
+                  default: {
+                    variant: 'h8',
+                    align: 'center',
+                    weight: 700,
+                    color: 'black100'
+                  }
+                }}
+              >
                 {this?.state?.error?.message}
               </Typography>
             )}

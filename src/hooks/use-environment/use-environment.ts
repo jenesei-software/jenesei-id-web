@@ -7,6 +7,11 @@ const name = import.meta.env.VITE_DEFAULT_SHORTNAME
 const shortName = import.meta.env.VITE_DEFAULT_NAME
 const themeColor = import.meta.env.VITE_DEFAULT_THEME_COLOR
 const mode = import.meta.env.VITE_NODE_ENV
+const baseURL = import.meta.env.VITE_BASE_URL
+const coreURL = import.meta.env.VITE_CORE_URL
+const socketURL = import.meta.env.VITE_SOCKET_URL
+const cookieNameAccessToken = import.meta.env.VITE_AVAILABILITY_COOKIE_NAME
+
 export const useEnvironment = (): {
   title: string
   description: string
@@ -15,6 +20,10 @@ export const useEnvironment = (): {
   themeColor: string
   mode: 'dev' | 'prod' | 'test'
   version: string
+  baseURL: string
+  coreURL: string
+  socketURL: string
+  cookieNameAccessToken: string
 } => {
   const data = useMemo(
     () => ({
@@ -24,7 +33,11 @@ export const useEnvironment = (): {
       shortName: shortName,
       themeColor: themeColor,
       mode: mode,
-      version: version
+      version: version,
+      baseURL: baseURL,
+      coreURL: coreURL,
+      socketURL: socketURL,
+      cookieNameAccessToken: cookieNameAccessToken
     }),
     []
   )

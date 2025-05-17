@@ -5,13 +5,12 @@ import { useScreenWidth } from '@jenesei-software/jenesei-ui-react/context-scree
 import { ProviderSonner } from '@jenesei-software/jenesei-ui-react/context-sonner'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Outlet, useMatches, useNavigate } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 // import { Footer } from '@local/components/component-footer'
-// import { Header } from '@local/components/component-header'
-import { ProviderLanguage } from '@local/contexts/context-language'
+import { Header } from '@local/components/component-header'
 import { ProviderValidation } from '@local/contexts/context-validation'
 import { LayoutRoutePrivate, LayoutRoutePublic } from '@local/core/router'
 import { useEnvironment } from '@local/hooks/use-environment'
@@ -26,11 +25,9 @@ export function LayoutRoot() {
 
   return (
     <>
-      <ProviderLanguage>
-        <ProviderValidation>
-          <LayoutRootComponent />
-        </ProviderValidation>
-      </ProviderLanguage>
+      <ProviderValidation>
+        <LayoutRootComponent />
+      </ProviderValidation>
       {env.mode === 'test' && (
         <>
           <ReactQueryDevtools buttonPosition="bottom-left" />
@@ -42,7 +39,7 @@ export function LayoutRoot() {
 }
 
 const LayoutRootComponent = () => {
-  const { title, description } = useEnvironment()
+  const { title } = useEnvironment()
   const { t } = useTranslation('translation')
   const { isLoading, isSuccess, isFetched } = useSSOProfile({ retry: false })
   const isAuthenticated = useMemo(() => (isFetched ? isSuccess : undefined), [isFetched, isSuccess])
@@ -88,24 +85,21 @@ const LayoutRootComponent = () => {
       <ProviderApp
         defaultPreview={{ visible: visible }}
         defaultTitle={title}
-        defaultDescription={description}
+        defaultDescription={t('meta.description')}
         isScrollOutlet={true}
         defaultBgColor="whiteJanice"
         defaultStatusBarColor="whiteJanice"
-        // header={{
-        //   zIndex: 1,
-        //   component: <Header />,
-        //   height: '70px',
-        //   heightMobile: '60px',
-        //   heightTablet: '60px'
-        // }}
-        // footer={{
-        //   zIndex: 1,
-        //   component: <Footer />,
-        //   height: '0px',
-        //   heightMobile: isMatchPrivate ? '76px' : '0px',
-        //   heightTablet: '0px'
-        // }}
+        header={
+          isMatchPrivate
+            ? {
+                zIndex: 1,
+                component: <Header />,
+                height: '70px',
+                heightMobile: '60px',
+                heightTablet: '60px'
+              }
+            : undefined
+        }
         main={{
           zIndex: 0
         }}

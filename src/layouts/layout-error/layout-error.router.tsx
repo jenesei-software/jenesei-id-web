@@ -2,21 +2,34 @@ import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
 import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
 import { CatchBoundary, useRouter } from '@tanstack/react-router'
 import { ReactElement } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { LayoutErrorRouterProps, LayoutErrorTitlesContainer, LayoutErrorWrapper } from '.'
 
 export function LayoutErrorRouter(): ReactElement<LayoutErrorRouterProps> {
   const router = useRouter()
+  const { t: tBoundary } = useTranslation('translation', { keyPrefix: 'boundary' })
 
   return (
     <CatchBoundary getResetKey={() => 'reset'} onCatch={error => console.error(error)}>
       <LayoutErrorWrapper>
         <LayoutErrorTitlesContainer>
-          <Typography align="center" size={16} weight={700} color="black80">
-            Произошла неизвестная ошибка. Пожалуйста, попробуйте позже.
+          <Typography
+            sx={{
+              default: {
+                variant: 'h6',
+                align: 'center',
+                weight: 700,
+                color: 'black60'
+              }
+            }}
+          >
+            {tBoundary('title-1')}
+            <br />
+            {tBoundary('title-2')}
           </Typography>
-          <Button genre={'gray'} size={'large'} width="max-content" onClick={() => router.invalidate()}>
-            Перезагрузить страницу
+          <Button genre={'gray'} size={'small'} onClick={() => router.invalidate()}>
+            {tBoundary('title-button')}
           </Button>
         </LayoutErrorTitlesContainer>
       </LayoutErrorWrapper>
