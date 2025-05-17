@@ -1,6 +1,10 @@
+import { useSSOLogout } from '@jenesei-software/jenesei-id-web-api'
+import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 
 export function PagePrivateHome() {
+  const { mutateAsync, isPending } = useSSOLogout()
+
   return (
     <Stack
       sx={{
@@ -13,6 +17,26 @@ export function PagePrivateHome() {
           overflow: 'hidden'
         }
       }}
-    ></Stack>
+    >
+      <Button
+        isHidden={isPending}
+        isDisabled={isPending}
+        genre="product"
+        size="medium"
+        isOnlyIcon={isPending}
+        onClick={async () => {
+          await mutateAsync()
+        }}
+        icons={[
+          {
+            type: 'loading',
+            name: 'Balls',
+            isHidden: !isPending
+          }
+        ]}
+      >
+        LogOut
+      </Button>
+    </Stack>
   )
 }
