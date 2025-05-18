@@ -1,10 +1,23 @@
-import { AuthLayout } from '@jenesei-software/jenesei-ui-react/layout-auth'
+import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
+import { useScreenWidth } from '@jenesei-software/jenesei-ui-react/context-screen-width'
 import { Outlet } from '@tanstack/react-router'
 
 export function LayoutPrivate() {
+  const { screenActual } = useScreenWidth()
+
   return (
-    <AuthLayout backUrl="/images/auth-back-mountain.png" backUrlWebp="/images/auth-back-mountain.webp">
+    <Stack
+      sx={theme => ({
+        default: {
+          flexGrow: 1,
+          padding: '26px',
+          borderStyle: 'solid',
+          borderColor: theme.palette.black05,
+          borderWidth: screenActual.value !== 'mobile' ? '0px 0px 0px 2px' : '0px'
+        }
+      })}
+    >
       <Outlet />
-    </AuthLayout>
+    </Stack>
   )
 }

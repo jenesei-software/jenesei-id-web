@@ -5,6 +5,37 @@
     "title-button": "Reload page"
   },
   "private": {
+    "title-account": "Account",
+    "personal-info": {
+      "title-url": "Jenesei ID - Personal info",
+      "menu": {
+        "title": "Personal info",
+        "description": "Update your profile, contact details and preferences to personalize your experience."
+      }
+    },
+    "sessions-and-security": {
+      "title-url": "Jenesei ID - Sessions & Security",
+      "menu": {
+        "title": "Sessions & Security",
+        "description": "Track and manage your sessions on authorized devices and control how you log in."
+      }
+    },
+    "language-and-country": {
+      "title-url": "Jenesei ID - Language & Country",
+      "menu": {
+        "title": "Language & Country",
+        "description": "Select your favorite language for Jenesei Software services."
+      }
+    },
+    "resources": {
+      "title-url": "Jenesei ID - Resources",
+      "menu": {
+        "title": "Resources",
+        "description": "Explore and try the available Jenesei services."
+      }
+    }
+  },
+  "public": {
     "sign-in": {
       "title-url": "Jenesei ID - Sign In",
       "title-button": "Sign In",
@@ -15,7 +46,17 @@
     },
     "sign-up": {
       "title-url": "Jenesei ID - Sign Up",
-      "title-url-confirmation": "Jenesei ID - Email Confirmation"
+      "title-url-confirmation": "Jenesei ID - Check your email",
+      "title": "Sign Up",
+      "title-sign-in-1": "Do you already have an account?",
+      "title-sign-in-2": "Log in",
+      "title-confirmation": "Check your email",
+      "title-confirmation-description": "We have sent you a confirmation email to",
+      "title-spam": "Didn’t receive the email? Check spam or promotion folder",
+      "title-repeat": "Time left: {{seconds}}",
+      "title-button": "Sign Up",
+      "title-button-continue": "Continue",
+      "title-button-repeat": "Send the code again"
     },
     "forgot-password": {
       "title-url": "Jenesei ID - Password Recovery",

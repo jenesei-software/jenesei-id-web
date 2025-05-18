@@ -5,7 +5,10 @@ import { LayoutErrorRouter } from '@local/layouts/layout-error'
 import { LayoutPrivate } from '@local/layouts/layout-private'
 import { LayoutPublic } from '@local/layouts/layout-public'
 import { LayoutRoot } from '@local/layouts/layout-root'
-import { PagePrivateHome } from '@local/pages/private/home'
+import { PagePrivateLanguageAndCountry } from '@local/pages/private/language-and-country'
+import { PagePrivatePersonalInfo } from '@local/pages/private/personal-info'
+import { PagePrivateResources } from '@local/pages/private/resources'
+import { PagePrivateSessionsAndSecurity } from '@local/pages/private/sessions-and-security'
 import { PagePublicForgotPassword } from '@local/pages/public/forgot-password'
 import { PagePublicSignIn } from '@local/pages/public/sign-in'
 import { PagePublicSignUp } from '@local/pages/public/sign-up'
@@ -26,13 +29,13 @@ export const LayoutRouteRoot = createRootRouteWithContext<IContext>()({
 export const LayoutRoutePrivate = createRoute({
   getParentRoute: () => LayoutRouteRoot,
   component: LayoutPrivate,
-  notFoundComponent: () => <Navigate to={PageRoutePrivateHome.fullPath} />,
+  notFoundComponent: () => <Navigate to={PageRoutePrivatePersonalInfo.fullPath} />,
   path: '/pr',
   beforeLoad: props => {
     const isFirst = props.location.pathname == '/pr'
     if (isFirst)
       throw redirect({
-        to: PageRoutePrivateHome.fullPath
+        to: PageRoutePrivatePersonalInfo.fullPath
       })
   }
 })
@@ -51,10 +54,25 @@ export const LayoutRoutePublic = createRoute({
   }
 })
 
-export const PageRoutePrivateHome = createRoute({
+export const PageRoutePrivatePersonalInfo = createRoute({
   getParentRoute: () => LayoutRoutePrivate,
-  component: PagePrivateHome,
-  path: '/home'
+  component: PagePrivatePersonalInfo,
+  path: '/personal-info'
+})
+export const PageRoutePrivateLanguageAndCountry = createRoute({
+  getParentRoute: () => LayoutRoutePrivate,
+  component: PagePrivateLanguageAndCountry,
+  path: '/language-and-country'
+})
+export const PageRoutePrivateResources = createRoute({
+  getParentRoute: () => LayoutRoutePrivate,
+  component: PagePrivateResources,
+  path: '/resources'
+})
+export const PageRoutePrivateSessionsAndSecurity = createRoute({
+  getParentRoute: () => LayoutRoutePrivate,
+  component: PagePrivateSessionsAndSecurity,
+  path: '/sessions-and-security'
 })
 export const PageRoutePublicSignUp = createRoute({
   getParentRoute: () => LayoutRoutePublic,
@@ -81,7 +99,10 @@ const routeTree = LayoutRouteRoot.addChildren({
     PageRoutePublicForgotPassword
   }),
   LayoutRoutePrivate: LayoutRoutePrivate.addChildren({
-    PageRoutePrivateHome
+    PageRoutePrivatePersonalInfo,
+    PageRoutePrivateLanguageAndCountry,
+    PageRoutePrivateResources,
+    PageRoutePrivateSessionsAndSecurity
   })
 })
 

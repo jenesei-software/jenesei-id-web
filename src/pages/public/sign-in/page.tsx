@@ -2,21 +2,19 @@ import { useSSOSignIn } from '@jenesei-software/jenesei-id-web-api'
 import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
 import { Input } from '@jenesei-software/jenesei-ui-react/component-input'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
+import { Typography, TypographyLink } from '@jenesei-software/jenesei-ui-react/component-typography'
 import { useApp } from '@jenesei-software/jenesei-ui-react/context-app'
 import { useForm } from '@tanstack/react-form'
-import { useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Form } from '@local/components/component-form'
 import { useValidation } from '@local/contexts/context-validation'
-import { PageRoutePublicSignUp } from '@local/core/router'
+import { PageRoutePublicForgotPassword, PageRoutePublicSignUp } from '@local/core/router'
 
 export function PagePublicSignIn() {
-  const navigate = useNavigate()
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' })
-  const { t: tSignIn } = useTranslation('translation', { keyPrefix: 'private.sign-in' })
+  const { t: tSignIn } = useTranslation('translation', { keyPrefix: 'public.sign-in' })
 
   const { changeTitle } = useApp()
   const { validationSignIn, validationFunctions } = useValidation()
@@ -27,7 +25,7 @@ export function PagePublicSignIn() {
 
   const form = useForm({
     defaultValues: {
-      nickname: '',
+      username: '',
       password: ''
     },
 
@@ -36,7 +34,7 @@ export function PagePublicSignIn() {
         await mutateAsync({
           body: {
             password: value.password,
-            nickname: value.nickname
+            nickname: value.username
           }
         })
       } catch {
@@ -86,10 +84,8 @@ export function PagePublicSignIn() {
           }}
         >
           {tSignIn('title-sign-up-1')}{' '}
-          <Typography
-            onClick={() => {
-              navigate({ to: PageRoutePublicSignUp.fullPath })
-            }}
+          <TypographyLink
+            to={PageRoutePublicSignUp.fullPath}
             sx={{
               default: {
                 variant: 'h8',
@@ -100,7 +96,7 @@ export function PagePublicSignIn() {
             }}
           >
             {tSignIn('title-sign-up-2')}
-          </Typography>
+          </TypographyLink>
         </Typography>
       </Stack>
 
@@ -111,7 +107,7 @@ export function PagePublicSignIn() {
           gap: '25px'
         }}
       >
-        <form.Field name="nickname">
+        <form.Field name="username">
           {field => {
             return (
               <Stack
@@ -190,7 +186,8 @@ export function PagePublicSignIn() {
             }
           }}
         >
-          <Typography
+          <TypographyLink
+            to={PageRoutePublicForgotPassword.fullPath}
             sx={{
               default: {
                 variant: 'h8',
@@ -201,7 +198,7 @@ export function PagePublicSignIn() {
             }}
           >
             {tSignIn('title-forgot-password')}
-          </Typography>
+          </TypographyLink>
         </Stack>
         <form.Subscribe>
           {state => (

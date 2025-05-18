@@ -4,10 +4,9 @@ import { DatePicker, MonthItem, WeekItem } from '@jenesei-software/jenesei-ui-re
 import { Input } from '@jenesei-software/jenesei-ui-react/component-input'
 import { InputOTP } from '@jenesei-software/jenesei-ui-react/component-input-otp'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
+import { Typography, TypographyLink } from '@jenesei-software/jenesei-ui-react/component-typography'
 import { useApp } from '@jenesei-software/jenesei-ui-react/context-app'
 import { useForm } from '@tanstack/react-form'
-import { useNavigate } from '@tanstack/react-router'
 import moment from 'moment'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,11 +16,10 @@ import { useValidation } from '@local/contexts/context-validation'
 import { PageRoutePublicSignIn } from '@local/core/router'
 
 export function PagePublicSignUp() {
-  const navigate = useNavigate()
   const { changeTitle } = useApp()
   const { validationSignUp, validationFunctions } = useValidation()
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' })
-  const { t: tSignUp } = useTranslation('translation', { keyPrefix: 'private.sign-up' })
+  const { t: tSignUp } = useTranslation('translation', { keyPrefix: 'public.sign-up' })
   const { t: tDate } = useTranslation('translation', { keyPrefix: 'date' })
 
   const [attempts, setAttempts] = useState(0)
@@ -98,7 +96,7 @@ export function PagePublicSignUp() {
                 password: value.currentPassword,
                 email: value.email,
                 nickname: value.username,
-                dateOfBirth: moment(value.dateOfBirth).format('YYYY-MM-DD')
+                dateOfBirth: moment(value.dateOfBirth).format('DD.MM.YYYY')
               }
             })
           } catch {
@@ -218,21 +216,18 @@ export function PagePublicSignUp() {
               }}
             >
               {tSignUp('title-sign-in-1')}{' '}
-              <Typography
-                onClick={() => {
-                  navigate({ to: PageRoutePublicSignIn.fullPath })
-                }}
+              <TypographyLink
+                to={PageRoutePublicSignIn.fullPath}
                 sx={{
                   default: {
                     variant: 'h8',
                     weight: 400,
-                    color: 'blueRest',
-                    cursor: 'pointer'
+                    color: 'blueRest'
                   }
                 }}
               >
                 {tSignUp('title-sign-in-2')}
-              </Typography>
+              </TypographyLink>
             </Typography>
           </>
         ) : (
@@ -317,7 +312,7 @@ export function PagePublicSignUp() {
                   onBlur={field.handleBlur}
                   onChange={field.handleChange}
                   genre="grayBorder"
-                  size="medium"
+                  size="large"
                   error={{
                     errorMessage: field.state.meta.errors?.join(','),
                     isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
@@ -507,6 +502,61 @@ export function PagePublicSignUp() {
           </>
         )}
 
+        <form.Field name="email">
+          {field =>
+            attempts !== 0 &&
+            attempts < 3 &&
+            !field.state.meta.errors.length && (
+              <Stack
+                sx={{
+                  default: {
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                  }
+                }}
+              >
+                {cooldownTime > 0 && (
+                  <Typography
+                    sx={{
+                      default: {
+                        variant: 'h7',
+                        weight: 400,
+                        color: 'black100'
+                      }
+                    }}
+                  >
+                    {tSignUp('title-repeat', { seconds: cooldownTime })}
+                  </Typography>
+                )}
+                <Button
+                  type="button"
+                  genre="blackBorder"
+                  isOnlyIcon={isPending}
+                  icons={[
+                    {
+                      type: 'loading',
+                      name: 'Balls',
+                      isHidden: !isPending
+                    }
+                  ]}
+                  sx={{
+                    default: {
+                      marginLeft: 'auto'
+                    }
+                  }}
+                  isDisabled={isCooldown}
+                  isHidden={isCooldown}
+                  size="medium"
+                  onClick={() => {
+                    handleResendCode(field.state.value)
+                  }}
+                >
+                  {tSignUp('title-button-repeat')}
+                </Button>
+              </Stack>
+            )
+          }
+        </form.Field>
         <form.Subscribe>
           {state => (
             <Button
@@ -528,44 +578,19 @@ export function PagePublicSignUp() {
             </Button>
           )}
         </form.Subscribe>
-        <form.Field name="email">
-          {field =>
-            attempts !== 0 &&
-            attempts < 3 &&
-            !field.state.meta.errors.length && (
-              <Button
-                type="button"
-                genre="product"
-                sx={{
-                  default: {
-                    backgroundColor: 'transparent',
-                    '&:hover': {
-                      backgroundColor: 'transparent'
-                    }
-                  }
-                }}
-                isOnlyIcon={isPending}
-                icons={[
-                  {
-                    type: 'loading',
-                    name: 'Balls',
-                    isHidden: !isPending
-                  }
-                ]}
-                isDisabled={isCooldown}
-                isHidden={isCooldown}
-                size="medium"
-                onClick={() => {
-                  handleResendCode(field.state.value)
-                }}
-              >
-                {cooldownTime > 0
-                  ? tSignUp('title-button-repeat-time', { seconds: cooldownTime })
-                  : tSignUp('title-button-repeat')}
-              </Button>
-            )
-          }
-        </form.Field>
+        {attempts !== 0 && (
+          <Typography
+            sx={{
+              default: {
+                variant: 'h7',
+                weight: 400,
+                color: 'black100'
+              }
+            }}
+          >
+            {tSignUp('title-spam')}
+          </Typography>
+        )}
       </Form>
     </>
   )

@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 
 // import { Footer } from '@local/components/component-footer'
 import { Header } from '@local/components/component-header'
+import { LeftAside } from '@local/components/component-left-aside'
 import { ProviderValidation } from '@local/contexts/context-validation'
 import { LayoutRoutePrivate, LayoutRoutePublic } from '@local/core/router'
 import { useEnvironment } from '@local/hooks/use-environment'
@@ -68,11 +69,11 @@ const LayoutRootComponent = () => {
     }
   }, [isAuthenticated, isMatchPrivate, isMatchPublic, navigate])
 
-  const { isMobile } = useScreenWidth()
+  const { screenActual } = useScreenWidth()
   return (
     <ProviderSonner
       gap={12}
-      position={isMobile ? 'bottom-center' : 'bottom-right'}
+      position={screenActual.value === 'mobile' ? 'bottom-center' : 'bottom-right'}
       visibleToasts={3}
       zIndex={100}
       default={{
@@ -87,14 +88,24 @@ const LayoutRootComponent = () => {
         defaultTitle={title}
         defaultDescription={t('meta.description')}
         isScrollOutlet={true}
-        defaultBgColor="whiteJanice"
-        defaultStatusBarColor="whiteJanice"
+        defaultBgColor="whiteStandard"
+        defaultStatusBarColor="whiteStandard"
+        leftAside={
+          screenActual.value !== 'mobile' && isMatchPrivate
+            ? {
+                component: <LeftAside />,
+                isTopFooter: true,
+                width: '420px',
+                widthTablet: '96px'
+              }
+            : undefined
+        }
         header={
           isMatchPrivate
             ? {
                 zIndex: 1,
                 component: <Header />,
-                height: '70px',
+                height: '60px',
                 heightMobile: '60px',
                 heightTablet: '60px'
               }

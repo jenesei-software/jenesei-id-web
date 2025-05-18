@@ -2,7 +2,7 @@ import { useSSOLogout } from '@jenesei-software/jenesei-id-web-api'
 import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 
-export function PagePrivateHome() {
+export function PagePrivateResources() {
   const { mutateAsync, isPending } = useSSOLogout()
 
   return (

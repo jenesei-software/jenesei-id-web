@@ -5,6 +5,37 @@
     "title-button": "Перезагрузить страницу"
   },
   "private": {
+    "title-account": "Аккаунт",
+    "personal-info": {
+      "title-url": "Jenesei ID - Личная информация",
+      "menu": {
+        "title": "Личная информация",
+        "description": "Обновите свой профиль, контактные данные и предпочтения, чтобы персонализировать свой опыт."
+      }
+    },
+    "sessions-and-security": {
+      "title-url": "Jenesei ID - Сеансы и безопасность",
+      "menu": {
+        "title": "Сеансы и безопасность",
+        "description": "Отслеживайте и управляйте своими сеансами и контролируйте, как вы входите в систему."
+      }
+    },
+    "language-and-country": {
+      "title-url": "Jenesei ID - Язык и страна",
+      "menu": {
+        "title": "Язык и страна",
+        "description": "Выберите свой любимый язык для служб Jenesei Software."
+      }
+    },
+    "resources": {
+      "title-url": "Jenesei ID - Ресурсы",
+      "menu": {
+        "title": "Ресурсы",
+        "description": "Изучите и попробуйте доступные услуги Jenesei Software."
+      }
+    }
+  },
+  "public": {
     "sign-in": {
       "title-url": "Jenesei ID - Вход",
       "title-button": "Войти",
@@ -21,9 +52,10 @@
       "title-sign-in-2": "Войти",
       "title-confirmation": "Проверьте свою почту",
       "title-confirmation-description": "Мы отправили вам письмо с подтверждением на адрес",
+      "title-spam": "Не получили письмо? Проверьте папку со спамом или акциями",
+      "title-repeat": "Осталось времени: {{seconds}}",
       "title-button": "Зарегистрироваться",
       "title-button-continue": "Продолжить",
-      "title-button-repeat-time": "Отправить код повторно через: {{seconds}} секунд",
       "title-button-repeat": "Отправить код повторно"
     },
     "forgot-password": {
