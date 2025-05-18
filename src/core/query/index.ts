@@ -5,6 +5,13 @@ export const queryClient = new QueryClient({
     queries: {
       refetchOnWindowFocus: false,
       staleTime: 60000
+    },
+    mutations: {
+      onError: error => {
+        if (error) {
+          console.error('Log. queryClient, error:', error.response?.data)
+        }
+      }
     }
   }
 })

@@ -111,19 +111,19 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
             if (value === 0) {
               return false
             }
-            return moment(value).isValid()
+            return moment.utc(value).isValid()
           })
           .test('min-age', tForm('dateOfBirth.errors.minAge', { minAge: 18 }), value => {
             if (value === undefined || value === null) return true
-            return moment(value).valueOf() <= moment().subtract(18, 'years').valueOf()
+            return moment.utc(value).valueOf() <= moment.utc().subtract(18, 'years').valueOf()
           })
           .test('max-age', tForm('dateOfBirth.errors.maxAge', { maxAge: 118 }), value => {
             if (value === undefined || value === null) return true
-            return moment(value).valueOf() >= moment().subtract(118, 'years').valueOf()
+            return moment.utc(value).valueOf() >= moment.utc().subtract(118, 'years').valueOf()
           })
           .test('is-not-future', tForm('dateOfBirth.errors.future'), value => {
             if (value === undefined || value === null) return true
-            return moment(value).valueOf() <= moment().valueOf()
+            return moment.utc(value).valueOf() <= moment.utc().valueOf()
           }),
         code: yup.string().trim().required(tForm('code.errors.required')).length(5, tForm('code.errors.length')),
         email: yup
