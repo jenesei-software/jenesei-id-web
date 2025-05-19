@@ -1,0 +1,244 @@
+{
+  "boundary": {
+    "title-1": "Произошла неизвестная ошибка",
+    "title-2": "Пожалуйста, попробуйте позже",
+    "title-button": "Перезагрузить страницу"
+  },
+  "private": {
+    "title-account": "Аккаунт",
+    "personal-info": {
+      "title-url": "Jenesei ID - Личная информация",
+      "menu": {
+        "title": "Личная информация",
+        "description": "Обновите свой профиль, контактные данные и предпочтения, чтобы персонализировать свой опыт."
+      }
+    },
+    "sessions-and-security": {
+      "title-url": "Jenesei ID - Сеансы и безопасность",
+      "menu": {
+        "title": "Сеансы и безопасность",
+        "description": "Отслеживайте и управляйте своими сеансами и контролируйте, как вы входите в систему."
+      }
+    },
+    "language-and-country": {
+      "title-url": "Jenesei ID - Язык и страна",
+      "menu": {
+        "title": "Язык и страна",
+        "description": "Выберите свой любимый язык для служб Jenesei Software."
+      }
+    },
+    "resources": {
+      "title-url": "Jenesei ID - Ресурсы",
+      "menu": {
+        "title": "Ресурсы",
+        "description": "Изучите и попробуйте доступные услуги Jenesei Software."
+      }
+    }
+  },
+  "public": {
+    "sign-in": {
+      "title-url": "Jenesei ID - Вход",
+      "title-button": "Войти",
+      "title-forgot-password": "Забыли пароль?",
+      "title-welcome": "Добро пожаловать",
+      "title-sign-up-1": "У вас нет аккаунта?",
+      "title-sign-up-2": "Создать аккаунт"
+    },
+    "sign-up": {
+      "title-url": "Jenesei ID - Регистрация",
+      "title-url-confirmation": "Jenesei ID - Подтверждение почты",
+      "title": "Создание аккаунта",
+      "title-sign-in-1": "У вас уже есть аккаунт?",
+      "title-sign-in-2": "Войти",
+      "title-confirmation": "Проверьте свою почту",
+      "title-confirmation-description": "Мы отправили вам письмо с подтверждением на адрес",
+      "title-spam": "Не получили письмо? Проверьте папку со спамом или акциями",
+      "title-repeat": "Осталось времени: {{seconds}}",
+      "title-button": "Зарегистрироваться",
+      "title-button-continue": "Продолжить",
+      "title-button-repeat": "Отправить код повторно"
+    },
+    "forgot-password": {
+      "title-url": "Jenesei ID - Восстановление пароля",
+      "title-url-confirmation": "Jenesei ID - Подтверждение почты"
+    }
+  },
+  "meta": {
+    "description": "Лучший сервис для управления вашим аккаунтом"
+  },
+  "sonner": {
+    "undo": "Закрыть"
+  },
+  "api": {
+    "sso": {
+      "sign-in": {
+        "success": {
+          "title": "Успешный вход",
+          "description": "Вы успешно вошли в систему"
+        },
+        "error": {
+          "title": "Ошибка входа",
+          "description": "Не удалось войти в систему."
+        }
+      }
+    }
+  },
+  "form": {
+    "language": {
+      "placeholder": "Выберите язык"
+    },
+    "dateOfBirth": {
+      "placeholder": "Дата рождения",
+      "errors": {
+        "required": "Обязательное поле",
+        "invalid": "Некорректная дата рождения",
+        "minAge": "Дата рождения должна быть не менее {{minAge}} лет",
+        "maxAge": "Дата рождения должна быть не более {{maxAge}} лет",
+        "future": "Дата рождения не может быть в будущем"
+      }
+    },
+    "username": {
+      "placeholder": "Логин",
+      "errors": {
+        "no-spaces": "Логин не должен содержать пробелов",
+        "alreadyExists": "Логин уже зарегистрирован",
+        "required": "Обязательное поле",
+        "minLength": "Логин должен содержать не менее {{minLength}} символов",
+        "maxLength": "Логин не должен превышать {{maxLength}} символов",
+        "no-check": "Не удалось проверить логин на уникальность"
+      }
+    },
+    "code": {
+      "errors": {
+        "required": "Обязательное поле",
+        "length": "Недостаточно символов"
+      }
+    },
+    "email": {
+      "placeholder": "Почта",
+      "errors": {
+        "required": "Обязательное поле",
+        "alreadyExists": "Почта уже зарегистрирована",
+        "invalid": "Некорректный адрес электронной почты",
+        "no-spaces": "Почта не должна содержать пробелов",
+        "no-check": "Не удалось проверить почту на уникальность"
+      }
+    },
+    "password": {
+      "placeholder": "Пароль",
+      "placeholder-confirm": "Подтвердите пароль",
+      "errors": {
+        "required": "Обязательное поле",
+        "minLength": "Пароль должен содержать не менее {{minLength}} символов",
+        "maxLength": "Пароль не должен превышать {{maxLength}} символов",
+        "uppercase": "Пароль должен содержать хотя бы одну заглавную букву",
+        "lowercase": "Пароль должен содержать хотя бы одну строчную букву",
+        "digit": "Пароль должен содержать хотя бы одну цифру",
+        "special": "Пароль должен содержать хотя бы один специальный символ",
+        "mismatch": "Пароли не совпадают",
+        "no-spaces": "Пароль не должен содержать пробелов"
+      }
+    }
+  },
+  "date": {
+    "months": {
+      "january": {
+        "localeLong": "Январь",
+        "localeShort": "Янв",
+        "value": "january"
+      },
+      "february": {
+        "localeLong": "Февраль",
+        "localeShort": "Фев",
+        "value": "february"
+      },
+      "march": {
+        "localeLong": "Март",
+        "localeShort": "Мар",
+        "value": "march"
+      },
+      "april": {
+        "localeLong": "Апрель",
+        "localeShort": "Апр",
+        "value": "april"
+      },
+      "may": {
+        "localeLong": "Май",
+        "localeShort": "Май",
+        "value": "may"
+      },
+      "june": {
+        "localeLong": "Июнь",
+        "localeShort": "Июн",
+        "value": "june"
+      },
+      "july": {
+        "localeLong": "Июль",
+        "localeShort": "Июл",
+        "value": "july"
+      },
+      "august": {
+        "localeLong": "Август",
+        "localeShort": "Авг",
+        "value": "august"
+      },
+      "september": {
+        "localeLong": "Сентябрь",
+        "localeShort": "Сен",
+        "value": "september"
+      },
+      "october": {
+        "localeLong": "Октябрь",
+        "localeShort": "Окт",
+        "value": "october"
+      },
+      "november": {
+        "localeLong": "Ноябрь",
+        "localeShort": "Ноя",
+        "value": "november"
+      },
+      "december": {
+        "localeLong": "Декабрь",
+        "localeShort": "Дек",
+        "value": "december"
+      }
+    },
+    "weeks": {
+      "mo": {
+        "localeLong": "Понедельник",
+        "localeShort": "Пн",
+        "value": "mo"
+      },
+      "tu": {
+        "localeLong": "Вторник",
+        "localeShort": "Вт",
+        "value": "tu"
+      },
+      "we": {
+        "localeLong": "Среда",
+        "localeShort": "Ср",
+        "value": "we"
+      },
+      "th": {
+        "localeLong": "Четверг",
+        "localeShort": "Чт",
+        "value": "th"
+      },
+      "fr": {
+        "localeLong": "Пятница",
+        "localeShort": "Пт",
+        "value": "fr"
+      },
+      "sa": {
+        "localeLong": "Суббота",
+        "localeShort": "Сб",
+        "value": "sa"
+      },
+      "su": {
+        "localeLong": "Воскресенье",
+        "localeShort": "Вс",
+        "value": "su"
+      }
+    }
+  }
+}

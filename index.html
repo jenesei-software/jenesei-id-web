@@ -1,118 +1,16 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <!-- Base   -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.png" />
-    <link rel="shortcut icon" href="/icons/icon-64x64.ico" />
-    <!-- Preview   -->
-    <style>
-      /* Стили для PreviewWrapper */
-      .preview-wrapper {
-        z-index: 9999;
-        background-color: #ffffff;
-        width: 100dvw;
-        height: 100dvh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 1;
-        transform: translateY(0);
-        transition:
-          opacity 0.5s ease,
-          transform 0.5s ease;
-      }
-
-      .preview-wrapper.visible {
-        opacity: 0;
-        transform: translateY(0);
-      }
-
-      /* Стили для PreviewLoading */
-      .preview-loading {
-        --color: #1769a5;
-        --size-mid: 6vmin;
-        --size-dot: 1.5vmin;
-        --size-bar: 0.4vmin;
-        --size-square: 3vmin;
-        position: relative;
-      }
-
-      .preview-loading::before,
-      .preview-loading::after {
-        content: '';
-        box-sizing: border-box;
-        position: absolute;
-      }
-
-      .preview-loading::before,
-      .preview-loading::after {
-        width: var(--size-square);
-        height: var(--size-square);
-        background-color: var(--color);
-      }
-
-      .preview-loading::before {
-        top: calc(50% - var(--size-square));
-        left: calc(50% - var(--size-square));
-        animation: loader1 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
-      }
-
-      .preview-loading::after {
-        top: 50%;
-        left: 50%;
-        animation: loader2 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
-      }
-
-      @keyframes loader1 {
-        0%,
-        100% {
-          transform: none;
-        }
-
-        25% {
-          transform: translateX(100%);
-        }
-
-        50% {
-          transform: translateX(100%) translateY(100%);
-        }
-
-        75% {
-          transform: translateY(100%);
-        }
-      }
-
-      @keyframes loader2 {
-        0%,
-        100% {
-          transform: none;
-        }
-
-        25% {
-          transform: translateX(-100%);
-        }
-
-        50% {
-          transform: translateX(-100%) translateY(-100%);
-        }
-
-        75% {
-          transform: translateY(-100%);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="preview-wrapper">
-      <div class="preview-loading"></div>
-    </div>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="">
+<head>
+  <!-- Base   -->
+  <title><%= title %></title>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="<%= robotsMeta %>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="apple-touch-icon" href="<%= icon180 %>" />
+  <link rel="shortcut icon" href="<%= icon64 %>" />
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+</body>
 </html>

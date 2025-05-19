@@ -1,17 +1,18 @@
-export type LayoutRootRouteSearch = {
-  pastResource?: 'jenesei_id'
-}
-export const validateLayoutRootRouteSearch = (
-  search: Record<keyof LayoutRootRouteSearch, unknown>,
-): LayoutRootRouteSearch => {
-  const isPastResource = (
-    value: unknown,
-  ): value is LayoutRootRouteSearch['pastResource'] => value === 'jenesei_id'
+import { IServiceKeys } from '@jenesei-software/jenesei-ui-react/types'
 
-  const searchParams: LayoutRootRouteSearch = {
-    pastResource: isPastResource(search?.pastResource)
-      ? search.pastResource
-      : undefined,
+export type LayoutRouteRootSearch = {
+  pastResource?: IServiceKeys
+  // redirect?: string
+}
+export const validateLayoutRouteRootSearch = (
+  search: Record<keyof LayoutRouteRootSearch, unknown>
+): LayoutRouteRootSearch => {
+  const isPastResource = (value: unknown): value is LayoutRouteRootSearch['pastResource'] => value === 'jenesei_id'
+  // const isRedirect = (value: unknown): value is LayoutRouteRootSearch['redirect'] => typeof value === 'string'
+
+  const searchParams: LayoutRouteRootSearch = {
+    pastResource: isPastResource(search?.pastResource) ? search.pastResource : undefined
+    // redirect: isRedirect(search?.redirect) ? search.redirect : undefined
   }
 
   return searchParams

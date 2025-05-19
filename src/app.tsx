@@ -1,67 +1,44 @@
-import {
-  JeneseiGlobalStyles,
-  JeneseiTheme,
-  ProviderCookie,
-  ProviderPermission,
-  useRemovePreviewLoader
-} from '@jenesei-software/jenesei-ui-react'
-import { ProviderAxiosWebId } from '@jenesei-software/jenesei-web-id-api'
+import { ProviderAxiosWebId, ProviderWSWebId } from '@jenesei-software/jenesei-id-web-api'
+import { ProviderDialog } from '@jenesei-software/jenesei-ui-react/context-dialog'
+import { ProviderGeolocation } from '@jenesei-software/jenesei-ui-react/context-geolocation'
+import { ProviderPermission } from '@jenesei-software/jenesei-ui-react/context-permission'
+import { ProviderScreenWidth } from '@jenesei-software/jenesei-ui-react/context-screen-width'
+import { JeneseiGlobalStyles, JeneseiTheme } from '@jenesei-software/jenesei-ui-react/style-theme'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { I18nextProvider } from 'react-i18next'
 import { ThemeProvider } from 'styled-components'
 
-import { i18n } from '@assets/i18n'
-
-import { queryClient } from '@core/query'
-
-import { getValidateCookieValue, validateCookieKeys } from '@functions/validate-cookie-value'
-
-import { LayoutRouter } from '@layouts/layout-router'
-
-import '@fontsource/inter/100.css'
-import '@fontsource/inter/300.css'
-import '@fontsource/inter/400.css'
-import '@fontsource/inter/500.css'
-import '@fontsource/inter/700.css'
-import '@fontsource/inter/900.css'
-
-import '@fontsource/roboto/100.css'
-import '@fontsource/roboto/300.css'
-import '@fontsource/roboto/400.css'
-import '@fontsource/roboto/500.css'
-import '@fontsource/roboto/700.css'
-import '@fontsource/roboto/900.css'
-
-import 'react-ripple-click/dist/index.css'
-import 'react-toggle/style.css'
-
-const baseURL = import.meta.env.VITE_BASE_URL || ''
-const coreURL = import.meta.env.VITE_CORE_URL || ''
-const availabilityCookieName = import.meta.env.VITE_AVAILABILITY_COOKIE_NAME || ''
+import { ProviderLanguage } from '@local/contexts/context-language'
+import { queryClient } from '@local/core/query'
+import { useEnvironment } from '@local/hooks/use-environment'
+import { LayoutErrorBoundary } from '@local/layouts/layout-error'
+import { LayoutRouter } from '@local/layouts/layout-router'
 
 function App() {
-  useRemovePreviewLoader()
+  const env = useEnvironment()
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider theme={JeneseiTheme}>
+    <ThemeProvider theme={JeneseiTheme}>
+      <ProviderScreenWidth>
+        <ProviderLanguage>
           <JeneseiGlobalStyles />
-          <ProviderAxiosWebId coreURL={coreURL} baseURL={baseURL} availabilityCookieName={availabilityCookieName}>
-            <ProviderCookie
-              validate={{
-                validateKeys: validateCookieKeys,
-                getValidateCookieValue
-              }}
-            >
-              <ProviderPermission serviceWorkerPath="/service-worker.js">
-                <LayoutRouter />
-              </ProviderPermission>
-            </ProviderCookie>
-          </ProviderAxiosWebId>
-        </ThemeProvider>
-      </I18nextProvider>
-    </QueryClientProvider>
+          <LayoutErrorBoundary>
+            <QueryClientProvider client={queryClient}>
+              <ProviderAxiosWebId queryClient={queryClient} baseURL={env.baseURL}>
+                <ProviderWSWebId socketURL={env.socketURL}>
+                  <ProviderPermission>
+                    <ProviderGeolocation>
+                      <ProviderDialog zIndex={1000}>
+                        <LayoutRouter />
+                      </ProviderDialog>
+                    </ProviderGeolocation>
+                  </ProviderPermission>
+                </ProviderWSWebId>
+              </ProviderAxiosWebId>
+            </QueryClientProvider>
+          </LayoutErrorBoundary>
+        </ProviderLanguage>
+      </ProviderScreenWidth>
+    </ThemeProvider>
   )
 }
 
