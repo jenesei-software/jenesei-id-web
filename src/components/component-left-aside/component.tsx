@@ -1,3 +1,4 @@
+import { Image } from '@jenesei-software/jenesei-ui-react'
 import { Icon, LibraryIconIdItemProps } from '@jenesei-software/jenesei-ui-react/component-icon'
 import { Ripple } from '@jenesei-software/jenesei-ui-react/component-ripple'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
@@ -9,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { useTheme } from 'styled-components'
 
 import {
+  LayoutRoutePrivate,
   PageRoutePrivateLanguageAndCountry,
   PageRoutePrivatePersonalInfo,
   PageRoutePrivateResources,
@@ -19,8 +21,12 @@ export const LeftAside: FC = () => {
   const { t: tPrivate } = useTranslation('translation', { keyPrefix: 'private' })
 
   const { screenActual } = useScreenWidth()
-
-  return (
+  const isMatchPrivate = useMatches({
+    select(matches) {
+      return matches.some(match => match.fullPath === LayoutRoutePrivate.fullPath)
+    }
+  })
+  return isMatchPrivate ? (
     <Stack
       sx={() => ({
         default: {
@@ -37,7 +43,7 @@ export const LeftAside: FC = () => {
           default: {
             alignItems: 'center',
             justifyContent: 'flex-start',
-            paddingLeft: screenActual.value === 'default' ? '20px' : '12px',
+            paddingLeft: screenActual === 'default' ? '20px' : '12px',
             height: '68px'
           }
         })}
@@ -93,6 +99,73 @@ export const LeftAside: FC = () => {
         />
       </Stack>
     </Stack>
+  ) : (
+    <Stack
+      sx={() => ({
+        default: {
+          flexGrow: 1,
+          justifyContent: 'space-between',
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          position: 'relative',
+          overflow: 'hidden'
+        }
+      })}
+    >
+      {' '}
+      <>
+        <Image
+          src="https://id.jenesei.ru/images/auth-back-mountain.jpg"
+          alt="Mountain"
+          propsStack={{
+            sx: theme => ({
+              default: {
+                width: '100%',
+                height: '100%',
+                position: 'absolute',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: theme.palette.black10,
+                pointerEvents: 'none'
+              }
+            })
+          }}
+        />
+        <Stack
+          sx={{
+            default: {
+              flexGrow: 1,
+              alignItems: 'center',
+              justifyContent: 'center'
+            }
+          }}
+        >
+          <Stack
+            sx={{
+              default: {
+                width: '82px',
+                height: '82px'
+              }
+            }}
+          >
+            <Icon type="logo" name="Jenesei" size="100%" primaryColor="whiteStandard" />
+          </Stack>
+
+          <Typography
+            sx={{
+              default: {
+                size: 42,
+                weight: 700,
+                color: 'whiteStandard',
+                line: 1
+              }
+            }}
+          >
+            Jenesei ID
+          </Typography>
+        </Stack>
+      </>
+    </Stack>
   )
 }
 
@@ -147,7 +220,7 @@ const LeftAsideItem: FC<{
         >
           <Icon type="id" name={props.icon} size="large" primaryColor={isMatch ? 'whiteStandard' : 'black80'} />
         </Stack>
-        {screenActual.value === 'default' ? (
+        {screenActual === 'default' ? (
           <Stack
             sx={() => ({
               default: {

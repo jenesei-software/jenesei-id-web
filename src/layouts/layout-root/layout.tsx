@@ -73,7 +73,7 @@ const LayoutRootComponent = () => {
   return (
     <ProviderSonner
       gap={12}
-      position={screenActual.value === 'mobile' ? 'bottom-center' : 'bottom-right'}
+      position={screenActual === 'mobile' ? 'bottom-center' : 'bottom-right'}
       visibleToasts={3}
       zIndex={100}
       default={{
@@ -84,33 +84,30 @@ const LayoutRootComponent = () => {
       }}
     >
       <ProviderApp
-        defaultPreview={{ visible: visible }}
+        defaultPreview={{ visible: !visible, defaultVisible: false }}
         defaultTitle={title}
         defaultDescription={t('meta.description')}
         isScrollOutlet={true}
         defaultBgColor="whiteStandard"
         defaultStatusBarColor="whiteStandard"
-        leftAside={
-          screenActual.value !== 'mobile' && isMatchPrivate
-            ? {
-                component: <LeftAside />,
-                isTopFooter: true,
-                width: '420px',
-                widthTablet: '96px'
-              }
-            : undefined
-        }
-        header={
-          isMatchPrivate
-            ? {
-                zIndex: 1,
-                component: <Header />,
-                height: '60px',
-                heightMobile: '60px',
-                heightTablet: '60px'
-              }
-            : undefined
-        }
+        leftAside={{
+          component: <LeftAside />,
+          isTopFooter: true,
+          length: {
+            default: isMatchPrivate ? '420px' : '50dvw',
+            tablet: isMatchPrivate ? '96px' : null,
+            mobile: null
+          }
+        }}
+        header={{
+          zIndex: 1,
+          component: <Header />,
+          length: {
+            default: isMatchPrivate ? '60px' : null,
+            tablet: isMatchPrivate ? '60px' : '170px',
+            mobile: isMatchPrivate ? '60px' : '170px'
+          }
+        }}
         main={{
           zIndex: 0
         }}

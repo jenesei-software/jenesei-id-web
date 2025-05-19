@@ -13,7 +13,7 @@ export function LayoutPrivate() {
           padding: '26px',
           borderStyle: 'solid',
           borderColor: theme.palette.black05,
-          borderWidth: screenActual.value !== 'mobile' ? '0px 0px 0px 2px' : '0px'
+          borderWidth: screenActual !== 'mobile' ? '0px 0px 0px 2px' : '0px'
         }
       })}
     >
