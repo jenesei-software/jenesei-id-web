@@ -44,7 +44,7 @@ export function PagePublicSignIn() {
 
   useEffect(() => {
     form.validate('blur')
-  }, [form, tSignIn])
+  }, [form, tForm])
 
   return (
     <>

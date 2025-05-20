@@ -29,25 +29,42 @@
     "personal-info": {
       "menu": {
         "title": "Personal info",
-        "description": "Update your profile, contact details and preferences to personalize your experience."
+        "description": "Update your profile, contact details and preferences to personalize your experience"
       }
     },
     "sessions-and-security": {
+      "form-session": {
+        "title": "Active sessions",
+        "description": "View and terminate active sessions on other devices"
+      },
+      "form-password": {
+        "title": "Password",
+        "description": "Change your password to enhance security",
+        "placeholder-old": "Old password",
+        "placeholder-new": "New password",
+        "placeholder-new-confirm": "Confirm new password",
+        "title-button": "Change password"
+      },
       "menu": {
         "title": "Sessions & Security",
-        "description": "Track and manage your sessions on authorized devices and control how you log in."
+        "description": "Track and manage your sessions on authorized devices and control how you log in"
       }
     },
     "language-and-country": {
+      "form": {
+        "language": {
+          "title": "Language"
+        }
+      },
       "menu": {
         "title": "Language & Country",
-        "description": "Select your favorite language for Jenesei services."
+        "description": "Select your favorite language and country for Jenesei services"
       }
     },
     "resources": {
       "menu": {
         "title": "Resources",
-        "description": "Explore and try the available Jenesei services."
+        "description": "Explore and try the available Jenesei services"
       }
     }
   },
@@ -88,7 +105,7 @@
         },
         "error": {
           "title": "Login error",
-          "description": "Failed to log in."
+          "description": "Failed to log in"
         }
       }
     }
@@ -146,7 +163,8 @@
         "digit": "Password must contain at least one digit",
         "special": "Password must contain at least one special character",
         "mismatch": "Passwords do not match",
-        "no-spaces": "Password must not contain spaces"
+        "no-spaces": "Password must not contain spaces",
+        "sameAsOld": "New password must not be the same as the old password"
       }
     }
   },
