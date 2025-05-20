@@ -1,8 +1,7 @@
 import { SessionDto, useSessionTerminate, useWSSession } from '@jenesei-software/jenesei-id-web-api'
-import { Icon, Input, Separator, Typography } from '@jenesei-software/jenesei-ui-react'
-import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
+import { Button, Icon, Input, Separator, Stack, Typography } from '@jenesei-software/jenesei-ui-react'
 import { useForm } from '@tanstack/react-form'
+import moment from 'moment'
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UAParser } from 'ua-parser-js'
@@ -24,8 +23,9 @@ export function PagePrivateSessionsAndSecurity() {
     },
 
     onSubmit: async ({ value }) => {
+      console.log(value)
       try {
-        // await mutateAsync({
+        // do nothing
       } catch {
         // do nothing
       }
@@ -39,13 +39,13 @@ export function PagePrivateSessionsAndSecurity() {
   useEffect(() => {
     form.validate('blur')
   }, [form, tForm])
-  console.log('dataWSSession', dataWSSession)
+
   return (
     <Stack
       sx={{
         default: {
           width: '100%',
-          height: '100%',
+          height: 'fit-content',
           alignItems: 'stretch',
           flexDirection: 'column',
           flexGrow: 1,
@@ -318,26 +318,25 @@ export function PagePrivateSessionsAndSecurity() {
         <Stack
           sx={{
             default: {
-              flexDirection: 'row',
-              alignItems: 'flex-start',
-              flexWrap: 'wrap',
-              gap: '10px',
               width: '100%',
-              alignSelf: 'flex-start'
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '12px'
             }
           }}
         >
           {dataWSSession &&
             Object.entries(dataWSSession).map(([key, session]) => (
-              <PagePrivateSessionsAndSecuritySessionItem key={key} session={session} />
+              <PagePrivateSessionsAndSecuritySessionItem key={key} session={session} sessionId={key} />
             ))}
         </Stack>
       </Stack>
     </Stack>
   )
 }
-export function PagePrivateSessionsAndSecuritySessionItem(props: { session: SessionDto }) {
-  const { mutate } = useSessionTerminate()
+export function PagePrivateSessionsAndSecuritySessionItem(props: { session: SessionDto; sessionId: string }) {
+  const { mutate, isPending } = useSessionTerminate()
+  const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.sessions-and-security' })
 
   const result = useMemo(() => {
     const parser = new UAParser()
@@ -348,14 +347,15 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
     <Stack
       sx={theme => ({
         default: {
-          minWidth: '300px',
+          width: '100%',
           height: '100%',
           alignItems: 'stretch',
           flexDirection: 'column',
           backgroundColor: theme.palette.grayJanice,
           flexGrow: 1,
           gap: '10px',
-          borderRadius: '20px'
+          borderRadius: '20px',
+          padding: '10px'
         },
         mobile: {
           minWidth: '100%',
@@ -363,8 +363,125 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
         }
       })}
     >
-      <Stack>
-        <Icon type="id" name="Activity" size="large" primaryColor="blueRest" />
+      <Stack sx={{ default: { alignItems: 'center', justifyContent: 'space-between', padding: '0px 6.5px 0px 0px' } }}>
+        <Icon type="id" name="Web" size="large" primaryColor="blueRest" />
+        <Stack
+          sx={theme => ({
+            default: {
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: props.session.current ? theme.palette.greenGoogle : theme.palette.grayJanice
+            }
+          })}
+        />
+      </Stack>
+      <Stack sx={{ default: { alignItems: 'center', justifyContent: 'space-between', padding: '0px 6.5px 0px 0px' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h8',
+              weight: 700,
+              color: 'black60',
+              line: 1
+            }
+          }}
+        >
+          Device:
+        </Typography>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h8',
+              weight: 700,
+              color: 'black60',
+              line: 1
+            }
+          }}
+        >
+          {result.browser.name} {result.browser.type} {result.browser.version}
+        </Typography>
+      </Stack>
+      <Stack sx={{ default: { alignItems: 'center', justifyContent: 'space-between', padding: '0px 6.5px 0px 0px' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h8',
+              weight: 700,
+              color: 'black60',
+              line: 1
+            }
+          }}
+        >
+          OC:
+        </Typography>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h8',
+              weight: 700,
+              color: 'black60',
+              line: 1
+            }
+          }}
+        >
+          {result.os.name}
+        </Typography>
+      </Stack>
+      <Stack sx={{ default: { alignItems: 'center', justifyContent: 'space-between', padding: '0px 6.5px 0px 0px' } }}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h8',
+              weight: 700,
+              color: 'black60',
+              line: 1
+            }
+          }}
+        >
+          Last activity:
+        </Typography>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h8',
+              weight: 700,
+              color: 'black60',
+              line: 1
+            }
+          }}
+        >
+          {moment(props.session.lastActivity).format('YYYY.MM.DD HH:mm:ss')}
+        </Typography>
+      </Stack>
+      <Stack
+        sx={{
+          default: { alignItems: 'center', justifyContent: 'flex-start', padding: '0px 6.5px 0px 0px', gap: '12px' }
+        }}
+      >
+        <Button
+          isHidden={isPending}
+          isDisabled={isPending}
+          isOnlyIcon={isPending}
+          isRadius
+          genre="gray"
+          size="small"
+          icons={[
+            {
+              type: 'loading',
+              name: 'Line',
+              isHidden: !isPending
+            }
+          ]}
+          onClick={() => mutate({ path: { sessionId: props.sessionId } })}
+        >
+          {tPage('form-session.title-button-close')}
+        </Button>
+        {props.session.current && (
+          <Button isRadius isDisabled genre="greenTransparent" size="small">
+            {tPage('form-session.title-button-current')}
+          </Button>
+        )}
       </Stack>
     </Stack>
   )

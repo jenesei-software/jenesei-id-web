@@ -35,7 +35,9 @@
     "sessions-and-security": {
       "form-session": {
         "title": "Активные сеансы",
-        "description": "Просмотрите и завершите активные сеансы на других устройствах"
+        "description": "Просмотрите и завершите активные сеансы на других устройствах",
+        "title-button-close": "Завершить сеанс",
+        "title-button-current": "Текущий сеанс"
       },
       "form-password": {
         "title": "Пароль",

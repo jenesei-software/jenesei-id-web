@@ -35,7 +35,9 @@
     "sessions-and-security": {
       "form-session": {
         "title": "Active sessions",
-        "description": "View and terminate active sessions on other devices"
+        "description": "View and terminate active sessions on other devices",
+        "title-button-close": "Terminate session",
+        "title-button-current": "Current"
       },
       "form-password": {
         "title": "Password",

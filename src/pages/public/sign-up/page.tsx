@@ -523,7 +523,7 @@ export function PagePublicSignUp() {
                   icons={[
                     {
                       type: 'loading',
-                      name: 'Balls',
+                      name: 'Line',
                       isHidden: !isPending
                     }
                   ]}
@@ -557,7 +557,7 @@ export function PagePublicSignUp() {
               icons={[
                 {
                   type: 'loading',
-                  name: 'Balls',
+                  name: 'Line',
                   isHidden: !state.isSubmitting
                 }
               ]}

@@ -1,4 +1,4 @@
-import { Icon, LibraryIconIdItemProps, Ripple } from '@jenesei-software/jenesei-ui-react'
+import { Icon, IconItemProps, Ripple } from '@jenesei-software/jenesei-ui-react'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 import { Link, LinkProps, useMatches } from '@tanstack/react-router'
 import { FC } from 'react'
@@ -19,7 +19,8 @@ export const Footer: FC = () => {
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'row',
-          flexGrow: 1
+          flexGrow: 1,
+          userSelect: 'none'
         }
       })}
     >
@@ -32,7 +33,7 @@ export const Footer: FC = () => {
 }
 const FooterItem: FC<{
   to: LinkProps['to']
-  icon: LibraryIconIdItemProps['name']
+  icon: IconItemProps<'id'>['name']
 }> = props => {
   const theme = useTheme()
   const isMatch = useMatches({

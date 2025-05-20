@@ -1,5 +1,5 @@
 import { Image } from '@jenesei-software/jenesei-ui-react'
-import { Icon, LibraryIconIdItemProps } from '@jenesei-software/jenesei-ui-react/component-icon'
+import { Icon, IconItemProps } from '@jenesei-software/jenesei-ui-react/component-icon'
 import { Ripple } from '@jenesei-software/jenesei-ui-react/component-ripple'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
@@ -218,7 +218,7 @@ export const LeftAside: FC = () => {
 
 const LeftAsideItem: FC<{
   to: LinkProps['to']
-  icon: LibraryIconIdItemProps['name']
+  icon: IconItemProps<'id'>['name']
   title: string
   description: string
 }> = props => {

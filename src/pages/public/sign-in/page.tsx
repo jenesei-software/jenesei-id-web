@@ -207,7 +207,7 @@ export function PagePublicSignIn() {
               icons={[
                 {
                   type: 'loading',
-                  name: 'Balls',
+                  name: 'Line',
                   isHidden: !state.isSubmitting
                 }
               ]}
