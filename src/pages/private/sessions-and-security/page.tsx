@@ -322,7 +322,8 @@ export function PagePrivateSessionsAndSecurity() {
               alignItems: 'flex-start',
               flexWrap: 'wrap',
               gap: '10px',
-              width: '100%'
+              width: '100%',
+              alignSelf: 'flex-start'
             }
           }}
         >
