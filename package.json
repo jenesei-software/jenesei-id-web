@@ -18,8 +18,8 @@
     "@fontsource/inter": "^5.0.16",
     "@fontsource/roboto": "^5.0.14",
     "@fontsource/work-sans": "^5.2.5",
-    "@jenesei-software/jenesei-id-web-api": "^1.1.17",
-    "@jenesei-software/jenesei-ui-react": "^1.1.1",
+    "@jenesei-software/jenesei-id-web-api": "^1.1.18",
+    "@jenesei-software/jenesei-ui-react": "^1.1.3",
     "@tanstack/react-form": "^1.7.0",
     "@tanstack/react-query": "^5.62.10",
     "@tanstack/react-router": "^1.120.5",
@@ -45,6 +45,7 @@
     "socket.io-client": "^4.8.1",
     "styled-components": "^6.1.18",
     "styled-reset": "^4.5.2",
+    "ua-parser-js": "^2.0.3",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
@@ -58,6 +59,7 @@
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/ua-parser-js": "^0.7.39",
     "@vitejs/plugin-basic-ssl": "^1.2.0",
     "@vitejs/plugin-react": "^4.3.4",
     "dotenv": "^16.4.7",

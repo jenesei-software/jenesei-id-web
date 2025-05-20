@@ -5,7 +5,6 @@ import { Input } from '@jenesei-software/jenesei-ui-react/component-input'
 import { InputOTP } from '@jenesei-software/jenesei-ui-react/component-input-otp'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 import { Typography, TypographyLink } from '@jenesei-software/jenesei-ui-react/component-typography'
-import { useApp } from '@jenesei-software/jenesei-ui-react/context-app'
 import { useForm } from '@tanstack/react-form'
 import moment from 'moment'
 import { useCallback, useEffect, useState } from 'react'
@@ -16,7 +15,6 @@ import { useValidation } from '@local/contexts/context-validation'
 import { PageRoutePublicSignIn } from '@local/core/router'
 
 export function PagePublicSignUp() {
-  const { changeTitle } = useApp()
   const { validationSignUp, validationFunctions } = useValidation()
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' })
   const { t: tSignUp } = useTranslation('translation', { keyPrefix: 'public.sign-up' })
@@ -29,16 +27,6 @@ export function PagePublicSignUp() {
   const { mutateAsync: mutateAsyncConfirmation, reset: resetConfirmation } = useSSOVerify()
   const { mutateAsync: mutateAsyncConfirmEmail, isPending, reset: resetConfirmEmail } = useSSOPreSignUp()
   const { mutateAsync: mutateAsyncSignUp, reset: resetSignUp } = useSSOSignUp()
-
-  // const { toast } = useSonner()
-
-  useEffect(() => {
-    if (attempts !== 0) {
-      changeTitle(tSignUp('title-url-confirmation'))
-    } else {
-      changeTitle(tSignUp('title-url'))
-    }
-  }, [changeTitle, attempts, tSignUp])
 
   const form = useForm({
     defaultValues: {
@@ -535,7 +523,7 @@ export function PagePublicSignUp() {
                   icons={[
                     {
                       type: 'loading',
-                      name: 'Balls',
+                      name: 'Line',
                       isHidden: !isPending
                     }
                   ]}
@@ -569,7 +557,7 @@ export function PagePublicSignUp() {
               icons={[
                 {
                   type: 'loading',
-                  name: 'Balls',
+                  name: 'Line',
                   isHidden: !state.isSubmitting
                 }
               ]}

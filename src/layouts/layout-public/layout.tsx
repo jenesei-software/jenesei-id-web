@@ -17,7 +17,7 @@ export function LayoutPublic() {
           flexGrow: 1,
           flexDirection: 'column',
           padding: '20px',
-          overflow: 'hidden'
+          overflow: 'auto'
         },
         tablet: {
           padding: '10px',
@@ -60,7 +60,10 @@ export function LayoutPublic() {
             },
             tablet: {
               width: '560px',
-              paddingBottom: '138px'
+              justifyContent: 'flex-start'
+            },
+            mobile: {
+              paddingBottom: '0px'
             }
           }}
         >

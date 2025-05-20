@@ -13,7 +13,11 @@ export function LayoutPrivate() {
           padding: '26px',
           borderStyle: 'solid',
           borderColor: theme.palette.black05,
-          borderWidth: screenActual !== 'mobile' ? '0px 0px 0px 2px' : '0px'
+          overflow: 'auto',
+          borderWidth: screenActual !== 'mobile' ? '2px 0px 0px 2px' : '2px 0px 0px 0px'
+        },
+        mobile: {
+          padding: '14px'
         }
       })}
     >

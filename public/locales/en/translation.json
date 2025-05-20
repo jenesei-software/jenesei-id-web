@@ -1,4 +1,24 @@
 {
+  "url": {
+    "title": {
+      "/pr/language-and-country": "Jenesei ID - Language & Country",
+      "/pr/personal-info": "Jenesei ID - Personal info",
+      "/pr/resources": "Jenesei ID - Resources",
+      "/pr/sessions-and-security": "Jenesei ID - Sessions & Security",
+      "/pu/sign-in": "Jenesei ID - Sign In",
+      "/pu/sign-up": "Jenesei ID - Sign Up",
+      "/pu/forgot-password": "Jenesei ID - Forgot Password"
+    },
+    "nav": {
+      "/pr/language-and-country": ["Account", "Language & Country"],
+      "/pr/personal-info": ["Account", "Personal info"],
+      "/pr/resources": ["Account", "Resources"],
+      "/pr/sessions-and-security": ["Account", "Sessions & Security"],
+      "/pu/sign-in": ["Account", "Sign In"],
+      "/pu/sign-up": ["Account", "Sign Up"],
+      "/pu/forgot-password": ["Account", "Forgot Password"]
+    }
+  },
   "boundary": {
     "title-1": "An unknown error occurred",
     "title-2": "Please try again later",
@@ -7,37 +27,51 @@
   "private": {
     "title-account": "Account",
     "personal-info": {
-      "title-url": "Jenesei ID - Personal info",
       "menu": {
         "title": "Personal info",
-        "description": "Update your profile, contact details and preferences to personalize your experience."
+        "description": "Update your profile, contact details and preferences to personalize your experience"
       }
     },
     "sessions-and-security": {
-      "title-url": "Jenesei ID - Sessions & Security",
+      "form-session": {
+        "title": "Active sessions",
+        "description": "View and terminate active sessions on other devices",
+        "title-button-close": "Terminate session",
+        "title-button-current": "Current"
+      },
+      "form-password": {
+        "title": "Password",
+        "description": "Change your password to enhance security",
+        "placeholder-old": "Old password",
+        "placeholder-new": "New password",
+        "placeholder-new-confirm": "Confirm new password",
+        "title-button": "Change password"
+      },
       "menu": {
         "title": "Sessions & Security",
-        "description": "Track and manage your sessions on authorized devices and control how you log in."
+        "description": "Track and manage your sessions on authorized devices and control how you log in"
       }
     },
     "language-and-country": {
-      "title-url": "Jenesei ID - Language & Country",
+      "form": {
+        "language": {
+          "title": "Language"
+        }
+      },
       "menu": {
         "title": "Language & Country",
-        "description": "Select your favorite language for Jenesei Software services."
+        "description": "Select your favorite language and country for Jenesei services"
       }
     },
     "resources": {
-      "title-url": "Jenesei ID - Resources",
       "menu": {
         "title": "Resources",
-        "description": "Explore and try the available Jenesei services."
+        "description": "Explore and try the available Jenesei services"
       }
     }
   },
   "public": {
     "sign-in": {
-      "title-url": "Jenesei ID - Sign In",
       "title-button": "Sign In",
       "title-forgot-password": "Forgot password?",
       "title-welcome": "Welcome",
@@ -45,8 +79,6 @@
       "title-sign-up-2": "Create account"
     },
     "sign-up": {
-      "title-url": "Jenesei ID - Sign Up",
-      "title-url-confirmation": "Jenesei ID - Check your email",
       "title": "Sign Up",
       "title-sign-in-1": "Do you already have an account?",
       "title-sign-in-2": "Sign in",
@@ -58,10 +90,7 @@
       "title-button-continue": "Continue",
       "title-button-repeat": "Send the code again"
     },
-    "forgot-password": {
-      "title-url": "Jenesei ID - Password Recovery",
-      "title-url-confirmation": "Jenesei ID - Email Confirmation"
-    }
+    "forgot-password": {}
   },
   "meta": {
     "description": "The best service for managing your account"
@@ -78,7 +107,7 @@
         },
         "error": {
           "title": "Login error",
-          "description": "Failed to log in."
+          "description": "Failed to log in"
         }
       }
     }
@@ -136,7 +165,8 @@
         "digit": "Password must contain at least one digit",
         "special": "Password must contain at least one special character",
         "mismatch": "Passwords do not match",
-        "no-spaces": "Password must not contain spaces"
+        "no-spaces": "Password must not contain spaces",
+        "sameAsOld": "New password must not be the same as the old password"
       }
     }
   },

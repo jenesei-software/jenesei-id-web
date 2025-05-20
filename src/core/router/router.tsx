@@ -32,7 +32,7 @@ export const LayoutRoutePrivate = createRoute({
   notFoundComponent: () => <Navigate to={PageRoutePrivatePersonalInfo.fullPath} />,
   path: '/pr',
   beforeLoad: props => {
-    const isFirst = props.location.pathname == '/pr'
+    const isFirst = props.location.pathname.replace(/\/$/, '') == '/pr'
     if (isFirst)
       throw redirect({
         to: PageRoutePrivatePersonalInfo.fullPath
@@ -46,7 +46,7 @@ export const LayoutRoutePublic = createRoute({
   notFoundComponent: () => <Navigate to={PageRoutePublicSignIn.fullPath} />,
   path: '/pu',
   beforeLoad: props => {
-    const isFirst = props.location.pathname == '/pu'
+    const isFirst = props.location.pathname.replace(/\/$/, '') == '/pu'
     if (isFirst)
       throw redirect({
         to: PageRoutePublicSignIn.fullPath

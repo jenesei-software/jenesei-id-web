@@ -1,17 +1,19 @@
 import { useSSOProfile } from '@jenesei-software/jenesei-id-web-api'
 import { useRemovePreviewLoader } from '@jenesei-software/jenesei-ui-react/area-preview'
-import { ProviderApp } from '@jenesei-software/jenesei-ui-react/context-app'
+import { ProviderApp, useApp } from '@jenesei-software/jenesei-ui-react/context-app'
 import { useScreenWidth } from '@jenesei-software/jenesei-ui-react/context-screen-width'
 import { ProviderSonner } from '@jenesei-software/jenesei-ui-react/context-sonner'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Outlet, useMatches, useNavigate } from '@tanstack/react-router'
+import { Outlet, useMatches, useNavigate, useRouterState } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { Footer } from '@local/components/component-footer'
 // import { Footer } from '@local/components/component-footer'
 import { Header } from '@local/components/component-header'
 import { LeftAside } from '@local/components/component-left-aside'
+import { Nav } from '@local/components/component-nav'
 import { ProviderValidation } from '@local/contexts/context-validation'
 import { LayoutRoutePrivate, LayoutRoutePublic } from '@local/core/router'
 import { useEnvironment } from '@local/hooks/use-environment'
@@ -93,27 +95,64 @@ const LayoutRootComponent = () => {
         leftAside={{
           component: <LeftAside />,
           isTopFooter: true,
+          isTopNav: true,
           length: {
             default: isMatchPrivate ? '420px' : '50dvw',
             tablet: isMatchPrivate ? '96px' : null,
             mobile: null
           }
         }}
+        footer={{
+          component: <Footer />,
+          length: {
+            default: null,
+            tablet: null,
+            mobile: isMatchPrivate ? '95px' : null
+          }
+        }}
+        nav={{
+          component: <Nav />,
+          length: {
+            default: isMatchPrivate ? '68px' : null,
+            tablet: isMatchPrivate ? '68px' : null,
+            mobile: isMatchPrivate ? '40px' : null
+          }
+        }}
         header={{
           zIndex: 1,
           component: <Header />,
           length: {
-            default: isMatchPrivate ? '60px' : null,
-            tablet: isMatchPrivate ? '60px' : '170px',
-            mobile: isMatchPrivate ? '60px' : '170px'
+            default: isMatchPrivate ? null : null,
+            tablet: isMatchPrivate ? null : '170px',
+            mobile: isMatchPrivate ? null : '170px'
           }
         }}
         main={{
           zIndex: 0
         }}
       >
-        <Outlet />
+        <LayoutURLComponent />
       </ProviderApp>
     </ProviderSonner>
   )
+}
+const LayoutURLComponent = () => {
+  const { title } = useEnvironment()
+  const { t: tURLTitle } = useTranslation('translation', { keyPrefix: 'url.title' })
+  const fullPath = useRouterState({
+    select: state => state.location.pathname.replace(/\/$/, '')
+  })
+  const { changeTitle } = useApp()
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const titleTranslate = tURLTitle(fullPath as any, { defaultValue: '__MISSING__' })
+    const exists = titleTranslate !== '__MISSING__'
+    if (exists) {
+      changeTitle(titleTranslate)
+    } else {
+      changeTitle(title)
+    }
+  }, [changeTitle, title, fullPath, tURLTitle])
+  return <Outlet />
 }

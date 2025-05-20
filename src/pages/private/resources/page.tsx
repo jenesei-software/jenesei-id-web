@@ -30,7 +30,7 @@ export function PagePrivateResources() {
         icons={[
           {
             type: 'loading',
-            name: 'Balls',
+            name: 'Line',
             isHidden: !isPending
           }
         ]}
