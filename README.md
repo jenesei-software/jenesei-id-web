@@ -34,3 +34,5 @@
 | /src/providers  | The directory with data providers.                                                       |
 | /src/styles     | The directory for global project styles.                                               |
 | /public/        | The directory containing the HTML file of the project, the manifest file of the project, as well as all kinds of icons. |
+
+test
