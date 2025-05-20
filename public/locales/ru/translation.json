@@ -1,4 +1,24 @@
 {
+  "url": {
+    "title": {
+      "/pr/language-and-country": "Jenesei ID - Язык и страна",
+      "/pr/personal-info": "Jenesei ID - Личная информация",
+      "/pr/resources": "Jenesei ID - Ресурсы",
+      "/pr/sessions-and-security": "Jenesei ID - Сеансы и безопасность",
+      "/pu/sign-in": "Jenesei ID - Вход",
+      "/pu/sign-up": "Jenesei ID - Регистрация",
+      "/pu/forgot-password": "Jenesei ID - Восстановление пароля"
+    },
+    "nav": {
+      "/pr/language-and-country": ["Аккаунт", "Язык и страна"],
+      "/pr/personal-info": ["Аккаунт", "Личная информация"],
+      "/pr/resources": ["Аккаунт", "Ресурсы"],
+      "/pr/sessions-and-security": ["Аккаунт", "Сеансы и безопасность"],
+      "/pu/sign-in": ["Авторизация", "Вход"],
+      "/pu/sign-up": ["Авторизация", "Регистрация"],
+      "/pu/forgot-password": ["Авторизация", "Восстановление пароля"]
+    }
+  },
   "boundary": {
     "title-1": "Произошла неизвестная ошибка",
     "title-2": "Пожалуйста, попробуйте позже",
@@ -7,37 +27,32 @@
   "private": {
     "title-account": "Аккаунт",
     "personal-info": {
-      "title-url": "Jenesei ID - Личная информация",
       "menu": {
         "title": "Личная информация",
         "description": "Обновите свой профиль, контактные данные и предпочтения, чтобы персонализировать свой опыт."
       }
     },
     "sessions-and-security": {
-      "title-url": "Jenesei ID - Сеансы и безопасность",
       "menu": {
         "title": "Сеансы и безопасность",
         "description": "Отслеживайте и управляйте своими сеансами и контролируйте, как вы входите в систему."
       }
     },
     "language-and-country": {
-      "title-url": "Jenesei ID - Язык и страна",
       "menu": {
         "title": "Язык и страна",
-        "description": "Выберите свой любимый язык для служб Jenesei Software."
+        "description": "Выберите свой любимый язык для служб Jenesei."
       }
     },
     "resources": {
-      "title-url": "Jenesei ID - Ресурсы",
       "menu": {
         "title": "Ресурсы",
-        "description": "Изучите и попробуйте доступные услуги Jenesei Software."
+        "description": "Изучите и попробуйте доступные услуги Jenesei."
       }
     }
   },
   "public": {
     "sign-in": {
-      "title-url": "Jenesei ID - Вход",
       "title-button": "Войти",
       "title-forgot-password": "Забыли пароль?",
       "title-welcome": "Добро пожаловать",
@@ -45,8 +60,6 @@
       "title-sign-up-2": "Создать аккаунт"
     },
     "sign-up": {
-      "title-url": "Jenesei ID - Регистрация",
-      "title-url-confirmation": "Jenesei ID - Подтверждение почты",
       "title": "Создание аккаунта",
       "title-sign-in-1": "У вас уже есть аккаунт?",
       "title-sign-in-2": "Войти",
@@ -58,10 +71,7 @@
       "title-button-continue": "Продолжить",
       "title-button-repeat": "Отправить код повторно"
     },
-    "forgot-password": {
-      "title-url": "Jenesei ID - Восстановление пароля",
-      "title-url-confirmation": "Jenesei ID - Подтверждение почты"
-    }
+    "forgot-password": {}
   },
   "meta": {
     "description": "Лучший сервис для управления вашим аккаунтом"

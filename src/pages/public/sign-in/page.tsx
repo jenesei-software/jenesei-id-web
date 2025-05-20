@@ -3,7 +3,6 @@ import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
 import { Input } from '@jenesei-software/jenesei-ui-react/component-input'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 import { Typography, TypographyLink } from '@jenesei-software/jenesei-ui-react/component-typography'
-import { useApp } from '@jenesei-software/jenesei-ui-react/context-app'
 import { useForm } from '@tanstack/react-form'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,12 +15,8 @@ export function PagePublicSignIn() {
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' })
   const { t: tSignIn } = useTranslation('translation', { keyPrefix: 'public.sign-in' })
 
-  const { changeTitle } = useApp()
   const { validationSignIn, validationFunctions } = useValidation()
   const { mutateAsync } = useSSOSignIn()
-  useEffect(() => {
-    changeTitle(tSignIn('title-url'))
-  }, [changeTitle, tSignIn])
 
   const form = useForm({
     defaultValues: {

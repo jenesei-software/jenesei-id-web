@@ -4,8 +4,9 @@ import { Ripple } from '@jenesei-software/jenesei-ui-react/component-ripple'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
 import { useScreenWidth } from '@jenesei-software/jenesei-ui-react/context-screen-width'
+import { useIsFetching, useIsMutating } from '@tanstack/react-query'
 import { Link, LinkProps, useMatches } from '@tanstack/react-router'
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from 'styled-components'
 
@@ -18,6 +19,9 @@ import {
 } from '@local/core/router'
 
 export const LeftAside: FC = () => {
+  const isFetching = useIsFetching()
+  const isMutating = useIsMutating()
+  const isLoading = useMemo(() => isFetching > 0 || isMutating > 0, [isFetching, isMutating])
   const { t: tPrivate } = useTranslation('translation', { keyPrefix: 'private' })
 
   const { screenActual } = useScreenWidth()
@@ -53,7 +57,8 @@ export const LeftAside: FC = () => {
             default: {
               size: 18,
               weight: 500,
-              color: 'black100'
+              color: 'black100',
+              line: 1
             }
           }}
         >
@@ -98,6 +103,49 @@ export const LeftAside: FC = () => {
           to={PageRoutePrivateResources.fullPath}
         />
       </Stack>
+      <Stack
+        sx={theme => ({
+          default: {
+            height: '84px',
+            padding: screenActual === 'default' ? '0px 26px' : '0px 32px',
+            gap: '14px',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            backgroundColor: theme.palette.black100
+          }
+        })}
+      >
+        <Stack
+          sx={{
+            default: {
+              width: '32px',
+              minWidth: '32px',
+              height: '32px'
+            }
+          }}
+        >
+          {isLoading ? (
+            <Icon type="loading" name="Line" size="100%" primaryColor="whiteStandard" />
+          ) : (
+            <Icon type="logo" name="Jenesei" size="100%" primaryColor="blueRest" />
+          )}
+        </Stack>
+
+        {screenActual === 'default' && (
+          <Typography
+            sx={{
+              default: {
+                size: 20,
+                weight: 700,
+                color: 'whiteStandard',
+                line: 1
+              }
+            }}
+          >
+            Jenesei ID
+          </Typography>
+        )}
+      </Stack>
     </Stack>
   ) : (
     <Stack
@@ -112,7 +160,6 @@ export const LeftAside: FC = () => {
         }
       })}
     >
-      {' '}
       <>
         <Image
           src="https://id.jenesei.ru/images/auth-back-mountain.jpg"
