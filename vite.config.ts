@@ -120,7 +120,7 @@ export default defineConfig(({ mode }) => {
             prefix: 'icon',
             sizesBackgroundWhite: [],
             sizesBackgroundTransparent: sizesBackgroundTransparent,
-            sizesFavicon: sizesFavicon
+            sizesFavicon: []
           })
         }
       })

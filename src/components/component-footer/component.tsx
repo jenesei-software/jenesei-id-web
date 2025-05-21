@@ -16,7 +16,7 @@ export const Footer: FC = () => {
     <Stack
       sx={() => ({
         default: {
-          alignItems: 'center',
+          alignItems: 'stretch',
           justifyContent: 'center',
           flexDirection: 'row',
           flexGrow: 1,
@@ -61,13 +61,15 @@ const FooterItem: FC<{
             borderColor: isMatch ? theme.palette.black80 : theme.palette.black05,
             borderWidth: '4px 0px 0px 0px',
             width: '100%',
+            height: '100%',
             flexDirection: 'row',
             gap: '16px',
             alignItems: 'center',
             justifyContent: 'center',
             alignSelf: 'stretch',
             flexGrow: 1,
-            paddingBottom: '35px'
+            paddingBottom: '35px',
+            boxSizing: 'border-box'
           }
         })}
       >
