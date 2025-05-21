@@ -75,7 +75,7 @@ export function PagePrivateResources() {
             gridTemplateColumns: 'repeat(3, minmax(300px, 1fr))'
           },
           mobile: {
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))'
           }
         }}
       >
