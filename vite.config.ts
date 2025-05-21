@@ -30,8 +30,8 @@ export default defineConfig(({ mode }) => {
     }
   }
 
-  const sizesBackgroundTransparent = [64, 180, 192, 256, 384, 512]
-  const sizesBackgroundWhite = [180, 192]
+  const sizesBackgroundTransparent = [57, 64, 72, 76, 114, 120, 144, 152, 180, 192, 256, 384, 512]
+  const sizesBackgroundWhite = []
   const sizesFavicon = [64]
   return {
     server: {
@@ -89,8 +89,16 @@ export default defineConfig(({ mode }) => {
           data: {
             title: VITE_DEFAULT_SHORTNAME,
             robotsMeta: robotsMode[mode]?.meta,
-            icon180: `icons/icon-180x180-white.png`,
-            icon64: `icons/icon-64x64-favicon.ico`
+            icon57: `icons/icon-57x57.png`,
+            icon72: `icons/icon-72x72.png`,
+            icon76: `icons/icon-76x76.png`,
+            icon114: `icons/icon-114x114.png`,
+            icon120: `icons/icon-1204x120.png`,
+            icon144: `icons/icon-144x144.png`,
+            icon152: `icons/icon-152x152.png`,
+            icon180: `icons/icon-180x180.png`,
+
+            icon64Fav: `icons/icon-64x64-favicon.ico`
           }
         }
       }),
@@ -120,7 +128,7 @@ export default defineConfig(({ mode }) => {
             prefix: 'icon',
             sizesBackgroundWhite: [],
             sizesBackgroundTransparent: sizesBackgroundTransparent,
-            sizesFavicon: []
+            sizesFavicon: sizesFavicon
           })
         }
       })
