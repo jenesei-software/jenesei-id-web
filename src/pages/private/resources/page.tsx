@@ -184,7 +184,7 @@ export function PagePrivateResourcesItem(props: { resource: ResourceDto; isConne
           ]}
           onClick={() => mutate({ body: { resourceId: props.resource.resourceId } })}
         >
-          {props.isConnect ? tPage('button-connect') : tPage('button-connected')}
+          {props.isConnect ? tPage('button-connected') : tPage('button-connect')}
         </Button>
         <Button isRadius isDisabled genre={props.resource.isActive ? 'greenTransparent' : 'gray'} size="small">
           {props.resource.isActive ? tPage('button-active') : tPage('button-inactive')}
