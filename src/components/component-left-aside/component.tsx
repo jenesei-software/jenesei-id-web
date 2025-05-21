@@ -87,7 +87,7 @@ export const LeftAside: FC = () => {
         <LeftAsideItem
           description={tPrivate('sessions-and-security.menu.description')}
           title={tPrivate('sessions-and-security.menu.title')}
-          icon="Document"
+          icon="Lock"
           to={PageRoutePrivateSessionsAndSecurity.fullPath}
         />
         <LeftAsideItem

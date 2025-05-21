@@ -54,6 +54,9 @@
     },
     "language-and-country": {
       "form": {
+        "country": {
+          "title": "Страна"
+        },
         "language": {
           "title": "Язык"
         }
@@ -67,6 +70,16 @@
       "menu": {
         "title": "Ресурсы",
         "description": "Изучите и попробуйте доступные услуги Jenesei"
+      },
+      "button-connect": "Подключить",
+      "button-connected": "Подключено",
+      "button-active": "Активно",
+      "button-inactive": "Не активно",
+      "services": {
+        "jenesei_id": {
+          "title": "Jenesei ID",
+          "description": "Управляйте своим аккаунтом и получайте доступ к сервисам Jenesei"
+        }
       }
     }
   },
@@ -113,6 +126,9 @@
     }
   },
   "form": {
+    "country": {
+      "placeholder": "Выберите страну"
+    },
     "language": {
       "placeholder": "Выберите язык"
     },

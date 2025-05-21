@@ -72,7 +72,6 @@ const LayoutRootComponent = () => {
   }, [isAuthenticated, isMatchPrivate, isMatchPublic, navigate])
 
   const { screenActual } = useScreenWidth()
-  console.log('screenActual', screenActual)
   return (
     <ProviderSonner
       gap={12}
