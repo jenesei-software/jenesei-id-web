@@ -1,5 +1,6 @@
 import {
   ILanguageKeys,
+  Select,
   SelectLanguage,
   Separator,
   Typography,
@@ -62,39 +63,88 @@ export function PagePrivateLanguageAndCountry() {
           {t('private.language-and-country.menu.description')}
         </Typography>
       </Stack>
-      <Separator color="black05" height="2px" width="100%" radius="50%" />
+      <Separator color="black05" height="2px" width="100%" radius="4px" />
       <Stack
         sx={{
           default: {
-            flexDirection: 'column',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
             alignItems: 'flex-start',
-            gap: '8px'
+            gap: '12px',
+            width: '100%'
           }
         }}
       >
-        <Typography
+        <Stack
           sx={{
             default: {
-              variant: 'h7',
-              weight: 700,
-              color: 'black80',
-              line: 1
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '8px',
+              width: '100%'
             }
           }}
         >
-          {t('private.language-and-country.form.language.title')}
-        </Typography>
-        <SelectLanguage
-          placeholder={t('form.language.placeholder')}
-          isShowSelectInputIcon
-          isShowDropdownOptionIcon
-          genre="blackBorder"
-          size={'medium'}
-          width={screenActual === 'mobile' ? '100%' : '300px'}
-          value={lng}
-          inputProps={{ isReadOnly: true, variety: 'standard' }}
-          onChange={lng => changeLng(lng as ILanguageKeys)}
-        />
+          <Typography
+            sx={{
+              default: {
+                variant: 'h7',
+                weight: 700,
+                color: 'black80',
+                line: 1
+              }
+            }}
+          >
+            {t('private.language-and-country.form.language.title')}
+          </Typography>
+          <SelectLanguage
+            placeholder={t('form.language.placeholder')}
+            isShowSelectInputIcon
+            isShowDropdownOptionIcon
+            genre="blackBorder"
+            size={'medium'}
+            width={screenActual === 'mobile' ? '100%' : '300px'}
+            value={lng}
+            inputProps={{ isReadOnly: true, variety: 'standard' }}
+            onChange={lng => changeLng(lng as ILanguageKeys)}
+          />
+        </Stack>
+        <Stack
+          sx={{
+            default: {
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '8px',
+              width: '100%'
+            }
+          }}
+        >
+          <Typography
+            sx={{
+              default: {
+                variant: 'h7',
+                weight: 700,
+                color: 'black80',
+                line: 1
+              }
+            }}
+          >
+            {t('private.language-and-country.form.country.title')}
+          </Typography>
+          <Select
+            placeholder={t('form.country.placeholder')}
+            isShowSelectInputIcon
+            isShowDropdownOptionIcon
+            genre="blackBorder"
+            size="medium"
+            width={screenActual === 'mobile' ? '100%' : '300px'}
+            onChange={() => {}}
+            option={[{ label: 'USA', value: 'USA' }]}
+            value={[]}
+            inputProps={{ isReadOnly: true, variety: 'standard' }}
+            isDisabled
+          />
+        </Stack>
       </Stack>
     </Stack>
   )

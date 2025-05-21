@@ -54,6 +54,9 @@
     },
     "language-and-country": {
       "form": {
+        "country": {
+          "title": "Country"
+        },
         "language": {
           "title": "Language"
         }
@@ -67,6 +70,16 @@
       "menu": {
         "title": "Resources",
         "description": "Explore and try the available Jenesei services"
+      },
+      "button-connect": "Connect",
+      "button-connected": "Connected",
+      "button-active": "Active",
+      "button-inactive": "Inactive",
+      "services": {
+        "jenesei_id": {
+          "title": "Jenesei ID",
+          "description": "Manage your account and access all Jenesei services with a single ID"
+        }
       }
     }
   },
@@ -113,6 +126,9 @@
     }
   },
   "form": {
+    "country": {
+      "placeholder": "Select country"
+    },
     "language": {
       "placeholder": "Select language"
     },

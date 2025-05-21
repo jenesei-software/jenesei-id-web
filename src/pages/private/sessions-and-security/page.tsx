@@ -276,7 +276,7 @@ export function PagePrivateSessionsAndSecurity() {
           default: {
             flexDirection: 'column',
             alignItems: 'flex-start',
-            gap: '8px',
+            gap: '16px',
             width: '100%'
           }
         }}
@@ -285,8 +285,7 @@ export function PagePrivateSessionsAndSecurity() {
           sx={{
             default: {
               flexDirection: 'column',
-
-              gap: '8px'
+              gap: '6px'
             }
           }}
         >
@@ -320,8 +319,11 @@ export function PagePrivateSessionsAndSecurity() {
             default: {
               width: '100%',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))',
               gap: '12px'
+            },
+            tablet: {
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'
             }
           }}
         >

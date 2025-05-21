@@ -25,7 +25,7 @@ export const Footer: FC = () => {
       })}
     >
       <FooterItem icon="Profile" to={PageRoutePrivatePersonalInfo.fullPath} />
-      <FooterItem icon="Document" to={PageRoutePrivateSessionsAndSecurity.fullPath} />
+      <FooterItem icon="Lock" to={PageRoutePrivateSessionsAndSecurity.fullPath} />
       <FooterItem icon="Language" to={PageRoutePrivateLanguageAndCountry.fullPath} />
       <FooterItem icon="Resources" to={PageRoutePrivateResources.fullPath} />
     </Stack>
