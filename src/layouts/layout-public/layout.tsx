@@ -63,6 +63,7 @@ export function LayoutPublic() {
               justifyContent: 'flex-start'
             },
             mobile: {
+              width: '100%',
               paddingBottom: '0px'
             }
           }}

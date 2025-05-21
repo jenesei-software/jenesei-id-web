@@ -87,7 +87,7 @@ export function PagePrivateSessionsAndSecurity() {
           {tPage('menu.description')}
         </Typography>
       </Stack>
-      <Separator color="black05" height="2px" width="100%" radius="50%" />
+      <Separator color="black05" height="2px" width="100%" radius="4px" />
       <Stack
         sx={{
           default: {
@@ -270,7 +270,7 @@ export function PagePrivateSessionsAndSecurity() {
           </form.Subscribe>
         </Form>
       </Stack>
-      <Separator color="black05" height="2px" width="100%" radius="50%" />
+      <Separator color="black05" height="2px" width="100%" radius="4px" />
       <Stack
         sx={{
           default: {
