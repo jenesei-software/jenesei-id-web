@@ -86,18 +86,43 @@ export const Header: FC = () => {
               <Icon type="logo" name="Jenesei" size="100%" primaryColor="whiteStandard" />
             </Stack>
 
-            <Typography
-              sx={{
+            <Stack
+              sx={() => ({
                 default: {
-                  size: 42,
-                  weight: 700,
-                  color: 'whiteStandard',
-                  line: 1
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                  position: 'relative',
+                  flexDirection: 'column'
                 }
-              }}
+              })}
             >
-              Jenesei ID
-            </Typography>
+              <Typography
+                sx={{
+                  default: {
+                    size: 42,
+                    weight: 700,
+                    color: 'whiteStandard',
+                    line: 1,
+                    shadow: 'shadowPulse'
+                  }
+                }}
+              >
+                {t('public.layout.title')}
+              </Typography>
+              <Typography
+                sx={{
+                  default: {
+                    size: 12,
+                    weight: 500,
+                    color: 'whiteStandard',
+                    line: 1,
+                    shadow: 'shadowPulse'
+                  }
+                }}
+              >
+                {t('public.layout.description')}
+              </Typography>
+            </Stack>
           </Stack>
         </>
       )}

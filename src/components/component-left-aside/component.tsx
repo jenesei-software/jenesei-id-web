@@ -23,6 +23,7 @@ export const LeftAside: FC = () => {
   const isMutating = useIsMutating()
   const isLoading = useMemo(() => isFetching > 0 || isMutating > 0, [isFetching, isMutating])
   const { t: tPrivate } = useTranslation('translation', { keyPrefix: 'private' })
+  const { t: tPublic } = useTranslation('translation', { keyPrefix: 'public' })
 
   const { screenActual } = useScreenWidth()
   const isMatchPrivate = useMatches({
@@ -198,18 +199,43 @@ export const LeftAside: FC = () => {
             <Icon type="logo" name="Jenesei" size="100%" primaryColor="whiteStandard" />
           </Stack>
 
-          <Typography
-            sx={{
+          <Stack
+            sx={() => ({
               default: {
-                size: 42,
-                weight: 700,
-                color: 'whiteStandard',
-                line: 1
+                alignItems: 'flex-start',
+                justifyContent: 'center',
+                position: 'relative',
+                flexDirection: 'column'
               }
-            }}
+            })}
           >
-            Jenesei ID
-          </Typography>
+            <Typography
+              sx={{
+                default: {
+                  size: 42,
+                  weight: 700,
+                  color: 'whiteStandard',
+                  line: 1,
+                  shadow: 'shadowPulse'
+                }
+              }}
+            >
+              {tPublic('layout.title')}
+            </Typography>
+            <Typography
+              sx={{
+                default: {
+                  size: 12,
+                  weight: 500,
+                  color: 'whiteStandard',
+                  line: 1,
+                  shadow: 'shadowPulse'
+                }
+              }}
+            >
+              {tPublic('layout.description')}
+            </Typography>
+          </Stack>
         </Stack>
       </>
     </Stack>
@@ -230,7 +256,7 @@ const LeftAsideItem: FC<{
     }
   })
   return (
-    <Link to={props.to} style={{ width: '-webkit-fill-available', textDecoration: 'none' }}>
+    <Link to={props.to} style={{ width: '100%', height: 'fit-content', textDecoration: 'none', display: 'flex' }}>
       <Stack
         isRipple
         sx={() => ({

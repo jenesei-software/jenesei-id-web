@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => {
   return {
     server: {
       host: 'local.dev.jenesei.ru',
-      port: 2000
+      port: 3000
     },
     build: {
       outDir: 'build',

@@ -38,7 +38,8 @@ export function PagePublicSignIn() {
     },
     canSubmitWhenInvalid: false,
     validators: {
-      onBlurAsync: validationFunctions.touched(validationSignIn)
+      onChangeAsyncDebounceMs: 500,
+      onChangeAsync: validationFunctions.touched(validationSignIn)
     }
   })
 

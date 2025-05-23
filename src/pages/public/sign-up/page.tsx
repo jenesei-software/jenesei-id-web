@@ -118,7 +118,8 @@ export function PagePublicSignUp() {
       }
     },
     validators: {
-      onBlurAsync: validationFunctions.touched(validationSignUp)
+      onChangeAsyncDebounceMs: 500,
+      onChangeAsync: validationFunctions.touched(validationSignUp)
     }
   })
 

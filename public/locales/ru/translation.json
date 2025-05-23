@@ -84,6 +84,10 @@
     }
   },
   "public": {
+    "layout": {
+      "title": "Jenesei ID",
+      "description": "Построй своё будущее"
+    },
     "sign-in": {
       "title-button": "Войти",
       "title-forgot-password": "Забыли пароль?",
