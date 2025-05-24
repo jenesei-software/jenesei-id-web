@@ -6,7 +6,7 @@ import Backend from 'i18next-chained-backend'
 import HttpApi from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 
-import translation from '../../../public/locales/ru/translation.json'
+import translation from '../../../public/locales/rus/translation.json'
 
 // const mode = import.meta.env.VITE_NODE_ENV
 
