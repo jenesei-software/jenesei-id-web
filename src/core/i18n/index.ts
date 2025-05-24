@@ -11,7 +11,7 @@ import translation from '../../../public/locales/ru/translation.json'
 // const mode = import.meta.env.VITE_NODE_ENV
 
 export const defaultNS: INameSpace = 'translation'
-export const fallbackLng = KeysLanguage.en as ILanguageKeys
+export const fallbackLng = KeysLanguage.eng as ILanguageKeys
 export const supportedLngs = Object.values(KeysLanguage) as ILanguageKeys[]
 export const browserLng = navigator.language.split('-')[0]
 

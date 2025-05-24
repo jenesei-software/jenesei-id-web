@@ -99,6 +99,14 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
       }),
     [tForm]
   )
+  const validationLanguageAndCountryCode = useMemo(
+    () =>
+      yup.object({
+        language: yup.string().trim(),
+        password: yup.string().trim()
+      }),
+    []
+  )
   const validationPasswordUpdate = useMemo(
     () =>
       yup.object({
@@ -224,7 +232,13 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
   )
   return (
     <ValidationContext.Provider
-      value={{ validationFunctions, validationSignIn, validationSignUp, validationPasswordUpdate }}
+      value={{
+        validationFunctions,
+        validationSignIn,
+        validationSignUp,
+        validationPasswordUpdate,
+        validationLanguageAndCountryCode
+      }}
     >
       {props.children}
     </ValidationContext.Provider>

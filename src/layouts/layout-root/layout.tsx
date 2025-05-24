@@ -1,5 +1,4 @@
 import { useSSOProfile } from '@jenesei-software/jenesei-id-web-api'
-import { useRemovePreviewLoader } from '@jenesei-software/jenesei-ui-react/area-preview'
 import { ProviderApp, useApp } from '@jenesei-software/jenesei-ui-react/context-app'
 import { useScreenWidth } from '@jenesei-software/jenesei-ui-react/context-screen-width'
 import { ProviderSonner } from '@jenesei-software/jenesei-ui-react/context-sonner'
@@ -10,7 +9,6 @@ import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Footer } from '@local/components/component-footer'
-// import { Footer } from '@local/components/component-footer'
 import { Header } from '@local/components/component-header'
 import { LeftAside } from '@local/components/component-left-aside'
 import { Nav } from '@local/components/component-nav'
@@ -19,7 +17,6 @@ import { LayoutRoutePrivate, LayoutRoutePublic } from '@local/core/router'
 import { useEnvironment } from '@local/hooks/use-environment'
 
 export function LayoutRoot() {
-  useRemovePreviewLoader()
   const env = useEnvironment()
 
   useEffect(() => {

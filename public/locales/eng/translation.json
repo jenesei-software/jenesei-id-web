@@ -59,7 +59,8 @@
         },
         "language": {
           "title": "Language"
-        }
+        },
+        "title-button": "Save"
       },
       "menu": {
         "title": "Language & Country",
@@ -131,7 +132,8 @@
   },
   "form": {
     "country": {
-      "placeholder": "Select country"
+      "placeholder": "Select country",
+      "empty-options": "No countries found"
     },
     "language": {
       "placeholder": "Select language"

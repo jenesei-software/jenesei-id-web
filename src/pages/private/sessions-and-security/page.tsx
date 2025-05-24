@@ -370,10 +370,19 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
         <Stack
           sx={theme => ({
             default: {
+              '@keyframes blink-bg': {
+                from: {
+                  backgroundColor: theme.palette.greenGoogle
+                },
+                to: {
+                  backgroundColor: theme.palette.grayJanice
+                }
+              },
               width: '12px',
               height: '12px',
               borderRadius: '50%',
-              backgroundColor: props.session.current ? theme.palette.greenGoogle : theme.palette.grayJanice
+              backgroundColor: props.session.current ? theme.palette.greenGoogle : theme.palette.grayJanice,
+              animation: props.session.current ? 'blink-bg 1s infinite alternate' : undefined
             }
           })}
         />

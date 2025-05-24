@@ -59,7 +59,8 @@
         },
         "language": {
           "title": "Язык"
-        }
+        },
+        "title-button": "Сохранить"
       },
       "menu": {
         "title": "Язык и страна",
@@ -131,7 +132,8 @@
   },
   "form": {
     "country": {
-      "placeholder": "Выберите страну"
+      "placeholder": "Выберите страну",
+      "empty-options": "Нет найденных стран"
     },
     "language": {
       "placeholder": "Выберите язык"
