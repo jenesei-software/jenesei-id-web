@@ -1,0 +1,1 @@
+import{b as t,j as e,S as x,O as p}from"./vendor-DqezmsEU.js";function d(){const{screenActual:o}=t();return e.jsx(x,{sx:r=>({default:{flexGrow:1,padding:"26px",borderStyle:"solid",borderColor:r.palette.black05,overflowY:"auto",overflowX:"hidden",borderWidth:o!=="mobile"?"2px 0px 0px 2px":"2px 0px 0px 0px"},mobile:{padding:"14px"}}),children:e.jsx(p,{})})}export{d as L};
