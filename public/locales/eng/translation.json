@@ -27,6 +27,10 @@
   "private": {
     "title-account": "Account",
     "personal-info": {
+      "form": {
+        "title-button-save": "Save",
+        "title-button-cancel": "Cancel"
+      },
       "menu": {
         "title": "Personal info",
         "description": "Update your profile, contact details and preferences to personalize your experience"

@@ -71,6 +71,7 @@ export function PagePrivatePersonalInfo() {
           alignItems: 'stretch',
           flexDirection: 'column',
           flexGrow: 1,
+          position: 'relative',
           gap: '26px'
         }
       }}
@@ -110,14 +111,16 @@ export function PagePrivatePersonalInfo() {
         </Typography>
       </Stack>
       <Separator color="black05" height="2px" width="100%" radius="4px" />
-      <Preview visible={!isLoading}>
-        <Form
-          width="100%"
-          handleSubmit={form.handleSubmit}
-          style={{
-            gap: '25px'
-          }}
-        >
+
+      <Form
+        width="100%"
+        handleSubmit={form.handleSubmit}
+        style={{
+          gap: '25px',
+          position: 'relative'
+        }}
+      >
+        <Preview visible={!isLoading}>
           <form.Field name="image">
             {field => (
               <Stack
@@ -563,8 +566,8 @@ export function PagePrivatePersonalInfo() {
               </Stack>
             )}
           </form.Subscribe>
-        </Form>
-      </Preview>
+        </Preview>
+      </Form>
     </Stack>
   )
 }
