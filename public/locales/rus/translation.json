@@ -27,6 +27,10 @@
   "private": {
     "title-account": "Аккаунт",
     "personal-info": {
+      "form": {
+        "title-button-save": "Сохранить",
+        "title-button-cancel": "Отменить"
+      },
       "menu": {
         "title": "Личная информация",
         "description": "Обновите свой профиль, контактные данные и предпочтения, чтобы персонализировать свой опыт"
@@ -131,6 +135,19 @@
     }
   },
   "form": {
+    "image": {
+      "placeholder": "Изображение профиля",
+      "placeholder-input": "Выберите изображение профиля",
+      "alt": "Изображение профиля",
+      "description": "PNG, JPEG, не более 5 МБ",
+      "dialog": {
+        "buttonAdd": "Загрузить изображение",
+        "dialogSave": "Сохранить",
+        "dialogCancel": "Отменить",
+        "dialogAddImage": "Добавить",
+        "dialogDeleteImage": "Удалить"
+      }
+    },
     "country": {
       "placeholder": "Выберите страну",
       "empty-options": "Нет найденных стран"
@@ -140,6 +157,7 @@
     },
     "dateOfBirth": {
       "placeholder": "Дата рождения",
+      "placeholder-input": "Выберите дату рождения",
       "errors": {
         "required": "Обязательное поле",
         "invalid": "Некорректная дата рождения",
@@ -148,8 +166,29 @@
         "future": "Дата рождения не может быть в будущем"
       }
     },
+    "firstName": {
+      "placeholder": "Имя",
+      "placeholder-input": "Напишите ваше имя",
+      "errors": {
+        "no-spaces": "Имя не должно содержать пробелов",
+        "required": "Обязательное поле",
+        "minLength": "Имя должно содержать не менее {{minLength}} символов",
+        "maxLength": "Имя не должно превышать {{maxLength}} символов"
+      }
+    },
+    "lastName": {
+      "placeholder": "Фамилия",
+      "placeholder-input": "Напишите вашу фамилию",
+      "errors": {
+        "no-spaces": "Фамилия не должна содержать пробелов",
+        "required": "Обязательное поле",
+        "minLength": "Фамилия должна содержать не менее {{minLength}} символов",
+        "maxLength": "Фамилия не должна превышать {{maxLength}} символов"
+      }
+    },
     "username": {
       "placeholder": "Логин",
+      "placeholder-input": "Напишите ваш логин",
       "errors": {
         "no-spaces": "Логин не должен содержать пробелов",
         "alreadyExists": "Логин уже зарегистрирован",
@@ -167,6 +206,7 @@
     },
     "email": {
       "placeholder": "Почта",
+      "placeholder-input": "Напишите вашу почту",
       "errors": {
         "required": "Обязательное поле",
         "alreadyExists": "Почта уже зарегистрирована",

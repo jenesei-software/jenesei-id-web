@@ -52,19 +52,17 @@ export const Header: FC = () => {
           <Image
             src="https://id.jenesei.ru/images/auth-back-mountain.jpg"
             alt="Mountain"
-            propsStack={{
-              sx: theme => ({
-                default: {
-                  width: '100%',
-                  height: '100%',
-                  position: 'absolute',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: theme.palette.black10,
-                  pointerEvents: 'none'
-                }
-              })
-            }}
+            sxStack={theme => ({
+              default: {
+                width: '100%',
+                height: '100%',
+                position: 'absolute',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: theme.palette.black10,
+                pointerEvents: 'none'
+              }
+            })}
           />
           <Stack
             sx={{
@@ -102,7 +100,6 @@ export const Header: FC = () => {
                     size: 42,
                     weight: 700,
                     color: 'whiteStandard',
-                    line: 1,
                     shadow: 'shadowPulse'
                   }
                 }}
@@ -115,7 +112,6 @@ export const Header: FC = () => {
                     size: 12,
                     weight: 500,
                     color: 'whiteStandard',
-                    line: 1,
                     shadow: 'shadowPulse'
                   }
                 }}

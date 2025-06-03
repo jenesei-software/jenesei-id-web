@@ -15,6 +15,8 @@ export function LayoutPrivate() {
           borderColor: theme.palette.black05,
           overflowY: 'auto',
           overflowX: 'hidden',
+          height: 'fit-content',
+          minHeight: '-webkit-fill-available',
           borderWidth: screenActual !== 'mobile' ? '2px 0px 0px 2px' : '2px 0px 0px 0px'
         },
         mobile: {

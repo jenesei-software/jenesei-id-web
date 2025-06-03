@@ -19,7 +19,7 @@
     "@fontsource/roboto": "^5.0.14",
     "@fontsource/work-sans": "^5.2.5",
     "@jenesei-software/jenesei-id-web-api": "^1.1.20",
-    "@jenesei-software/jenesei-ui-react": "^1.1.7",
+    "@jenesei-software/jenesei-ui-react": "^1.1.10",
     "@tanstack/react-form": "^1.7.0",
     "@tanstack/react-query": "^5.62.10",
     "@tanstack/react-router": "^1.120.5",

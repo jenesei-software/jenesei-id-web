@@ -4,7 +4,7 @@ import {
   useResourceList,
   useResourceProfile
 } from '@jenesei-software/jenesei-id-web-api'
-import { Button, Icon, Separator, Typography } from '@jenesei-software/jenesei-ui-react'
+import { Button, Icon, Preview, Separator, Typography } from '@jenesei-software/jenesei-ui-react'
 import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,7 +13,7 @@ import { RESOURCE_LIST } from '@local/core/constants'
 
 export function PagePrivateResources() {
   const { t } = useTranslation('translation')
-  const { data: dataResourceList } = useResourceList()
+  const { data: dataResourceList, isLoading } = useResourceList()
   const { data: dataResourceProfile } = useResourceProfile()
   return (
     <Stack
@@ -63,30 +63,32 @@ export function PagePrivateResources() {
         </Typography>
       </Stack>
       <Separator color="black05" height="2px" width="100%" radius="4px" />
-      <Stack
-        sx={{
-          default: {
-            width: '100%',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))',
-            gap: '12px'
-          },
-          tablet: {
-            gridTemplateColumns: 'repeat(3, minmax(300px, 1fr))'
-          },
-          mobile: {
-            gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))'
-          }
-        }}
-      >
-        {dataResourceList?.map((resource: ResourceDto) => (
-          <PagePrivateResourcesItem
-            key={resource.resourceId}
-            resource={resource}
-            isConnect={(dataResourceProfile ?? []).some(r => r.resourceId === resource.resourceId)}
-          />
-        ))}
-      </Stack>
+      <Preview visible={!isLoading}>
+        <Stack
+          sx={{
+            default: {
+              width: '100%',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))',
+              gap: '12px'
+            },
+            tablet: {
+              gridTemplateColumns: 'repeat(3, minmax(300px, 1fr))'
+            },
+            mobile: {
+              gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))'
+            }
+          }}
+        >
+          {dataResourceList?.map((resource: ResourceDto) => (
+            <PagePrivateResourcesItem
+              key={resource.resourceId}
+              resource={resource}
+              isConnect={(dataResourceProfile ?? []).some(r => r.resourceId === resource.resourceId)}
+            />
+          ))}
+        </Stack>
+      </Preview>
     </Stack>
   )
 }

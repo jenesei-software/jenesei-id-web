@@ -230,9 +230,53 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
       }),
     [getUserCheckEmail, getUserCheckNickname, tForm]
   )
+  const validationUser = useMemo(
+    () =>
+      yup.object({
+        dateOfBirth: yup
+          .mixed()
+          .test('is-required', tForm('dateOfBirth.errors.required'), value => {
+            return value !== undefined && value !== null && value !== 0
+          })
+          .test('valid-date', tForm('dateOfBirth.errors.invalid'), value => {
+            if (value === 0) {
+              return false
+            }
+            return moment.utc(value).isValid()
+          })
+          .test('min-age', tForm('dateOfBirth.errors.minAge', { minAge: 18 }), value => {
+            if (value === undefined || value === null) return true
+            return moment.utc(value).valueOf() <= moment.utc().subtract(18, 'years').valueOf()
+          })
+          .test('max-age', tForm('dateOfBirth.errors.maxAge', { maxAge: 118 }), value => {
+            if (value === undefined || value === null) return true
+            return moment.utc(value).valueOf() >= moment.utc().subtract(118, 'years').valueOf()
+          })
+          .test('is-not-future', tForm('dateOfBirth.errors.future'), value => {
+            if (value === undefined || value === null) return true
+            return moment.utc(value).valueOf() <= moment.utc().valueOf()
+          }),
+        firstName: yup
+          .string()
+          .trim()
+          .required(tForm('firstName.errors.required'))
+          .min(2, tForm('firstName.errors.minLength', { minLength: 2 }))
+          .max(12, tForm('firstName.errors.maxLength', { maxLength: 12 }))
+          .test('no-spaces', tForm('firstName.errors.no-spaces'), value => !value?.includes(' ')),
+        lastName: yup
+          .string()
+          .trim()
+          .required(tForm('lastName.errors.required'))
+          .min(2, tForm('lastName.errors.minLength', { minLength: 2 }))
+          .max(12, tForm('lastName.errors.maxLength', { maxLength: 12 }))
+          .test('no-spaces', tForm('lastName.errors.no-spaces'), value => !value?.includes(' '))
+      }),
+    [tForm]
+  )
   return (
     <ValidationContext.Provider
       value={{
+        validationUser,
         validationFunctions,
         validationSignIn,
         validationSignUp,

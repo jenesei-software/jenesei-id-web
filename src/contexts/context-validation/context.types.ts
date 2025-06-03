@@ -27,4 +27,5 @@ export type ValidationContextProps = {
   validationSignIn: yup.ObjectSchema<any>
   validationPasswordUpdate: yup.ObjectSchema<any>
   validationLanguageAndCountryCode: yup.ObjectSchema<any>
+  validationUser: yup.ObjectSchema<any>
 }

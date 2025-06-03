@@ -41,7 +41,7 @@ export function LayoutRoot() {
 const LayoutRootComponent = () => {
   const { title } = useEnvironment()
   const { t } = useTranslation('translation')
-  const { isLoading, isSuccess, isFetched } = useSSOProfile({ retry: false })
+  const { isLoading, isSuccess, isFetched } = useSSOProfile()
   const isAuthenticated = useMemo(() => (isFetched ? isSuccess : undefined), [isFetched, isSuccess])
 
   const visible = useMemo(() => !!isLoading, [isLoading])

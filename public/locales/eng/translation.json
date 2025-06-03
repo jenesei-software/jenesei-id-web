@@ -131,15 +131,49 @@
     }
   },
   "form": {
+    "image": {
+      "placeholder": "Profile image",
+      "placeholder-input": "Upload profile image",
+      "alt": "Profile image",
+      "description": "PNG, JPEG, under 5 Mb",
+      "dialog": {
+        "buttonAdd": "Add image",
+        "dialogSave": "Save",
+        "dialogCancel": "Cancel",
+        "dialogAddImage": "Add",
+        "dialogDeleteImage": "Delete"
+      }
+    },
     "country": {
       "placeholder": "Select country",
       "empty-options": "No countries found"
+    },
+    "firstName": {
+      "placeholder": "First name",
+      "placeholder-input": "Enter first name",
+      "errors": {
+        "no-spaces": "First name must not contain spaces",
+        "required": "Required field",
+        "minLength": "First name must be at least {{minLength}} characters",
+        "maxLength": "First name must not exceed {{maxLength}} characters"
+      }
+    },
+    "lastName": {
+      "placeholder": "Last name",
+      "placeholder-input": "Enter last name",
+      "errors": {
+        "no-spaces": "Last name must not contain spaces",
+        "required": "Required field",
+        "minLength": "Last name must be at least {{minLength}} characters",
+        "maxLength": "Last name must not exceed {{maxLength}} characters"
+      }
     },
     "language": {
       "placeholder": "Select language"
     },
     "dateOfBirth": {
       "placeholder": "Date of birth",
+      "placeholder-input": "Enter date of birth",
       "errors": {
         "required": "Required field",
         "invalid": "Invalid date of birth",
@@ -150,6 +184,7 @@
     },
     "username": {
       "placeholder": "Username",
+      "placeholder-input": "Enter username",
       "errors": {
         "no-spaces": "Username must not contain spaces",
         "alreadyExists": "Username is already taken",
@@ -167,6 +202,7 @@
     },
     "email": {
       "placeholder": "Email",
+      "placeholder-input": "Enter email",
       "errors": {
         "required": "Required field",
         "alreadyExists": "Email is already registered",
