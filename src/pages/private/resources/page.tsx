@@ -19,7 +19,6 @@ export function PagePrivateResources() {
     <Stack
       sx={{
         default: {
-          width: '100%',
           alignItems: 'stretch',
           flexDirection: 'column',
           flexGrow: 1,
