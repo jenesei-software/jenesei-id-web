@@ -23,7 +23,8 @@ export function PagePrivateResources() {
           alignItems: 'stretch',
           flexDirection: 'column',
           flexGrow: 1,
-          gap: '20px'
+          gap: '20px',
+          position: 'relative'
         }
       }}
     >
@@ -62,42 +63,33 @@ export function PagePrivateResources() {
         </Typography>
       </Stack>
       <Separator color="black05" height="2px" width="100%" radius="4px" />
-      <Stack
-        sx={{
-          default: {
-            flexGrow: 1,
-            position: 'relative'
-          }
-        }}
-      >
-        <Preview visible={!isLoading} minTime={500}>
-          <Stack
-            sx={{
-              default: {
-                height: 'fit-content',
-                width: '100%',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))',
-                gap: '12px'
-              },
-              tablet: {
-                gridTemplateColumns: 'repeat(3, minmax(300px, 1fr))'
-              },
-              mobile: {
-                gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))'
-              }
-            }}
-          >
-            {dataResourceList?.map((resource: ResourceDto) => (
-              <PagePrivateResourcesItem
-                key={resource.resourceId}
-                resource={resource}
-                isConnect={(dataResourceProfile ?? []).some(r => r.resourceId === resource.resourceId)}
-              />
-            ))}
-          </Stack>
-        </Preview>
-      </Stack>
+      <Preview visible={!isLoading} minTime={500}>
+        <Stack
+          sx={{
+            default: {
+              height: 'fit-content',
+              width: '100%',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))',
+              gap: '12px'
+            },
+            tablet: {
+              gridTemplateColumns: 'repeat(3, minmax(300px, 1fr))'
+            },
+            mobile: {
+              gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))'
+            }
+          }}
+        >
+          {dataResourceList?.map((resource: ResourceDto) => (
+            <PagePrivateResourcesItem
+              key={resource.resourceId}
+              resource={resource}
+              isConnect={(dataResourceProfile ?? []).some(r => r.resourceId === resource.resourceId)}
+            />
+          ))}
+        </Stack>
+      </Preview>
     </Stack>
   )
 }
