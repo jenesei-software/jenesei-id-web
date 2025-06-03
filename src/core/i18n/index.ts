@@ -8,8 +8,6 @@ import { initReactI18next } from 'react-i18next'
 
 import translation from '../../../public/locales/rus/translation.json'
 
-// const mode = import.meta.env.VITE_NODE_ENV
-
 export const defaultNS: INameSpace = 'translation'
 export const fallbackLng = KeysLanguage.eng as ILanguageKeys
 export const supportedLngs = Object.values(KeysLanguage) as ILanguageKeys[]
