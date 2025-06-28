@@ -1,12 +1,12 @@
-name: Frontend Build Wrapper
+name: deploy-frontend
 
 on:
   workflow_dispatch:
     inputs:
       version_type:
-        description: 'Version bump'
+        description: "Version bump"
         required: false
-        default: 'none'
+        default: "none"
         type: choice
         options:
           - none
@@ -14,14 +14,15 @@ on:
           - minor
           - patch
       package_manager:
-        description: 'Package manager'
+        description: "Package manager"
         required: false
-        default: 'npm'
+        default: "npm"
         type: choice
         options:
           - npm
           - yarn
           - bun
+          - pnpm
       add_branch_name:
         description: 'Add branch name to version'
         required: false
@@ -32,10 +33,9 @@ on:
         required: false
         type: boolean
         default: true
-
 jobs:
   call-publisher:
-    uses: jenesei-software/.github/.github/workflows/frontend_build.yml@main
+    uses: jenesei-software/.github/.github/workflows/deploy-frontend.yml@main
     with:
       version_type: ${{ inputs.version_type }}
       package_manager: ${{ inputs.package_manager }}
