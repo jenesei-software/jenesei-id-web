@@ -1,5 +1,5 @@
-import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
-import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
+import { Button } from '@jenesei-software/jenesei-kit-react/component-button'
+import { Typography } from '@jenesei-software/jenesei-kit-react/component-typography'
 import { CatchBoundary, useRouter } from '@tanstack/react-router'
 import { ReactElement } from 'react'
 import { useTranslation } from 'react-i18next'

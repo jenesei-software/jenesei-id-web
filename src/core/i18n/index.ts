@@ -1,5 +1,5 @@
-import { KeysLanguage } from '@jenesei-software/jenesei-ui-react/consts'
-import { ILanguageKeys } from '@jenesei-software/jenesei-ui-react/types'
+import { KeysLanguage } from '@jenesei-software/jenesei-kit-react/consts'
+import { ILanguageKeys } from '@jenesei-software/jenesei-kit-react/types'
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import Backend from 'i18next-chained-backend'

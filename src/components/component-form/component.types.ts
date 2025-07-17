@@ -1,4 +1,4 @@
-import { AddDollarSign } from '@jenesei-software/jenesei-ui-react/types'
+import { AddDollarSign } from '@jenesei-software/jenesei-kit-react/types'
 import { CSSProperties, PropsWithChildren } from 'react'
 
 export interface FormProps extends PropsWithChildren {

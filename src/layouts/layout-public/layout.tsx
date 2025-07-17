@@ -1,15 +1,15 @@
-import { SelectLanguage } from '@jenesei-software/jenesei-ui-react/component-select'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { ILanguageKeys } from '@jenesei-software/jenesei-ui-react/types'
-import { Outlet } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
+import { useLanguage } from '@local/contexts/context-language';
 
-import { useLanguage } from '@local/contexts/context-language'
+import { SelectLanguage } from '@jenesei-software/jenesei-kit-react/component-select';
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
+import { ILanguageKeys } from '@jenesei-software/jenesei-kit-react/types';
+import { Outlet } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 
 export function LayoutPublic() {
-  const { t } = useTranslation('translation')
+  const { t } = useTranslation('translation');
 
-  const { changeLng, lng } = useLanguage()
+  const { changeLng, lng } = useLanguage();
   return (
     <Stack
       sx={{
@@ -17,60 +17,62 @@ export function LayoutPublic() {
           flexGrow: 1,
           flexDirection: 'column',
           padding: '20px',
-          overflow: 'auto'
+          overflow: 'auto',
         },
         tablet: {
           padding: '10px',
-          alignItems: 'center'
-        }
+          alignItems: 'center',
+        },
       }}
     >
-      <>
-        <Stack
+      <Stack
+        sx={{
+          default: {
+            justifyContent: 'flex-end',
+            width: '100%',
+          },
+        }}
+      >
+        <SelectLanguage
+          labelPlaceholder={t('form.language.placeholder')}
+          isShowDropdownOptionIcon
+          isOnClickOptionClose
+          isStayValueAfterSelect
+          genre='grayBorder'
+          size={'medium'}
           sx={{
             default: {
-              justifyContent: 'flex-end',
-              width: '100%'
-            }
-          }}
-        >
-          <SelectLanguage
-            placeholder={t('form.language.placeholder')}
-            isShowSelectInputIcon
-            isShowDropdownOptionIcon
-            genre="grayBorder"
-            size={'medium'}
-            width="120px"
-            value={lng}
-            inputProps={{ isReadOnly: true, variety: 'standard' }}
-            onChange={lng => changeLng(lng as ILanguageKeys)}
-          />
-        </Stack>
-        <Stack
-          sx={{
-            default: {
-              width: '400px',
-              flexDirection: 'column',
-              gap: '45px',
-              alignItems: 'stretch',
-              justifyContent: 'center',
-              flexGrow: 1,
-              maxWidth: '-webkit-fill-available',
-              paddingBottom: '38px'
+              width: '120px',
             },
-            tablet: {
-              width: '560px',
-              justifyContent: 'flex-start'
-            },
-            mobile: {
-              width: '100%',
-              paddingBottom: '0px'
-            }
           }}
-        >
-          <Outlet />
-        </Stack>
-      </>
+          value={lng}
+          onChange={(lng) => changeLng(lng as ILanguageKeys)}
+        />
+      </Stack>
+      <Stack
+        sx={{
+          default: {
+            width: '400px',
+            flexDirection: 'column',
+            gap: '45px',
+            alignItems: 'stretch',
+            justifyContent: 'center',
+            flexGrow: 1,
+            maxWidth: '-webkit-fill-available',
+            paddingBottom: '38px',
+          },
+          tablet: {
+            width: '560px',
+            justifyContent: 'flex-start',
+          },
+          mobile: {
+            width: '100%',
+            paddingBottom: '0px',
+          },
+        }}
+      >
+        <Outlet />
+      </Stack>
     </Stack>
-  )
+  );
 }

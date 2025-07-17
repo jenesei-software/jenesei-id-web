@@ -1,15 +1,15 @@
-import { useSSOSignIn } from '@jenesei-software/jenesei-id-web-api'
-import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
-import { Input } from '@jenesei-software/jenesei-ui-react/component-input'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { Typography, TypographyLink } from '@jenesei-software/jenesei-ui-react/component-typography'
-import { useForm } from '@tanstack/react-form'
-import { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-
 import { Form } from '@local/components/component-form'
 import { useValidation } from '@local/contexts/context-validation'
 import { PageRoutePublicForgotPassword, PageRoutePublicSignUp } from '@local/core/router'
+
+import { useSSOSignIn } from '@jenesei-software/jenesei-id-web-api'
+import { Button } from '@jenesei-software/jenesei-kit-react/component-button'
+import { Input } from '@jenesei-software/jenesei-kit-react/component-input'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
+import { Typography, TypographyLink } from '@jenesei-software/jenesei-kit-react/component-typography'
+import { useForm } from '@tanstack/react-form'
+import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export function PagePublicSignIn() {
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' })
@@ -117,7 +117,7 @@ export function PagePublicSignIn() {
               >
                 <Input
                   variety="standard"
-                  autocomplete="username"
+                  autoComplete="username"
                   placeholder={tForm('username.placeholder')}
                   id={field.name}
                   name={field.name}
@@ -151,7 +151,7 @@ export function PagePublicSignIn() {
               >
                 <Input
                   variety="standard"
-                  autocomplete="current-password"
+                  autoComplete="current-password"
                   type="password"
                   placeholder={tForm('password.placeholder')}
                   id={field.name}

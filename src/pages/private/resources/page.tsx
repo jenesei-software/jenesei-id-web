@@ -1,15 +1,15 @@
+import { RESOURCE_LIST } from '@local/core/constants'
+
 import {
   ResourceDto,
   useResourceConnect,
   useResourceList,
   useResourceProfile
 } from '@jenesei-software/jenesei-id-web-api'
-import { Button, Icon, Preview, Separator, Typography } from '@jenesei-software/jenesei-ui-react'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
+import { Button, Icon, Preview, Separator, Typography } from '@jenesei-software/jenesei-kit-react'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { RESOURCE_LIST } from '@local/core/constants'
 
 export function PagePrivateResources() {
   const { t } = useTranslation('translation')
@@ -61,7 +61,7 @@ export function PagePrivateResources() {
           {t('private.resources.menu.description')}
         </Typography>
       </Stack>
-      <Separator color="black05" height="2px" width="100%" radius="4px" />
+      <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
       <Preview visible={!isLoading} minTime={500}>
         <Stack
           sx={{

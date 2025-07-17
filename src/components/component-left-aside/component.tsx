@@ -1,15 +1,3 @@
-import { Image } from '@jenesei-software/jenesei-ui-react'
-import { Icon, IconItemProps } from '@jenesei-software/jenesei-ui-react/component-icon'
-import { Ripple } from '@jenesei-software/jenesei-ui-react/component-ripple'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
-import { useScreenWidth } from '@jenesei-software/jenesei-ui-react/context-screen-width'
-import { useIsFetching, useIsMutating } from '@tanstack/react-query'
-import { Link, LinkProps, useMatches } from '@tanstack/react-router'
-import { FC, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useTheme } from 'styled-components'
-
 import {
   LayoutRoutePrivate,
   PageRoutePrivateLanguageAndCountry,
@@ -17,6 +5,18 @@ import {
   PageRoutePrivateResources,
   PageRoutePrivateSessionsAndSecurity
 } from '@local/core/router'
+
+import { Image } from '@jenesei-software/jenesei-kit-react'
+import { Icon, IconItemProps } from '@jenesei-software/jenesei-kit-react/component-icon'
+import { Ripple } from '@jenesei-software/jenesei-kit-react/component-ripple'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
+import { Typography } from '@jenesei-software/jenesei-kit-react/component-typography'
+import { useScreenWidth } from '@jenesei-software/jenesei-kit-react/context-screen-width'
+import { useIsFetching, useIsMutating } from '@tanstack/react-query'
+import { Link, LinkProps, useMatches } from '@tanstack/react-router'
+import { FC, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useTheme } from 'styled-components'
 
 export const LeftAside: FC = () => {
   const isFetching = useIsFetching()

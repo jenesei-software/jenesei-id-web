@@ -1,18 +1,18 @@
+import { Form } from '@local/components/component-form'
+import { useValidation } from '@local/contexts/context-validation'
+import { PageRoutePublicSignIn } from '@local/core/router'
+
 import { useSSOPreSignUp, useSSOSignUp, useSSOVerify } from '@jenesei-software/jenesei-id-web-api'
-import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
-import { DatePicker, MonthItem, WeekItem } from '@jenesei-software/jenesei-ui-react/component-date-picker'
-import { Input } from '@jenesei-software/jenesei-ui-react/component-input'
-import { InputOTP } from '@jenesei-software/jenesei-ui-react/component-input-otp'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { Typography, TypographyLink } from '@jenesei-software/jenesei-ui-react/component-typography'
+import { Button } from '@jenesei-software/jenesei-kit-react/component-button'
+import { DatePicker, MonthItem, WeekItem } from '@jenesei-software/jenesei-kit-react/component-date-picker'
+import { Input } from '@jenesei-software/jenesei-kit-react/component-input'
+import { InputOTP } from '@jenesei-software/jenesei-kit-react/component-input-otp'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
+import { Typography, TypographyLink } from '@jenesei-software/jenesei-kit-react/component-typography'
 import { useForm } from '@tanstack/react-form'
 import moment from 'moment'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { Form } from '@local/components/component-form'
-import { useValidation } from '@local/contexts/context-validation'
-import { PageRoutePublicSignIn } from '@local/core/router'
 
 export function PagePublicSignUp() {
   const { validationSignUp, validationFunctions } = useValidation()
@@ -326,7 +326,7 @@ export function PagePublicSignUp() {
                 >
                   <Input
                     variety="standard"
-                    autocomplete="email"
+                    autoComplete="email"
                     placeholder={tForm('email.placeholder')}
                     type="email"
                     id={field.name}
@@ -359,7 +359,7 @@ export function PagePublicSignUp() {
                 >
                   <Input
                     variety="standard"
-                    autocomplete="username"
+                    autoComplete="username"
                     placeholder={tForm('username.placeholder')}
                     type="username"
                     id={field.name}
@@ -435,7 +435,7 @@ export function PagePublicSignUp() {
                 >
                   <Input
                     variety="standard"
-                    autocomplete="current-password"
+                    autoComplete="current-password"
                     type="password"
                     placeholder={tForm('password.placeholder')}
                     id={field.name}
@@ -468,7 +468,7 @@ export function PagePublicSignUp() {
                 >
                   <Input
                     variety="standard"
-                    autocomplete="current-password"
+                    autoComplete="current-password"
                     type="password"
                     placeholder={tForm('password.placeholder-confirm')}
                     id={field.name}

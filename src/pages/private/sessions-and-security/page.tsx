@@ -1,13 +1,13 @@
-import { SessionDto, useSessionTerminate, useWSSession } from '@jenesei-software/jenesei-id-web-api'
-import { Button, Icon, Input, Separator, Stack, Typography } from '@jenesei-software/jenesei-ui-react'
+import { Form } from '@local/components/component-form'
+import { useValidation } from '@local/contexts/context-validation'
+
+import { SessionDto, useSessionTerminateId, useWSSession } from '@jenesei-software/jenesei-id-web-api'
+import { Button, Icon, Input, Separator, Stack, Typography } from '@jenesei-software/jenesei-kit-react'
 import { useForm } from '@tanstack/react-form'
 import moment from 'moment'
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UAParser } from 'ua-parser-js'
-
-import { Form } from '@local/components/component-form'
-import { useValidation } from '@local/contexts/context-validation'
 
 export function PagePrivateSessionsAndSecurity() {
   const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.sessions-and-security' })
@@ -36,6 +36,7 @@ export function PagePrivateSessionsAndSecurity() {
     }
   })
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     form.validate('blur')
   }, [form, tForm])
@@ -87,7 +88,7 @@ export function PagePrivateSessionsAndSecurity() {
           {tPage('menu.description')}
         </Typography>
       </Stack>
-      <Separator color="black05" height="2px" width="100%" radius="4px" />
+      <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
       <Stack
         sx={{
           default: {
@@ -154,7 +155,7 @@ export function PagePrivateSessionsAndSecurity() {
               >
                 <Input
                   variety="standard"
-                  autocomplete="current-password"
+                  autoComplete="current-password"
                   type="password"
                   placeholder={tPage('form-password.placeholder-old')}
                   id={field.name}
@@ -186,7 +187,7 @@ export function PagePrivateSessionsAndSecurity() {
               >
                 <Input
                   variety="standard"
-                  autocomplete="current-password"
+                  autoComplete="current-password"
                   type="password"
                   placeholder={tPage('form-password.placeholder-new')}
                   id={field.name}
@@ -218,7 +219,7 @@ export function PagePrivateSessionsAndSecurity() {
               >
                 <Input
                   variety="standard"
-                  autocomplete="current-password"
+                  autoComplete="current-password"
                   type="password"
                   placeholder={tPage('form-password.placeholder-new-confirm')}
                   id={field.name}
@@ -270,7 +271,7 @@ export function PagePrivateSessionsAndSecurity() {
           </form.Subscribe>
         </Form>
       </Stack>
-      <Separator color="black05" height="2px" width="100%" radius="4px" />
+      <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
       <Stack
         sx={{
           default: {
@@ -337,7 +338,7 @@ export function PagePrivateSessionsAndSecurity() {
   )
 }
 export function PagePrivateSessionsAndSecuritySessionItem(props: { session: SessionDto; sessionId: string }) {
-  const { mutate, isPending } = useSessionTerminate()
+  const { mutate, isPending } = useSessionTerminateId()
   const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.sessions-and-security' })
 
   const result = useMemo(() => {

@@ -1,4 +1,7 @@
-import { UserDto, useSSOProfile } from '@jenesei-software/jenesei-id-web-api'
+import { Form } from '@local/components/component-form'
+import { useValidation } from '@local/contexts/context-validation'
+
+import { UserDto, useAuthProfile } from '@jenesei-software/jenesei-id-web-api'
 import {
   DatePicker,
   Icon,
@@ -11,16 +14,13 @@ import {
   Separator,
   Typography,
   WeekItem
-} from '@jenesei-software/jenesei-ui-react'
-import { Button } from '@jenesei-software/jenesei-ui-react/component-button'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
+} from '@jenesei-software/jenesei-kit-react'
+import { Button } from '@jenesei-software/jenesei-kit-react/component-button'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
 import { useForm } from '@tanstack/react-form'
 import moment from 'moment'
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { Form } from '@local/components/component-form'
-import { useValidation } from '@local/contexts/context-validation'
 
 export function PagePrivatePersonalInfo() {
   const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.personal-info' })
@@ -28,7 +28,7 @@ export function PagePrivatePersonalInfo() {
   const { t: tDate } = useTranslation('translation', { keyPrefix: 'date' })
 
   const { validationUser, validationFunctions } = useValidation()
-  const { isLoading, data } = useSSOProfile()
+  const { isLoading, data } = useAuthProfile()
 
   const defaultValues: Pick<UserDto, 'nickname' | 'firstName' | 'lastName'> & {
     dateOfBirth: number
@@ -56,6 +56,7 @@ export function PagePrivatePersonalInfo() {
     }
   })
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     form.validate('blur')
   }, [form, tPage])
@@ -110,7 +111,7 @@ export function PagePrivatePersonalInfo() {
           {tPage('menu.description')}
         </Typography>
       </Stack>
-      <Separator color="black05" height="2px" width="100%" radius="4px" />
+      <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
 
       <Form
         width="100%"
@@ -231,7 +232,7 @@ export function PagePrivatePersonalInfo() {
               </Stack>
             )}
           </form.Field>
-          <Separator color="black05" height="2px" width="100%" radius="4px" />
+          <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
           <Stack
             sx={{
               default: {
@@ -273,7 +274,7 @@ export function PagePrivatePersonalInfo() {
                   </Typography>
                   <Input
                     variety="standard"
-                    autocomplete="firstName"
+                    autoComplete="firstName"
                     placeholder={tForm('firstName.placeholder-input')}
                     type="firstName"
                     id={field.name}
@@ -322,7 +323,7 @@ export function PagePrivatePersonalInfo() {
                   </Typography>
                   <Input
                     variety="standard"
-                    autocomplete="lastName"
+                    autoComplete="lastName"
                     placeholder={tForm('lastName.placeholder-input')}
                     type="firstName"
                     id={field.name}
@@ -343,7 +344,7 @@ export function PagePrivatePersonalInfo() {
               )}
             </form.Field>
           </Stack>
-          <Separator color="black05" height="2px" width="100%" radius="4px" />
+          <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
           <form.Field name="dateOfBirth">
             {field => {
               const LastHundredYear18YearsAgoStartDate = moment.utc().subtract(118, 'years').valueOf()
@@ -403,7 +404,7 @@ export function PagePrivatePersonalInfo() {
               )
             }}
           </form.Field>
-          <Separator color="black05" height="2px" width="100%" radius="4px" />
+          <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
           <form.Field name="nickname">
             {field => (
               <Stack
@@ -433,7 +434,7 @@ export function PagePrivatePersonalInfo() {
                 </Typography>
                 <Input
                   variety="standard"
-                  autocomplete="username"
+                  autoComplete="username"
                   placeholder={tForm('username.placeholder-input')}
                   type="username"
                   id={field.name}
@@ -454,7 +455,7 @@ export function PagePrivatePersonalInfo() {
               </Stack>
             )}
           </form.Field>
-          <Separator color="black05" height="2px" width="100%" radius="4px" />
+          <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
           <form.Field name="email">
             {field => (
               <Stack
@@ -484,7 +485,7 @@ export function PagePrivatePersonalInfo() {
                 </Typography>
                 <Input
                   variety="standard"
-                  autocomplete="email"
+                  autoComplete="email"
                   placeholder={tForm('email.placeholder-input')}
                   type="email"
                   id={field.name}
@@ -505,7 +506,7 @@ export function PagePrivatePersonalInfo() {
               </Stack>
             )}
           </form.Field>
-          <Separator color="black05" height="2px" width="100%" radius="4px" />
+          <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
           <form.Subscribe>
             {state => (
               <Stack

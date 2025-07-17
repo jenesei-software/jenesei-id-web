@@ -1,5 +1,5 @@
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { useScreenWidth } from '@jenesei-software/jenesei-ui-react/context-screen-width'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
+import { useScreenWidth } from '@jenesei-software/jenesei-kit-react/context-screen-width'
 import { Outlet } from '@tanstack/react-router'
 
 export function LayoutPrivate() {
