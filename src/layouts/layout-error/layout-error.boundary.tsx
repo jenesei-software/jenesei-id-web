@@ -1,5 +1,5 @@
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
+import { Typography } from '@jenesei-software/jenesei-kit-react/component-typography'
 import React, { Component } from 'react'
 
 import { LayoutErrorBoundaryProps, LayoutErrorBoundaryState, LayoutErrorWrapper } from '.'

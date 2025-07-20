@@ -1,30 +1,29 @@
+import { RESOURCE_LIST } from '@local/core/constants'
+
 import {
   ResourceDto,
   useResourceConnect,
   useResourceList,
   useResourceProfile
 } from '@jenesei-software/jenesei-id-web-api'
-import { Button, Icon, Separator, Typography } from '@jenesei-software/jenesei-ui-react'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
+import { Button, Icon, Preview, Separator, Typography } from '@jenesei-software/jenesei-kit-react'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { RESOURCE_LIST } from '@local/core/constants'
-
 export function PagePrivateResources() {
   const { t } = useTranslation('translation')
-  const { data: dataResourceList } = useResourceList()
+  const { data: dataResourceList, isLoading } = useResourceList()
   const { data: dataResourceProfile } = useResourceProfile()
   return (
     <Stack
       sx={{
         default: {
-          width: '100%',
-          height: '100%',
           alignItems: 'stretch',
           flexDirection: 'column',
           flexGrow: 1,
-          gap: '20px'
+          gap: '20px',
+          position: 'relative'
         }
       }}
     >
@@ -62,31 +61,34 @@ export function PagePrivateResources() {
           {t('private.resources.menu.description')}
         </Typography>
       </Stack>
-      <Separator color="black05" height="2px" width="100%" radius="4px" />
-      <Stack
-        sx={{
-          default: {
-            width: '100%',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))',
-            gap: '12px'
-          },
-          tablet: {
-            gridTemplateColumns: 'repeat(3, minmax(300px, 1fr))'
-          },
-          mobile: {
-            gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))'
-          }
-        }}
-      >
-        {dataResourceList?.map((resource: ResourceDto) => (
-          <PagePrivateResourcesItem
-            key={resource.resourceId}
-            resource={resource}
-            isConnect={(dataResourceProfile ?? []).some(r => r.resourceId === resource.resourceId)}
-          />
-        ))}
-      </Stack>
+      <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
+      <Preview visible={!isLoading} minTime={500}>
+        <Stack
+          sx={{
+            default: {
+              height: 'fit-content',
+              width: '100%',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))',
+              gap: '12px'
+            },
+            tablet: {
+              gridTemplateColumns: 'repeat(3, minmax(300px, 1fr))'
+            },
+            mobile: {
+              gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))'
+            }
+          }}
+        >
+          {dataResourceList?.map((resource: ResourceDto) => (
+            <PagePrivateResourcesItem
+              key={resource.resourceId}
+              resource={resource}
+              isConnect={(dataResourceProfile ?? []).some(r => r.resourceId === resource.resourceId)}
+            />
+          ))}
+        </Stack>
+      </Preview>
     </Stack>
   )
 }
@@ -184,7 +186,7 @@ export function PagePrivateResourcesItem(props: { resource: ResourceDto; isConne
           ]}
           onClick={() => mutate({ body: { resourceId: props.resource.resourceId } })}
         >
-          {props.isConnect ? tPage('button-connect') : tPage('button-connected')}
+          {props.isConnect ? tPage('button-connected') : tPage('button-connect')}
         </Button>
         <Button isRadius isDisabled genre={props.resource.isActive ? 'greenTransparent' : 'gray'} size="small">
           {props.resource.isActive ? tPage('button-active') : tPage('button-inactive')}

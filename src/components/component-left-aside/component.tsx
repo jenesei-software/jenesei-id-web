@@ -1,15 +1,3 @@
-import { Image } from '@jenesei-software/jenesei-ui-react'
-import { Icon, IconItemProps } from '@jenesei-software/jenesei-ui-react/component-icon'
-import { Ripple } from '@jenesei-software/jenesei-ui-react/component-ripple'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { Typography } from '@jenesei-software/jenesei-ui-react/component-typography'
-import { useScreenWidth } from '@jenesei-software/jenesei-ui-react/context-screen-width'
-import { useIsFetching, useIsMutating } from '@tanstack/react-query'
-import { Link, LinkProps, useMatches } from '@tanstack/react-router'
-import { FC, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useTheme } from 'styled-components'
-
 import {
   LayoutRoutePrivate,
   PageRoutePrivateLanguageAndCountry,
@@ -18,11 +6,24 @@ import {
   PageRoutePrivateSessionsAndSecurity
 } from '@local/core/router'
 
+import { Image } from '@jenesei-software/jenesei-kit-react'
+import { Icon, IconItemProps } from '@jenesei-software/jenesei-kit-react/component-icon'
+import { Ripple } from '@jenesei-software/jenesei-kit-react/component-ripple'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
+import { Typography } from '@jenesei-software/jenesei-kit-react/component-typography'
+import { useScreenWidth } from '@jenesei-software/jenesei-kit-react/context-screen-width'
+import { useIsFetching, useIsMutating } from '@tanstack/react-query'
+import { Link, LinkProps, useMatches } from '@tanstack/react-router'
+import { FC, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useTheme } from 'styled-components'
+
 export const LeftAside: FC = () => {
   const isFetching = useIsFetching()
   const isMutating = useIsMutating()
   const isLoading = useMemo(() => isFetching > 0 || isMutating > 0, [isFetching, isMutating])
   const { t: tPrivate } = useTranslation('translation', { keyPrefix: 'private' })
+  const { t: tPublic } = useTranslation('translation', { keyPrefix: 'public' })
 
   const { screenActual } = useScreenWidth()
   const isMatchPrivate = useMatches({
@@ -164,19 +165,17 @@ export const LeftAside: FC = () => {
         <Image
           src="https://id.jenesei.ru/images/auth-back-mountain.jpg"
           alt="Mountain"
-          propsStack={{
-            sx: theme => ({
-              default: {
-                width: '100%',
-                height: '100%',
-                position: 'absolute',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: theme.palette.black10,
-                pointerEvents: 'none'
-              }
-            })
-          }}
+          sxStack={theme => ({
+            default: {
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: theme.palette.black10,
+              pointerEvents: 'none'
+            }
+          })}
         />
         <Stack
           sx={{
@@ -198,18 +197,41 @@ export const LeftAside: FC = () => {
             <Icon type="logo" name="Jenesei" size="100%" primaryColor="whiteStandard" />
           </Stack>
 
-          <Typography
-            sx={{
+          <Stack
+            sx={() => ({
               default: {
-                size: 42,
-                weight: 700,
-                color: 'whiteStandard',
-                line: 1
+                alignItems: 'flex-start',
+                justifyContent: 'center',
+                position: 'relative',
+                flexDirection: 'column'
               }
-            }}
+            })}
           >
-            Jenesei ID
-          </Typography>
+            <Typography
+              sx={{
+                default: {
+                  size: 42,
+                  weight: 700,
+                  color: 'whiteStandard',
+                  shadow: 'shadowPulse'
+                }
+              }}
+            >
+              {tPublic('layout.title')}
+            </Typography>
+            <Typography
+              sx={{
+                default: {
+                  size: 12,
+                  weight: 500,
+                  color: 'whiteStandard',
+                  shadow: 'shadowPulse'
+                }
+              }}
+            >
+              {tPublic('layout.description')}
+            </Typography>
+          </Stack>
         </Stack>
       </>
     </Stack>
@@ -230,7 +252,7 @@ const LeftAsideItem: FC<{
     }
   })
   return (
-    <Link to={props.to} style={{ width: '-webkit-fill-available', textDecoration: 'none' }}>
+    <Link to={props.to} style={{ width: '100%', height: 'fit-content', textDecoration: 'none', display: 'flex' }}>
       <Stack
         isRipple
         sx={() => ({

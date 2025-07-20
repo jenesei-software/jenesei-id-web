@@ -1,5 +1,5 @@
-import { Icon, TypographyLink, useScreenWidth } from '@jenesei-software/jenesei-ui-react'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
+import { Icon, TypographyLink, useScreenWidth } from '@jenesei-software/jenesei-kit-react'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
 import { useRouterState } from '@tanstack/react-router'
 import { FC, Fragment, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -1,4 +1,4 @@
-import { TIconLogoNameString } from '@jenesei-software/jenesei-ui-react'
+import { TIconLogoNameString } from '@jenesei-software/jenesei-kit-react'
 
 export const RESOURCE_LIST: {
   [key: string]: {

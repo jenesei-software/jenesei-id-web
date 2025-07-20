@@ -1,4 +1,4 @@
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
 
 export function PagePublicForgotPassword() {
   return (

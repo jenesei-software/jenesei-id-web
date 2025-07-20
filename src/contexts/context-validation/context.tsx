@@ -1,27 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useUserCheckEmail, useUserCheckNickname } from '@jenesei-software/jenesei-id-web-api'
-import { DeepKeys, FormApi } from '@tanstack/react-form'
-import moment from 'moment'
-import { FC, createContext, useContext, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import * as yup from 'yup'
+import { useUserCheckEmail, useUserCheckNickname } from '@jenesei-software/jenesei-id-web-api';
+import { DeepKeys, FormApi } from '@tanstack/react-form';
+import moment from 'moment';
+import { createContext, FC, useContext, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import * as yup from 'yup';
 
-import { ProviderValidationProps, ValidationContextProps } from '.'
+import { ProviderValidationProps, ValidationContextProps } from '.';
 
-const ValidationContext = createContext<ValidationContextProps | null>(null)
+const ValidationContext = createContext<ValidationContextProps | null>(null);
 
 export const useValidation = () => {
-  const context = useContext(ValidationContext)
+  const context = useContext(ValidationContext);
   if (!context) {
-    throw new Error('useValidation must be used within an ProviderValidation')
+    throw new Error('useValidation must be used within an ProviderValidation');
   }
-  return context
-}
+  return context;
+};
 
-export const ProviderValidation: FC<ProviderValidationProps> = props => {
-  const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' })
-  const getUserCheckNickname = useUserCheckNickname()
-  const getUserCheckEmail = useUserCheckEmail()
+export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
+  const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' });
+  const getUserCheckNickname = useUserCheckNickname();
+  const getUserCheckEmail = useUserCheckEmail();
 
   const validationFunctions = useMemo(
     () => ({
@@ -29,26 +29,29 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
         <TValues extends Record<string, any>>(validation: yup.ObjectSchema<any>) =>
         async ({
           value,
-          formApi
+          formApi,
         }: {
-          value: TValues
-          formApi: FormApi<TValues, any, any, any, any, any, any, any, any, any>
-          signal: AbortSignal
+          value: TValues;
+          formApi: FormApi<TValues, any, any, any, any, any, any, any, any, any>;
+          signal: AbortSignal;
         }): Promise<null | { fields: Record<string, string> }> => {
-          const touchedFields = Object.keys(formApi.fieldInfo).reduce((acc, fieldName) => {
-            const key = fieldName as DeepKeys<TValues>
-            const fieldMeta = formApi.fieldInfo?.[key]?.instance?.getMeta()
+          const touchedFields = Object.keys(formApi.fieldInfo).reduce(
+            (acc, fieldName) => {
+              const key = fieldName as DeepKeys<TValues>;
+              const fieldMeta = formApi.fieldInfo?.[key]?.instance?.getMeta();
 
-            if (fieldMeta?.isTouched) {
-              acc[key] = value[key]
-            }
+              if (fieldMeta?.isTouched) {
+                acc[key] = value[key];
+              }
 
-            return acc
-          }, {} as Partial<TValues>)
+              return acc;
+            },
+            {} as Partial<TValues>,
+          );
 
           try {
-            await validation.validate(touchedFields, { abortEarly: false })
-            return null
+            await validation.validate(touchedFields, { abortEarly: false });
+            return null;
           } catch (validationErrors) {
             if (validationErrors instanceof yup.ValidationError) {
               const errors = validationErrors.inner.reduce(
@@ -58,20 +61,20 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
                     Object.prototype.hasOwnProperty.call(touchedFields, error.path) &&
                     !acc[error.path]
                   ) {
-                    acc[error.path] = error.message
+                    acc[error.path] = error.message;
                   }
-                  return acc
+                  return acc;
                 },
-                {} as Record<string, string>
-              )
-              return { fields: errors }
+                {} as Record<string, string>,
+              );
+              return { fields: errors };
             }
-            return null
+            return null;
           }
-        }
+        },
     }),
-    []
-  )
+    [],
+  );
 
   const validationSignIn = useMemo(
     () =>
@@ -82,23 +85,31 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
           .required(tForm('username.errors.required'))
           .min(2, tForm('username.errors.minLength', { minLength: 2 }))
           .max(12, tForm('username.errors.maxLength', { maxLength: 12 }))
-          .test('no-spaces', tForm('username.errors.no-spaces'), value => !value?.includes(' ')),
+          .test('no-spaces', tForm('username.errors.no-spaces'), (value) => !value?.includes(' ')),
         password: yup
           .string()
           .trim()
           .required(tForm('password.errors.required'))
           .min(8, tForm('password.errors.minLength', { minLength: 8 }))
           .max(128, tForm('password.errors.maxLength', { maxLength: 128 }))
-          .test('no-spaces', tForm('password.errors.no-spaces'), value => !value?.includes(' '))
-          .test('has-uppercase', tForm('password.errors.uppercase'), password => /[A-Z]/.test(password || ''))
-          .test('has-lowercase', tForm('password.errors.lowercase'), password => /[a-z]/.test(password || ''))
-          .test('has-number', tForm('password.errors.digit'), password => /[0-9]/.test(password || ''))
-          .test('has-special-char', tForm('password.errors.special'), password =>
-            /[!()@#$%^&*_.-]/.test(password || '')
-          )
+          .test('no-spaces', tForm('password.errors.no-spaces'), (value) => !value?.includes(' '))
+          .test('has-uppercase', tForm('password.errors.uppercase'), (password) => /[A-Z]/.test(password || ''))
+          .test('has-lowercase', tForm('password.errors.lowercase'), (password) => /[a-z]/.test(password || ''))
+          .test('has-number', tForm('password.errors.digit'), (password) => /[0-9]/.test(password || ''))
+          .test('has-special-char', tForm('password.errors.special'), (password) =>
+            /[!()@#$%^&*_.-]/.test(password || ''),
+          ),
       }),
-    [tForm]
-  )
+    [tForm],
+  );
+  const validationLanguageAndCountryCode = useMemo(
+    () =>
+      yup.object({
+        language: yup.string().trim(),
+        password: yup.string().trim(),
+      }),
+    [],
+  );
   const validationPasswordUpdate = useMemo(
     () =>
       yup.object({
@@ -108,56 +119,56 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
           .required(tForm('password.errors.required'))
           .min(8, tForm('password.errors.minLength', { minLength: 8 }))
           .max(128, tForm('password.errors.maxLength', { maxLength: 128 }))
-          .test('no-spaces', tForm('password.errors.no-spaces'), value => !value?.includes(' ')),
+          .test('no-spaces', tForm('password.errors.no-spaces'), (value) => !value?.includes(' ')),
         newPassword: yup
           .string()
           .trim()
           .required(tForm('password.errors.required'))
           .min(8, tForm('password.errors.minLength', { minLength: 8 }))
           .max(128, tForm('password.errors.maxLength', { maxLength: 128 }))
-          .test('no-spaces', tForm('password.errors.no-spaces'), value => !value?.includes(' '))
-          .test('has-uppercase', tForm('password.errors.uppercase'), password => /[A-Z]/.test(password || ''))
-          .test('has-lowercase', tForm('password.errors.lowercase'), password => /[a-z]/.test(password || ''))
-          .test('has-number', tForm('password.errors.digit'), password => /[0-9]/.test(password || ''))
-          .test('has-special-char', tForm('password.errors.special'), password =>
-            /[!()@#$%^&*_.-]/.test(password || '')
+          .test('no-spaces', tForm('password.errors.no-spaces'), (value) => !value?.includes(' '))
+          .test('has-uppercase', tForm('password.errors.uppercase'), (password) => /[A-Z]/.test(password || ''))
+          .test('has-lowercase', tForm('password.errors.lowercase'), (password) => /[a-z]/.test(password || ''))
+          .test('has-number', tForm('password.errors.digit'), (password) => /[0-9]/.test(password || ''))
+          .test('has-special-char', tForm('password.errors.special'), (password) =>
+            /[!()@#$%^&*_.-]/.test(password || ''),
           )
           .test('not-same-as-old', tForm('password.errors.sameAsOld'), function (value) {
-            return value !== this.parent.oldPassword
+            return value !== this.parent.oldPassword;
           }),
         confirmNewPassword: yup
           .string()
           .trim()
           .required(tForm('password.errors.required'))
-          .oneOf([yup.ref('currentPassword'), ''], tForm('password.errors.mismatch'))
+          .oneOf([yup.ref('currentPassword'), ''], tForm('password.errors.mismatch')),
       }),
-    [tForm]
-  )
+    [tForm],
+  );
   const validationSignUp = useMemo(
     () =>
       yup.object({
         dateOfBirth: yup
           .mixed()
-          .test('is-required', tForm('dateOfBirth.errors.required'), value => {
-            return value !== undefined && value !== null && value !== 0
+          .test('is-required', tForm('dateOfBirth.errors.required'), (value) => {
+            return value !== undefined && value !== null && value !== 0;
           })
-          .test('valid-date', tForm('dateOfBirth.errors.invalid'), value => {
+          .test('valid-date', tForm('dateOfBirth.errors.invalid'), (value) => {
             if (value === 0) {
-              return false
+              return false;
             }
-            return moment.utc(value).isValid()
+            return moment.utc(value).isValid();
           })
-          .test('min-age', tForm('dateOfBirth.errors.minAge', { minAge: 18 }), value => {
-            if (value === undefined || value === null) return true
-            return moment.utc(value).valueOf() <= moment.utc().subtract(18, 'years').valueOf()
+          .test('min-age', tForm('dateOfBirth.errors.minAge', { minAge: 18 }), (value) => {
+            if (value === undefined || value === null) return true;
+            return moment.utc(value).valueOf() <= moment.utc().subtract(18, 'years').valueOf();
           })
-          .test('max-age', tForm('dateOfBirth.errors.maxAge', { maxAge: 118 }), value => {
-            if (value === undefined || value === null) return true
-            return moment.utc(value).valueOf() >= moment.utc().subtract(118, 'years').valueOf()
+          .test('max-age', tForm('dateOfBirth.errors.maxAge', { maxAge: 118 }), (value) => {
+            if (value === undefined || value === null) return true;
+            return moment.utc(value).valueOf() >= moment.utc().subtract(118, 'years').valueOf();
           })
-          .test('is-not-future', tForm('dateOfBirth.errors.future'), value => {
-            if (value === undefined || value === null) return true
-            return moment.utc(value).valueOf() <= moment.utc().valueOf()
+          .test('is-not-future', tForm('dateOfBirth.errors.future'), (value) => {
+            if (value === undefined || value === null) return true;
+            return moment.utc(value).valueOf() <= moment.utc().valueOf();
           }),
         code: yup.string().trim().required(tForm('code.errors.required')).length(5, tForm('code.errors.length')),
         email: yup
@@ -165,19 +176,19 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
           .trim()
           .required(tForm('email.errors.required'))
           .email(tForm('email.errors.invalid'))
-          .test('no-spaces', tForm('email.errors.no-spaces'), value => !value?.includes(' '))
+          .test('no-spaces', tForm('email.errors.no-spaces'), (value) => !value?.includes(' '))
           .test('email-check', tForm('email.errors.alreadyExists'), async function (v) {
-            const { createError } = this
+            const { createError } = this;
 
             if (!v || !v.includes('@') || v.includes(' ')) {
-              return true
+              return true;
             }
 
             try {
-              const response = await getUserCheckEmail({ path: { email: v } })
-              return !response.value
+              const response = await getUserCheckEmail({ path: { email: v } });
+              return !response.value;
             } catch {
-              return createError({ message: tForm('email.errors.no-check') })
+              return createError({ message: tForm('email.errors.no-check') });
             }
           }),
         username: yup
@@ -186,19 +197,19 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
           .required(tForm('username.errors.required'))
           .min(2, tForm('username.errors.minLength', { minLength: 2 }))
           .max(12, tForm('username.errors.maxLength', { maxLength: 12 }))
-          .test('no-spaces', tForm('username.errors.no-spaces'), value => !value?.includes(' '))
+          .test('no-spaces', tForm('username.errors.no-spaces'), (value) => !value?.includes(' '))
           .test('login-check', tForm('username.errors.alreadyExists'), async function (v) {
-            const { createError } = this
+            const { createError } = this;
 
             if (!v || v.length < 2 || v.length > 12 || v.includes(' ')) {
-              return true
+              return true;
             }
 
             try {
-              const response = await getUserCheckNickname({ path: { nickname: v } })
-              return !response.value
+              const response = await getUserCheckNickname({ path: { nickname: v } });
+              return !response.value;
             } catch {
-              return createError({ message: tForm('username.errors.no-check') })
+              return createError({ message: tForm('username.errors.no-check') });
             }
           }),
         currentPassword: yup
@@ -207,26 +218,76 @@ export const ProviderValidation: FC<ProviderValidationProps> = props => {
           .required(tForm('password.errors.required'))
           .min(8, tForm('password.errors.minLength', { minLength: 8 }))
           .max(128, tForm('password.errors.maxLength', { maxLength: 128 }))
-          .test('no-spaces', tForm('password.errors.no-spaces'), value => !value?.includes(' '))
-          .test('has-uppercase', tForm('password.errors.uppercase'), password => /[A-Z]/.test(password || ''))
-          .test('has-lowercase', tForm('password.errors.lowercase'), password => /[a-z]/.test(password || ''))
-          .test('has-number', tForm('password.errors.digit'), password => /[0-9]/.test(password || ''))
-          .test('has-special-char', tForm('password.errors.special'), password =>
-            /[!()@#$%^&*_.-]/.test(password || '')
+          .test('no-spaces', tForm('password.errors.no-spaces'), (value) => !value?.includes(' '))
+          .test('has-uppercase', tForm('password.errors.uppercase'), (password) => /[A-Z]/.test(password || ''))
+          .test('has-lowercase', tForm('password.errors.lowercase'), (password) => /[a-z]/.test(password || ''))
+          .test('has-number', tForm('password.errors.digit'), (password) => /[0-9]/.test(password || ''))
+          .test('has-special-char', tForm('password.errors.special'), (password) =>
+            /[!()@#$%^&*_.-]/.test(password || ''),
           ),
         confirmPassword: yup
           .string()
           .trim()
           .required(tForm('password.errors.required'))
-          .oneOf([yup.ref('currentPassword'), ''], tForm('password.errors.mismatch'))
+          .oneOf([yup.ref('currentPassword'), ''], tForm('password.errors.mismatch')),
       }),
-    [getUserCheckEmail, getUserCheckNickname, tForm]
-  )
+    [getUserCheckEmail, getUserCheckNickname, tForm],
+  );
+  const validationUser = useMemo(
+    () =>
+      yup.object({
+        dateOfBirth: yup
+          .mixed()
+          .test('is-required', tForm('dateOfBirth.errors.required'), (value) => {
+            return value !== undefined && value !== null && value !== 0;
+          })
+          .test('valid-date', tForm('dateOfBirth.errors.invalid'), (value) => {
+            if (value === 0) {
+              return false;
+            }
+            return moment.utc(value).isValid();
+          })
+          .test('min-age', tForm('dateOfBirth.errors.minAge', { minAge: 18 }), (value) => {
+            if (value === undefined || value === null) return true;
+            return moment.utc(value).valueOf() <= moment.utc().subtract(18, 'years').valueOf();
+          })
+          .test('max-age', tForm('dateOfBirth.errors.maxAge', { maxAge: 118 }), (value) => {
+            if (value === undefined || value === null) return true;
+            return moment.utc(value).valueOf() >= moment.utc().subtract(118, 'years').valueOf();
+          })
+          .test('is-not-future', tForm('dateOfBirth.errors.future'), (value) => {
+            if (value === undefined || value === null) return true;
+            return moment.utc(value).valueOf() <= moment.utc().valueOf();
+          }),
+        firstName: yup
+          .string()
+          .trim()
+          .required(tForm('firstName.errors.required'))
+          .min(2, tForm('firstName.errors.minLength', { minLength: 2 }))
+          .max(12, tForm('firstName.errors.maxLength', { maxLength: 12 }))
+          .test('no-spaces', tForm('firstName.errors.no-spaces'), (value) => !value?.includes(' ')),
+        lastName: yup
+          .string()
+          .trim()
+          .required(tForm('lastName.errors.required'))
+          .min(2, tForm('lastName.errors.minLength', { minLength: 2 }))
+          .max(12, tForm('lastName.errors.maxLength', { maxLength: 12 }))
+          .test('no-spaces', tForm('lastName.errors.no-spaces'), (value) => !value?.includes(' ')),
+      }),
+    [tForm],
+  );
   return (
     <ValidationContext.Provider
-      value={{ validationFunctions, validationSignIn, validationSignUp, validationPasswordUpdate }}
+      value={{
+        validationUser,
+        validationFunctions,
+        validationSignIn,
+        validationSignUp,
+        validationPasswordUpdate,
+        validationLanguageAndCountryCode,
+      }}
     >
       {props.children}
     </ValidationContext.Provider>
-  )
-}
+  );
+};

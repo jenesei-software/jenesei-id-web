@@ -1,15 +1,15 @@
-import { Icon, IconItemProps, Ripple } from '@jenesei-software/jenesei-ui-react'
-import { Stack } from '@jenesei-software/jenesei-ui-react/component-stack'
-import { Link, LinkProps, useMatches } from '@tanstack/react-router'
-import { FC } from 'react'
-import { useTheme } from 'styled-components'
-
 import {
   PageRoutePrivateLanguageAndCountry,
   PageRoutePrivatePersonalInfo,
   PageRoutePrivateResources,
-  PageRoutePrivateSessionsAndSecurity
-} from '@local/core/router'
+  PageRoutePrivateSessionsAndSecurity,
+} from '@local/core/router';
+
+import { Icon, IconItemProps, Ripple } from '@jenesei-software/jenesei-kit-react';
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
+import { Link, LinkProps, useMatches } from '@tanstack/react-router';
+import { FC } from 'react';
+import { useTheme } from 'styled-components';
 
 export const Footer: FC = () => {
   return (
@@ -20,27 +20,27 @@ export const Footer: FC = () => {
           justifyContent: 'center',
           flexDirection: 'row',
           flexGrow: 1,
-          userSelect: 'none'
-        }
+          userSelect: 'none',
+        },
       })}
     >
-      <FooterItem icon="Profile" to={PageRoutePrivatePersonalInfo.fullPath} />
-      <FooterItem icon="Lock" to={PageRoutePrivateSessionsAndSecurity.fullPath} />
-      <FooterItem icon="Language" to={PageRoutePrivateLanguageAndCountry.fullPath} />
-      <FooterItem icon="Resources" to={PageRoutePrivateResources.fullPath} />
+      <FooterItem icon='Profile' to={PageRoutePrivatePersonalInfo.fullPath} />
+      <FooterItem icon='Lock' to={PageRoutePrivateSessionsAndSecurity.fullPath} />
+      <FooterItem icon='Language' to={PageRoutePrivateLanguageAndCountry.fullPath} />
+      <FooterItem icon='Resources' to={PageRoutePrivateResources.fullPath} />
     </Stack>
-  )
-}
+  );
+};
 const FooterItem: FC<{
-  to: LinkProps['to']
-  icon: IconItemProps<'id'>['name']
-}> = props => {
-  const theme = useTheme()
+  to: LinkProps['to'];
+  icon: IconItemProps<'id'>['name'];
+}> = (props) => {
+  const theme = useTheme();
   const isMatch = useMatches({
     select(matches) {
-      return matches.some(match => match.fullPath === props.to)
-    }
-  })
+      return matches.some((match) => match.fullPath === props.to);
+    },
+  });
   return (
     <Link
       to={props.to}
@@ -49,7 +49,7 @@ const FooterItem: FC<{
         height: '100%',
         textDecoration: 'none',
         flexGrow: 1,
-        display: 'flex'
+        display: 'flex',
       }}
     >
       <Stack
@@ -67,13 +67,13 @@ const FooterItem: FC<{
             alignSelf: 'stretch',
             flexGrow: 1,
             paddingBottom: '35px',
-            boxSizing: 'border-box'
-          }
+            boxSizing: 'border-box',
+          },
         })}
       >
         <Ripple color={theme.palette.black80} />
         <Stack
-          sx={theme => ({
+          sx={(theme) => ({
             default: {
               background: isMatch ? theme.palette.black80 : theme.palette.whiteStandard,
               borderRadius: '100px',
@@ -82,13 +82,13 @@ const FooterItem: FC<{
               width: '44px',
               minWidth: '44px',
               height: '44px',
-              boxShadow: theme.effects.button
-            }
+              boxShadow: theme.effects.button,
+            },
           })}
         >
-          <Icon type="id" name={props.icon} size="large" primaryColor={isMatch ? 'whiteStandard' : 'black80'} />
+          <Icon type='id' name={props.icon} size='large' primaryColor={isMatch ? 'whiteStandard' : 'black80'} />
         </Stack>
       </Stack>
     </Link>
-  )
-}
+  );
+};
