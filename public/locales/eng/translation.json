@@ -331,6 +331,11 @@
         "localeShort": "Sun",
         "value": "su"
       }
+    },
+    "input": {
+      "day": "DD",
+      "month": "MM",
+      "year": "YYYY"
     }
   }
 }

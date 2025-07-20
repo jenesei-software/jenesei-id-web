@@ -12,17 +12,15 @@ import {
   SelectProps,
   Separator,
   Typography,
-  useScreenWidth,
 } from '@jenesei-software/jenesei-kit-react';
 import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
 import { useForm } from '@tanstack/react-form';
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function PagePrivateLanguageAndCountry() {
   const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.language-and-country' });
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' });
-  const { screenActual } = useScreenWidth();
 
   const { changeLng, lng } = useLanguage();
 
@@ -109,14 +107,16 @@ export function PagePrivateLanguageAndCountry() {
       </Stack>
       <Separator color='black05' thickness='2px' type='horizontal' radius='4px' />
       <Form
-        width='100%'
-        handleSubmit={form.handleSubmit}
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          alignItems: 'flex-start',
-          gap: '12px',
+        sx={{
+          default: {
+            width: '100%',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            alignItems: 'flex-start',
+            gap: '12px',
+          },
         }}
+        handleSubmit={form.handleSubmit}
       >
         <form.Field name='language'>
           {(field) => (
@@ -148,6 +148,7 @@ export function PagePrivateLanguageAndCountry() {
                 isShowDropdownOptionIcon
                 isOnClickOptionClose
                 isStayValueAfterSelect
+                isOnlyColorInSelectListOption
                 genre='blackBorder'
                 size={'medium'}
                 sx={{
@@ -254,7 +255,7 @@ export const SelectCountry: FC<SelectCountryProps> = (props) => {
     return result;
   }, [data, lng]);
   const [viewOption, setViewOption] = useState<IOptionCountry[]>(option);
-  const [query, setQuery] = useState<string>('');
+  const [, setQuery] = useState<string>('');
 
   useEffect(() => {
     setViewOption(option);
@@ -263,21 +264,21 @@ export const SelectCountry: FC<SelectCountryProps> = (props) => {
     props.onChange(option[0]?.value.toString());
     setQuery('');
   };
-  const handleQueryChange = useCallback(
-    (value: string) => {
-      setQuery(value);
-      props.onChange('');
-      if (value === '') {
-        setViewOption(option);
-      } else {
-        const filteredOptions = option.filter((option) =>
-          Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),
-        );
-        setViewOption(filteredOptions);
-      }
-    },
-    [option, props],
-  );
+  // const handleQueryChange = useCallback(
+  //   (value: string) => {
+  //     setQuery(value);
+  //     props.onChange('');
+  //     if (value === '') {
+  //       setViewOption(option);
+  //     } else {
+  //       const filteredOptions = option.filter((option) =>
+  //         Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),
+  //       );
+  //       setViewOption(filteredOptions);
+  //     }
+  //   },
+  //   [option, props],
+  // );
 
   const [value, setValue] = useState<IOptionCountry | undefined>(option.find((e) => e.value === props.code));
 

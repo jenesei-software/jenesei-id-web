@@ -1,29 +1,29 @@
-import { Form } from '@local/components/component-form'
-import { useValidation } from '@local/contexts/context-validation'
+import { Form } from '@local/components/component-form';
+import { useValidation } from '@local/contexts/context-validation';
 
-import { SessionDto, useSessionTerminateId, useWSSession } from '@jenesei-software/jenesei-id-web-api'
-import { Button, Icon, Input, Separator, Stack, Typography } from '@jenesei-software/jenesei-kit-react'
-import { useForm } from '@tanstack/react-form'
-import moment from 'moment'
-import { useEffect, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { UAParser } from 'ua-parser-js'
+import { SessionDto, useSessionTerminateId, useWSSession } from '@jenesei-software/jenesei-id-web-api';
+import { Button, Icon, Input, Separator, Stack, Typography } from '@jenesei-software/jenesei-kit-react';
+import { useForm } from '@tanstack/react-form';
+import moment from 'moment';
+import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { UAParser } from 'ua-parser-js';
 
 export function PagePrivateSessionsAndSecurity() {
-  const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.sessions-and-security' })
-  const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' })
+  const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.sessions-and-security' });
+  const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' });
 
-  const { validationPasswordUpdate, validationFunctions } = useValidation()
-  const { data: dataWSSession } = useWSSession()
+  const { validationPasswordUpdate, validationFunctions } = useValidation();
+  const { data: dataWSSession } = useWSSession();
   const form = useForm({
     defaultValues: {
       oldPassword: '',
       newPassword: '',
-      confirmNewPassword: ''
+      confirmNewPassword: '',
     },
 
     onSubmit: async ({ value }) => {
-      console.log(value)
+      console.log(value);
       try {
         // do nothing
       } catch {
@@ -32,14 +32,14 @@ export function PagePrivateSessionsAndSecurity() {
     },
     canSubmitWhenInvalid: false,
     validators: {
-      onBlurAsync: validationFunctions.touched(validationPasswordUpdate)
-    }
-  })
+      onBlurAsync: validationFunctions.touched(validationPasswordUpdate),
+    },
+  });
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    form.validate('blur')
-  }, [form, tForm])
+    form.validate('blur');
+  }, [form, tForm]);
 
   return (
     <Stack
@@ -50,8 +50,8 @@ export function PagePrivateSessionsAndSecurity() {
           alignItems: 'stretch',
           flexDirection: 'column',
           flexGrow: 1,
-          gap: '20px'
-        }
+          gap: '20px',
+        },
       }}
     >
       <Stack
@@ -59,8 +59,8 @@ export function PagePrivateSessionsAndSecurity() {
           default: {
             flexDirection: 'column',
             alignItems: 'flex-start',
-            gap: '6px'
-          }
+            gap: '6px',
+          },
         }}
       >
         <Typography
@@ -69,8 +69,8 @@ export function PagePrivateSessionsAndSecurity() {
               variant: 'h6',
               weight: 700,
               color: 'black80',
-              line: 1
-            }
+              line: 1,
+            },
           }}
         >
           {tPage('menu.title')}
@@ -81,8 +81,8 @@ export function PagePrivateSessionsAndSecurity() {
               variant: 'h8',
               weight: 500,
               color: 'black50',
-              line: 2
-            }
+              line: 2,
+            },
           }}
         >
           {tPage('menu.description')}
@@ -95,11 +95,11 @@ export function PagePrivateSessionsAndSecurity() {
             flexDirection: 'column',
             alignItems: 'flex-start',
             gap: '16px',
-            width: '300px'
+            width: '300px',
           },
           mobile: {
-            width: '100%'
-          }
+            width: '100%',
+          },
         }}
       >
         <Stack
@@ -107,8 +107,8 @@ export function PagePrivateSessionsAndSecurity() {
             default: {
               flexDirection: 'column',
 
-              gap: '8px'
-            }
+              gap: '8px',
+            },
           }}
         >
           <Typography
@@ -117,8 +117,8 @@ export function PagePrivateSessionsAndSecurity() {
                 variant: 'h7',
                 weight: 700,
                 color: 'black80',
-                line: 1
-              }
+                line: 1,
+              },
             }}
           >
             {tPage('form-password.title')}
@@ -129,140 +129,142 @@ export function PagePrivateSessionsAndSecurity() {
                 variant: 'h8',
                 weight: 500,
                 color: 'black60',
-                line: 1
-              }
+                line: 1,
+              },
             }}
           >
             {tPage('form-password.description')}
           </Typography>
         </Stack>
         <Form
-          width="100%"
           handleSubmit={form.handleSubmit}
-          style={{
-            gap: '22px'
+          sx={{
+            default: {
+              width: '100%',
+              gap: '22px',
+            },
           }}
         >
-          <form.Field name="oldPassword">
-            {field => (
+          <form.Field name='oldPassword'>
+            {(field) => (
               <Stack
                 sx={{
                   default: {
                     flexDirection: 'column',
-                    position: 'relative'
-                  }
+                    position: 'relative',
+                  },
                 }}
               >
                 <Input
-                  variety="standard"
-                  autoComplete="current-password"
-                  type="password"
+                  variety='standard'
+                  autoComplete='current-password'
+                  type='password'
                   placeholder={tPage('form-password.placeholder-old')}
                   id={field.name}
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={field.handleChange}
-                  genre="blackBorder"
-                  size="medium"
+                  genre='blackBorder'
+                  size='medium'
                   isNoSpaces
                   error={{
                     errorMessage: field.state.meta.errors?.join(','),
                     isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true
+                    isErrorAbsolute: true,
                   }}
                 />
               </Stack>
             )}
           </form.Field>
-          <form.Field name="newPassword">
-            {field => (
+          <form.Field name='newPassword'>
+            {(field) => (
               <Stack
                 sx={{
                   default: {
                     flexDirection: 'column',
-                    position: 'relative'
-                  }
+                    position: 'relative',
+                  },
                 }}
               >
                 <Input
-                  variety="standard"
-                  autoComplete="current-password"
-                  type="password"
+                  variety='standard'
+                  autoComplete='current-password'
+                  type='password'
                   placeholder={tPage('form-password.placeholder-new')}
                   id={field.name}
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={field.handleChange}
-                  genre="blackBorder"
-                  size="medium"
+                  genre='blackBorder'
+                  size='medium'
                   isNoSpaces
                   error={{
                     errorMessage: field.state.meta.errors?.join(','),
                     isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true
+                    isErrorAbsolute: true,
                   }}
                 />
               </Stack>
             )}
           </form.Field>
-          <form.Field name="confirmNewPassword">
-            {field => (
+          <form.Field name='confirmNewPassword'>
+            {(field) => (
               <Stack
                 sx={{
                   default: {
                     flexDirection: 'column',
-                    position: 'relative'
-                  }
+                    position: 'relative',
+                  },
                 }}
               >
                 <Input
-                  variety="standard"
-                  autoComplete="current-password"
-                  type="password"
+                  variety='standard'
+                  autoComplete='current-password'
+                  type='password'
                   placeholder={tPage('form-password.placeholder-new-confirm')}
                   id={field.name}
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={field.handleChange}
-                  genre="blackBorder"
-                  size="medium"
+                  genre='blackBorder'
+                  size='medium'
                   isNoSpaces
                   error={{
                     errorMessage: field.state.meta.errors?.join(','),
                     isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true
+                    isErrorAbsolute: true,
                   }}
                 />
               </Stack>
             )}
           </form.Field>
           <form.Subscribe>
-            {state => (
+            {(state) => (
               <Button
-                type="submit"
+                type='submit'
                 isHidden={!state.canSubmit}
                 isDisabled={!state.canSubmit || state.isSubmitting}
-                genre="black"
-                size="mediumSmall"
+                genre='black'
+                size='mediumSmall'
                 isOnlyIcon={state.isSubmitting}
                 sx={{
                   default: {
                     width: 'fit-content',
-                    minWidth: '160px'
+                    minWidth: '160px',
                   },
                   mobile: {
-                    width: '100%'
-                  }
+                    width: '100%',
+                  },
                 }}
                 icons={[
                   {
                     type: 'loading',
                     name: 'Line',
-                    isHidden: !state.isSubmitting
-                  }
+                    isHidden: !state.isSubmitting,
+                  },
                 ]}
               >
                 {tPage('form-password.title-button')}
@@ -278,16 +280,16 @@ export function PagePrivateSessionsAndSecurity() {
             flexDirection: 'column',
             alignItems: 'flex-start',
             gap: '16px',
-            width: '100%'
-          }
+            width: '100%',
+          },
         }}
       >
         <Stack
           sx={{
             default: {
               flexDirection: 'column',
-              gap: '6px'
-            }
+              gap: '6px',
+            },
           }}
         >
           <Typography
@@ -296,8 +298,8 @@ export function PagePrivateSessionsAndSecurity() {
                 variant: 'h7',
                 weight: 700,
                 color: 'black80',
-                line: 1
-              }
+                line: 1,
+              },
             }}
           >
             {tPage('form-session.title')}
@@ -308,8 +310,8 @@ export function PagePrivateSessionsAndSecurity() {
                 variant: 'h8',
                 weight: 500,
                 color: 'black60',
-                line: 1
-              }
+                line: 1,
+              },
             }}
           >
             {tPage('form-session.description')}
@@ -321,11 +323,11 @@ export function PagePrivateSessionsAndSecurity() {
               width: '100%',
               display: 'grid',
               gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))',
-              gap: '12px'
+              gap: '12px',
             },
             tablet: {
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))'
-            }
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            },
           }}
         >
           {dataWSSession &&
@@ -335,20 +337,20 @@ export function PagePrivateSessionsAndSecurity() {
         </Stack>
       </Stack>
     </Stack>
-  )
+  );
 }
 export function PagePrivateSessionsAndSecuritySessionItem(props: { session: SessionDto; sessionId: string }) {
-  const { mutate, isPending } = useSessionTerminateId()
-  const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.sessions-and-security' })
+  const { mutate, isPending } = useSessionTerminateId();
+  const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.sessions-and-security' });
 
   const result = useMemo(() => {
-    const parser = new UAParser()
-    parser.setUA(props.session.userAgent)
-    return parser.getResult()
-  }, [props.session.userAgent])
+    const parser = new UAParser();
+    parser.setUA(props.session.userAgent);
+    return parser.getResult();
+  }, [props.session.userAgent]);
   return (
     <Stack
-      sx={theme => ({
+      sx={(theme) => ({
         default: {
           width: '100%',
           height: '100%',
@@ -358,33 +360,33 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
           flexGrow: 1,
           gap: '10px',
           borderRadius: '20px',
-          padding: '10px'
+          padding: '10px',
         },
         mobile: {
           minWidth: '100%',
-          width: '100%'
-        }
+          width: '100%',
+        },
       })}
     >
       <Stack sx={{ default: { alignItems: 'center', justifyContent: 'space-between', padding: '0px 6.5px 0px 0px' } }}>
-        <Icon type="id" name="Web" size="large" primaryColor="blueRest" />
+        <Icon type='id' name='Web' size='large' primaryColor='blueRest' />
         <Stack
-          sx={theme => ({
+          sx={(theme) => ({
             default: {
               '@keyframes blink-bg': {
                 from: {
-                  backgroundColor: theme.palette.greenGoogle
+                  backgroundColor: theme.palette.greenGoogle,
                 },
                 to: {
-                  backgroundColor: theme.palette.grayJanice
-                }
+                  backgroundColor: theme.palette.grayJanice,
+                },
               },
               width: '12px',
               height: '12px',
               borderRadius: '50%',
               backgroundColor: props.session.current ? theme.palette.greenGoogle : theme.palette.grayJanice,
-              animation: props.session.current ? 'blink-bg 1s infinite alternate' : undefined
-            }
+              animation: props.session.current ? 'blink-bg 1s infinite alternate' : undefined,
+            },
           })}
         />
       </Stack>
@@ -395,8 +397,8 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
               variant: 'h8',
               weight: 700,
               color: 'black60',
-              line: 1
-            }
+              line: 1,
+            },
           }}
         >
           Device:
@@ -407,8 +409,8 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
               variant: 'h8',
               weight: 700,
               color: 'black60',
-              line: 1
-            }
+              line: 1,
+            },
           }}
         >
           {result.browser.name} {result.browser.type} {result.browser.version}
@@ -421,8 +423,8 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
               variant: 'h8',
               weight: 700,
               color: 'black60',
-              line: 1
-            }
+              line: 1,
+            },
           }}
         >
           OC:
@@ -433,8 +435,8 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
               variant: 'h8',
               weight: 700,
               color: 'black60',
-              line: 1
-            }
+              line: 1,
+            },
           }}
         >
           {result.os.name}
@@ -447,8 +449,8 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
               variant: 'h8',
               weight: 700,
               color: 'black60',
-              line: 1
-            }
+              line: 1,
+            },
           }}
         >
           Last activity:
@@ -459,8 +461,8 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
               variant: 'h8',
               weight: 700,
               color: 'black60',
-              line: 1
-            }
+              line: 1,
+            },
           }}
         >
           {moment(props.session.lastActivity).format('YYYY.MM.DD HH:mm:ss')}
@@ -468,7 +470,7 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
       </Stack>
       <Stack
         sx={{
-          default: { alignItems: 'center', justifyContent: 'flex-start', padding: '0px 6.5px 0px 0px', gap: '12px' }
+          default: { alignItems: 'center', justifyContent: 'flex-start', padding: '0px 6.5px 0px 0px', gap: '12px' },
         }}
       >
         <Button
@@ -476,25 +478,25 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
           isDisabled={isPending}
           isOnlyIcon={isPending}
           isRadius
-          genre="gray"
-          size="small"
+          genre='gray'
+          size='small'
           icons={[
             {
               type: 'loading',
               name: 'Line',
-              isHidden: !isPending
-            }
+              isHidden: !isPending,
+            },
           ]}
           onClick={() => mutate({ path: { sessionId: props.sessionId } })}
         >
           {tPage('form-session.title-button-close')}
         </Button>
         {props.session.current && (
-          <Button isRadius isDisabled genre="greenTransparent" size="small">
+          <Button isRadius isDisabled genre='greenTransparent' size='small'>
             {tPage('form-session.title-button-current')}
           </Button>
         )}
       </Stack>
     </Stack>
-  )
+  );
 }

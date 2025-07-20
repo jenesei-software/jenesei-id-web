@@ -38,6 +38,7 @@ export function LayoutPublic() {
           isShowDropdownOptionIcon
           isOnClickOptionClose
           isStayValueAfterSelect
+          isOnlyColorInSelectListOption
           genre='grayBorder'
           size={'medium'}
           sx={{

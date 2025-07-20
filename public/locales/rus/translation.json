@@ -334,6 +334,11 @@
         "localeShort": "Вс",
         "value": "su"
       }
+    },
+    "input": {
+      "day": "ДД",
+      "month": "ММ",
+      "year": "ГГГГ"
     }
   }
 }

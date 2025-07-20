@@ -38,6 +38,7 @@ export const Header: FC = () => {
           labelPlaceholder={t('form.language.placeholder')}
           isShowDropdownOptionIcon
           isOnClickOptionClose
+          isOnlyColorInSelectListOption
           isStayValueAfterSelect
           genre={'realebail-white'}
           size={'medium'}

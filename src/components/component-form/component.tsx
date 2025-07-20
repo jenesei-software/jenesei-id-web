@@ -5,7 +5,7 @@ import { FormProps, FormWrapper } from '.'
 export const Form: FC<FormProps> = props => {
   return (
     <FormWrapper
-      $width={props.width}
+      $sx={props.sx}
       onSubmit={e => {
         e.preventDefault()
         e.stopPropagation()
