@@ -39,7 +39,7 @@ export function LayoutRoot() {
 }
 
 const LayoutRootComponent = () => {
-  const { title } = useEnvironment();
+  const { shortName } = useEnvironment();
   const { t } = useTranslation('translation');
   const { isLoading, isSuccess, isFetched } = useAuthProfile();
   const isAuthenticated = useMemo(() => (isFetched ? isSuccess : undefined), [isFetched, isSuccess]);
@@ -84,7 +84,7 @@ const LayoutRootComponent = () => {
     >
       <ProviderApp
         defaultPreview={{ visible: !visible, defaultVisible: false }}
-        defaultTitle={title}
+        defaultTitle={shortName}
         defaultDescription={t('meta.description')}
         isScrollOutlet={true}
         defaultBgColor='whiteStandard'
@@ -134,7 +134,7 @@ const LayoutRootComponent = () => {
   );
 };
 const LayoutURLComponent = () => {
-  const { title } = useEnvironment();
+  const { shortName } = useEnvironment();
   const { t: tURLTitle } = useTranslation('translation', { keyPrefix: 'url.title' });
   const fullPath = useRouterState({
     select: (state) => state.location.pathname.replace(/\/$/, ''),
@@ -147,8 +147,8 @@ const LayoutURLComponent = () => {
     if (exists) {
       changeTitle(titleTranslate);
     } else {
-      changeTitle(title);
+      changeTitle(shortName);
     }
-  }, [changeTitle, title, fullPath, tURLTitle]);
+  }, [changeTitle, shortName, fullPath, tURLTitle]);
   return <Outlet />;
 };

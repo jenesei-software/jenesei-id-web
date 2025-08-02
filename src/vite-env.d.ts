@@ -1,7 +1,6 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_DEFAULT_TITLE: string
   readonly VITE_DEFAULT_DESCRIPTION: string
   readonly VITE_DEFAULT_SHORTNAME: string
   readonly VITE_DEFAULT_THEME_COLOR: string
