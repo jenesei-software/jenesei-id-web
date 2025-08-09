@@ -1,13 +1,13 @@
 {
   "url": {
     "title": {
-      "/pr/language-and-country": "Jenesei ID - Язык и страна",
-      "/pr/personal-info": "Jenesei ID - Личная информация",
-      "/pr/resources": "Jenesei ID - Ресурсы",
-      "/pr/sessions-and-security": "Jenesei ID - Сеансы и безопасность",
-      "/pu/sign-in": "Jenesei ID - Вход",
-      "/pu/sign-up": "Jenesei ID - Регистрация",
-      "/pu/forgot-password": "Jenesei ID - Восстановление пароля"
+      "/pr/language-and-country": "Jen. ID - Язык и страна",
+      "/pr/personal-info": "Jen. ID - Личная информация",
+      "/pr/resources": "Jen. ID - Ресурсы",
+      "/pr/sessions-and-security": "Jen. ID - Сеансы и безопасность",
+      "/pu/sign-in": "Jen. ID - Вход",
+      "/pu/sign-up": "Jen. ID - Регистрация",
+      "/pu/forgot-password": "Jen. ID - Восстановление пароля"
     },
     "nav": {
       "/pr/language-and-country": ["Аккаунт", "Язык и страна"],
