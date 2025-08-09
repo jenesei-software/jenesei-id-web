@@ -412,6 +412,10 @@ export function PagePublicSignUp() {
                         weeks: Object.values(tDate('weeks', { returnObjects: true })) as WeekItem[],
                         inputs: tDate('input', { returnObjects: true }),
                       }}
+                      notValidDate={{
+                        errorMessage: tDate('not-valid-date'),
+                        isErrorAbsolute: true,
+                      }}
                       labelPlaceholder={tForm('dateOfBirth.placeholder')}
                       id={field.name}
                       name={field.name}
@@ -420,9 +424,15 @@ export function PagePublicSignUp() {
                       onBlur={field.handleBlur}
                       onChange={field.handleChange}
                       genre='grayBorder'
-                      startDate={LastHundredYear18YearsAgoStartDate}
-                      endDate={LastHundredYear18YearsAgoEndDate}
+                      dateMin={LastHundredYear18YearsAgoStartDate}
+                      dateMax={LastHundredYear18YearsAgoEndDate}
+                      dateDefault={LastHundredYear18YearsAgoEndDate}
                       size='medium'
+                      error={{
+                        errorMessage: field.state.meta.errors?.join(','),
+                        isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
+                        isErrorAbsolute: true,
+                      }}
                     />
                   </Stack>
                 );
@@ -507,7 +517,7 @@ export function PagePublicSignUp() {
                   default: {
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    flexDirection:'row'
+                    flexDirection: 'row',
                   },
                 }}
               >

@@ -332,6 +332,7 @@
         "value": "su"
       }
     },
+    "not-valid-date": "Invalid date",
     "input": {
       "day": "DD",
       "month": "MM",

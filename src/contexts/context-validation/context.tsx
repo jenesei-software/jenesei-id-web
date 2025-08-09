@@ -149,6 +149,7 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
       yup.object({
         dateOfBirth: yup
           .mixed()
+          .required(tForm('dateOfBirth.errors.required'))
           .test('is-required', tForm('dateOfBirth.errors.required'), (value) => {
             return value !== undefined && value !== null && value !== 0;
           })
@@ -238,8 +239,9 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
       yup.object({
         dateOfBirth: yup
           .mixed()
+          .required(tForm('dateOfBirth.errors.required'))
           .test('is-required', tForm('dateOfBirth.errors.required'), (value) => {
-            return value !== undefined && value !== null && value !== 0;
+            return value !== null && value !== undefined && value !== 0 && value !== '';
           })
           .test('valid-date', tForm('dateOfBirth.errors.invalid'), (value) => {
             if (value === 0) {
