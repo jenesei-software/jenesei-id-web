@@ -13,7 +13,7 @@ export function PagePrivateSessionsAndSecurity() {
   const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.sessions-and-security' });
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' });
 
-  const { validationPasswordUpdate, validationFunctions } = useValidation();
+  const { validationPasswordUpdate, validationFunctions, getError } = useValidation();
   const { data: dataWSSession } = useWSSession();
   const form = useForm({
     defaultValues: {
@@ -32,7 +32,7 @@ export function PagePrivateSessionsAndSecurity() {
     },
     canSubmitWhenInvalid: false,
     validators: {
-      onBlurAsync: validationFunctions.touched(validationPasswordUpdate),
+      onChangeAsync: validationFunctions.change(validationPasswordUpdate),
     },
   });
 
@@ -168,11 +168,7 @@ export function PagePrivateSessionsAndSecurity() {
                   genre='blackBorder'
                   size='medium'
                   isNoSpaces
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             )}
@@ -200,11 +196,7 @@ export function PagePrivateSessionsAndSecurity() {
                   genre='blackBorder'
                   size='medium'
                   isNoSpaces
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             )}
@@ -232,11 +224,7 @@ export function PagePrivateSessionsAndSecurity() {
                   genre='blackBorder'
                   size='medium'
                   isNoSpaces
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             )}

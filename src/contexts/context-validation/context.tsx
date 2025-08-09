@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useUserCheckEmail, useUserCheckNickname } from '@jenesei-software/jenesei-id-web-api';
-import { DeepKeys, FormApi } from '@tanstack/react-form';
+import { FormAsyncValidateOrFn } from '@tanstack/react-form';
 import moment from 'moment';
-import { createContext, FC, useContext, useMemo } from 'react';
+import { createContext, FC, useCallback, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
@@ -23,59 +23,53 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
   const getUserCheckNickname = useUserCheckNickname();
   const getUserCheckEmail = useUserCheckEmail();
 
-  const validationFunctions = useMemo(
+  const validationFunctions: {
+    change: (validation: yup.ObjectSchema<any>) => FormAsyncValidateOrFn<any>;
+  } = useMemo(
     () => ({
-      touched:
-        <TValues extends Record<string, any>>(validation: yup.ObjectSchema<any>) =>
-        async ({
-          value,
-          formApi,
-        }: {
-          value: TValues;
-          formApi: FormApi<TValues, any, any, any, any, any, any, any, any, any>;
-          signal: AbortSignal;
-        }): Promise<null | { fields: Record<string, string> }> => {
-          const touchedFields = Object.keys(formApi.fieldInfo).reduce(
-            (acc, fieldName) => {
-              const key = fieldName as DeepKeys<TValues>;
-              const fieldMeta = formApi.fieldInfo?.[key]?.instance?.getMeta();
-
-              if (fieldMeta?.isTouched) {
-                acc[key] = value[key];
-              }
-
-              return acc;
-            },
-            {} as Partial<TValues>,
-          );
-
-          try {
-            await validation.validate(touchedFields, { abortEarly: false });
-            return null;
-          } catch (validationErrors) {
-            if (validationErrors instanceof yup.ValidationError) {
-              const errors = validationErrors.inner.reduce(
-                (acc, error) => {
-                  if (
-                    error.path &&
-                    Object.prototype.hasOwnProperty.call(touchedFields, error.path) &&
-                    !acc[error.path]
-                  ) {
-                    acc[error.path] = error.message;
-                  }
-                  return acc;
-                },
-                {} as Record<string, string>,
-              );
-              return { fields: errors };
+      change: (validation) => async (props) => {
+        const changeFields = Object.keys(props.formApi.fieldInfo).reduce(
+          (acc, fieldName) => {
+            const key = fieldName;
+            const fieldMeta = props.formApi.fieldInfo?.[key]?.instance?.getMeta();
+            if (fieldMeta?.isTouched) {
+              acc[key] = props.value[key];
             }
-            return null;
+
+            return acc;
+          },
+          {} as Record<string, string>,
+        );
+
+        try {
+          await validation.validate(changeFields, { abortEarly: false });
+          return null;
+        } catch (validationErrors) {
+          if (validationErrors instanceof yup.ValidationError) {
+            const errors = validationErrors.inner.reduce(
+              (acc, error) => {
+                if (error.path && Object.prototype.hasOwnProperty.call(changeFields, error.path) && !acc[error.path]) {
+                  acc[error.path] = error.message;
+                }
+                return acc;
+              },
+              {} as Record<string, string>,
+            );
+            return { fields: errors };
           }
-        },
+          return null;
+        }
+      },
     }),
     [],
   );
-
+  const getError: ValidationContextProps['getError'] = useCallback((props) => {
+    return {
+      errorMessage: props.errors?.join(','),
+      isError: !!props.isBlurred && !!props.errors.length,
+      isErrorAbsolute: true,
+    };
+  }, []);
   const validationSignIn = useMemo(
     () =>
       yup.object({
@@ -287,6 +281,7 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
         validationSignUp,
         validationPasswordUpdate,
         validationLanguageAndCountryCode,
+        getError,
       }}
     >
       {props.children}

@@ -15,7 +15,7 @@ export function PagePublicSignIn() {
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' });
   const { t: tSignIn } = useTranslation('translation', { keyPrefix: 'public.sign-in' });
 
-  const { validationSignIn, validationFunctions } = useValidation();
+  const { validationSignIn, validationFunctions, getError } = useValidation();
   const { mutateAsync } = useAuthSignIn();
 
   const form = useForm({
@@ -38,7 +38,7 @@ export function PagePublicSignIn() {
     },
     canSubmitWhenInvalid: false,
     validators: {
-      onBlurAsync: validationFunctions.touched(validationSignIn),
+      onChangeAsync: validationFunctions.change(validationSignIn),
     },
   });
 
@@ -129,11 +129,7 @@ export function PagePublicSignIn() {
                   genre='grayBorder'
                   size='medium'
                   isNoSpaces
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             );
@@ -164,11 +160,7 @@ export function PagePublicSignIn() {
                   genre='grayBorder'
                   size='medium'
                   isNoSpaces
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             );

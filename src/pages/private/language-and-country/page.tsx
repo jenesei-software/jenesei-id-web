@@ -42,7 +42,7 @@ export function PagePrivateLanguageAndCountry() {
     },
     canSubmitWhenInvalid: false,
     validators: {
-      onBlurAsync: validationFunctions.touched(validationLanguageAndCountryCode),
+      onChangeAsync: validationFunctions.change(validationLanguageAndCountryCode),
     },
   });
 

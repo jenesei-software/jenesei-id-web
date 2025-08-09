@@ -16,7 +16,7 @@
     "@fontsource/roboto-mono": "^5.2.6",
     "@fontsource/work-sans": "^5.2.5",
     "@jenesei-software/jenesei-id-web-api": "^1.1.21",
-    "@jenesei-software/jenesei-kit-react": "^1.3.0",
+    "@jenesei-software/jenesei-kit-react": "^1.3.2",
     "@tanstack/react-form": "^1.7.0",
     "@tanstack/react-query": "^5.62.10",
     "@tanstack/react-router": "^1.120.5",

@@ -15,7 +15,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function PagePublicSignUp() {
-  const { validationSignUp, validationFunctions } = useValidation();
+  const { validationSignUp, validationFunctions, getError } = useValidation();
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' });
   const { t: tSignUp } = useTranslation('translation', { keyPrefix: 'public.sign-up' });
   const { t: tDate } = useTranslation('translation', { keyPrefix: 'date' });
@@ -28,14 +28,15 @@ export function PagePublicSignUp() {
   const { mutateAsync: mutateAsyncConfirmEmail, isPending, reset: resetConfirmEmail } = useAuthPreSignUp();
   const { mutateAsync: mutateAsyncSignUp, reset: resetSignUp } = useAuthSignUp();
 
-  const defaultValues: {
+  interface FormValues {
     email: string;
     currentPassword: string;
     confirmPassword: string;
     username: string;
     dateOfBirth: number | null;
     code: string;
-  } = {
+  }
+  const defaultValues: FormValues = {
     email: '',
     currentPassword: '',
     confirmPassword: '',
@@ -125,7 +126,7 @@ export function PagePublicSignUp() {
       }
     },
     validators: {
-      onBlurAsync: validationFunctions.touched(validationSignUp),
+      onChangeAsync: validationFunctions.change(validationSignUp),
     },
   });
 
@@ -227,57 +228,55 @@ export function PagePublicSignUp() {
             </Typography>
           </>
         ) : (
-          <>
-            <form.Field name='email'>
-              {(field) => (
-                <Stack
+          <form.Field name='email'>
+            {(field) => (
+              <Stack
+                sx={{
+                  default: {
+                    flexDirection: 'column',
+                    gap: '6px',
+                    position: 'relative',
+                  },
+                }}
+              >
+                <Typography
                   sx={{
                     default: {
-                      flexDirection: 'column',
-                      gap: '6px',
-                      position: 'relative',
+                      variant: 'h2',
+                      weight: 700,
+                      color: 'black100',
                     },
                   }}
                 >
-                  <Typography
-                    sx={{
-                      default: {
-                        variant: 'h2',
-                        weight: 700,
-                        color: 'black100',
-                      },
-                    }}
-                  >
-                    {tSignUp('title-confirmation')}
-                  </Typography>
+                  {tSignUp('title-confirmation')}
+                </Typography>
+                <Typography
+                  sx={{
+                    default: {
+                      variant: 'h8',
+                      weight: 400,
+                      color: 'black100',
+                    },
+                  }}
+                >
+                  {tSignUp('title-confirmation-description')}{' '}
                   <Typography
                     sx={{
                       default: {
                         variant: 'h8',
                         weight: 400,
-                        color: 'black100',
+                        color: 'blueRest',
+                        cursor: 'pointer',
                       },
                     }}
                   >
-                    {tSignUp('title-confirmation-description')}{' '}
-                    <Typography
-                      sx={{
-                        default: {
-                          variant: 'h8',
-                          weight: 400,
-                          color: 'blueRest',
-                          cursor: 'pointer',
-                        },
-                      }}
-                    >
-                      {field.state.value}
-                    </Typography>
-                    .
+                    {field.state.value}
                   </Typography>
-                </Stack>
-              )}
-            </form.Field>
-          </>
+                  .
+                </Typography>
+              </Stack>
+            )}
+          </form.Field>
         )}
       </Stack>
 
@@ -315,11 +314,7 @@ export function PagePublicSignUp() {
                   onChange={field.handleChange}
                   genre='grayBorder'
                   size='large'
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             )}
@@ -350,11 +345,7 @@ export function PagePublicSignUp() {
                     genre='grayBorder'
                     size='medium'
                     isNoSpaces
-                    error={{
-                      errorMessage: field.state.meta.errors?.join(','),
-                      isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                      isErrorAbsolute: true,
-                    }}
+                    error={getError(field.state.meta)}
                   />
                 </Stack>
               )}
@@ -383,11 +374,7 @@ export function PagePublicSignUp() {
                     genre='grayBorder'
                     size='medium'
                     isNoSpaces
-                    error={{
-                      errorMessage: field.state.meta.errors?.join(','),
-                      isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                      isErrorAbsolute: true,
-                    }}
+                    error={getError(field.state.meta)}
                   />
                 </Stack>
               )}
@@ -428,11 +415,7 @@ export function PagePublicSignUp() {
                       dateMax={LastHundredYear18YearsAgoEndDate}
                       dateDefault={LastHundredYear18YearsAgoEndDate}
                       size='medium'
-                      error={{
-                        errorMessage: field.state.meta.errors?.join(','),
-                        isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                        isErrorAbsolute: true,
-                      }}
+                      error={getError(field.state.meta)}
                     />
                   </Stack>
                 );
@@ -462,11 +445,7 @@ export function PagePublicSignUp() {
                     genre='grayBorder'
                     size='medium'
                     isNoSpaces
-                    error={{
-                      errorMessage: field.state.meta.errors?.join(','),
-                      isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                      isErrorAbsolute: true,
-                    }}
+                    error={getError(field.state.meta)}
                   />
                 </Stack>
               )}
@@ -495,11 +474,7 @@ export function PagePublicSignUp() {
                     genre='grayBorder'
                     size='medium'
                     isNoSpaces
-                    error={{
-                      errorMessage: field.state.meta.errors?.join(','),
-                      isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                      isErrorAbsolute: true,
-                    }}
+                    error={getError(field.state.meta)}
                   />
                 </Stack>
               )}
