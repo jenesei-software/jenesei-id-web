@@ -1,7 +1,7 @@
 {
   "name": "jenesei-id-web",
   "private": true,
-  "version": "0.0.12-prod.1",
+  "version": "0.0.13-prod.1",
   "type": "module",
   "scripts": {
     "start": "vite --mode dev",
