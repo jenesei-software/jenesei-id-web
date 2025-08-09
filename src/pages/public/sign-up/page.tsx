@@ -126,6 +126,7 @@ export function PagePublicSignUp() {
       }
     },
     validators: {
+      onBlurAsync: validationFunctions.blur(validationSignUp),
       onChangeAsync: validationFunctions.change(validationSignUp),
     },
   });

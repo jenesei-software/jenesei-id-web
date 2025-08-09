@@ -33,6 +33,7 @@ export function PagePrivateSessionsAndSecurity() {
     canSubmitWhenInvalid: false,
     validators: {
       onChangeAsync: validationFunctions.change(validationPasswordUpdate),
+      onBlurAsync: validationFunctions.blur(validationPasswordUpdate),
     },
   });
 

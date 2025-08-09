@@ -53,6 +53,7 @@ export function PagePrivatePersonalInfo() {
     validators: {
       onChangeAsyncDebounceMs: 500,
       onChangeAsync: validationFunctions.change(validationUser),
+      onBlurAsync: validationFunctions.blur(validationUser),
     },
   });
 

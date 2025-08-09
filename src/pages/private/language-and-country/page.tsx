@@ -43,6 +43,7 @@ export function PagePrivateLanguageAndCountry() {
     canSubmitWhenInvalid: false,
     validators: {
       onChangeAsync: validationFunctions.change(validationLanguageAndCountryCode),
+      onBlurAsync: validationFunctions.blur(validationLanguageAndCountryCode),
     },
   });
 

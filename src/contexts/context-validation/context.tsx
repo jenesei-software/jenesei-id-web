@@ -24,10 +24,11 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
   const getUserCheckEmail = useUserCheckEmail();
 
   const validationFunctions: {
+    blur: (validation: yup.ObjectSchema<any>) => FormAsyncValidateOrFn<any>;
     change: (validation: yup.ObjectSchema<any>) => FormAsyncValidateOrFn<any>;
   } = useMemo(
     () => ({
-      change: (validation) => async (props) => {
+      blur: (validation) => async (props) => {
         const changeFields = Object.keys(props.formApi.fieldInfo).reduce(
           (acc, fieldName) => {
             const key = fieldName;
@@ -60,13 +61,47 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
           return null;
         }
       },
+      change: (validation) => async (props) => {
+        const changeFields = Object.keys(props.formApi.fieldInfo).reduce(
+          (acc, fieldName) => {
+            const key = fieldName;
+            const fieldMeta = props.formApi.fieldInfo?.[key]?.instance?.getMeta();
+            if (fieldMeta?.isTouched && fieldMeta?.isDirty) {
+              acc[key] = props.value[key];
+            }
+
+            return acc;
+          },
+          {} as Record<string, string>,
+        );
+
+        try {
+          await validation.validate(changeFields, { abortEarly: false });
+          return null;
+        } catch (validationErrors) {
+          if (validationErrors instanceof yup.ValidationError) {
+            const errors = validationErrors.inner.reduce(
+              (acc, error) => {
+                if (error.path && Object.prototype.hasOwnProperty.call(changeFields, error.path) && !acc[error.path]) {
+                  acc[error.path] = error.message;
+                }
+                return acc;
+              },
+              {} as Record<string, string>,
+            );
+            return { fields: errors };
+          }
+          return null;
+        }
+      },
     }),
     [],
   );
   const getError: ValidationContextProps['getError'] = useCallback((props) => {
+    const errorMessage = props.isBlurred && props.isDirty ? props.errorMap.onChange : props.errorMap.onBlur || '';
     return {
-      errorMessage: props.errors?.join(','),
-      isError: !!props.isBlurred && !!props.errors.length,
+      errorMessage: errorMessage,
+      isError: !!errorMessage,
       isErrorAbsolute: true,
     };
   }, []);

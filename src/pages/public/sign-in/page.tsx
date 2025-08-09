@@ -39,6 +39,7 @@ export function PagePublicSignIn() {
     canSubmitWhenInvalid: false,
     validators: {
       onChangeAsync: validationFunctions.change(validationSignIn),
+      onBlurAsync: validationFunctions.blur(validationSignIn),
     },
   });
 
