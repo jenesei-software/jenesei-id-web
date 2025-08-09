@@ -7,9 +7,7 @@
     "start": "vite --mode dev",
     "build:test": "tsc && vite build --mode test",
     "build:prod": "tsc && vite build --mode prod",
-    "build:dev": "tsc && vite build --mode dev",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "build:dev": "tsc && vite build --mode dev"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.0",
@@ -18,7 +16,7 @@
     "@fontsource/roboto-mono": "^5.2.6",
     "@fontsource/work-sans": "^5.2.5",
     "@jenesei-software/jenesei-id-web-api": "^1.1.21",
-    "@jenesei-software/jenesei-kit-react": "^1.2.2",
+    "@jenesei-software/jenesei-kit-react": "^1.2.9",
     "@tanstack/react-form": "^1.7.0",
     "@tanstack/react-query": "^5.62.10",
     "@tanstack/react-router": "^1.120.5",

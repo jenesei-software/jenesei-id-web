@@ -383,6 +383,9 @@ export function PagePrivatePersonalInfo() {
                       weeks: Object.values(tDate('weeks', { returnObjects: true })) as WeekItem[],
                       inputs: tDate('input', { returnObjects: true }),
                     }}
+                    notValidDate={{
+                      errorMessage: tDate('not-valid-date'),
+                    }}
                     labelPlaceholder={tForm('dateOfBirth.placeholder-input')}
                     id={field.name}
                     name={field.name}
@@ -391,8 +394,9 @@ export function PagePrivatePersonalInfo() {
                     onBlur={field.handleBlur}
                     onChange={field.handleChange}
                     genre='grayBorder'
-                    startDate={LastHundredYear18YearsAgoStartDate}
-                    endDate={LastHundredYear18YearsAgoEndDate}
+                    dateMin={LastHundredYear18YearsAgoStartDate}
+                    dateMax={LastHundredYear18YearsAgoEndDate}
+                    dateDefault={LastHundredYear18YearsAgoEndDate}
                     size='medium'
                   />
                 </Stack>
