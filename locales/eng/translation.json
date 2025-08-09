@@ -1,0 +1,342 @@
+{
+  "url": {
+    "title": {
+      "/pr/language-and-country": "Jen. ID - Language & Country",
+      "/pr/personal-info": "Jen. ID - Personal info",
+      "/pr/resources": "Jen. ID - Resources",
+      "/pr/sessions-and-security": "Jen. ID - Sessions & Security",
+      "/pu/sign-in": "Jen. ID - Sign In",
+      "/pu/sign-up": "Jen. ID - Sign Up",
+      "/pu/forgot-password": "Jen. ID - Forgot Password"
+    },
+    "nav": {
+      "/pr/language-and-country": ["Account", "Language & Country"],
+      "/pr/personal-info": ["Account", "Personal info"],
+      "/pr/resources": ["Account", "Resources"],
+      "/pr/sessions-and-security": ["Account", "Sessions & Security"],
+      "/pu/sign-in": ["Account", "Sign In"],
+      "/pu/sign-up": ["Account", "Sign Up"],
+      "/pu/forgot-password": ["Account", "Forgot Password"]
+    }
+  },
+  "boundary": {
+    "title-1": "An unknown error occurred",
+    "title-2": "Please try again later",
+    "title-button": "Reload page"
+  },
+  "private": {
+    "title-account": "Account",
+    "personal-info": {
+      "form": {
+        "title-button-save": "Save",
+        "title-button-cancel": "Cancel"
+      },
+      "menu": {
+        "title": "Personal info",
+        "description": "Update your profile, contact details and preferences to personalize your experience"
+      }
+    },
+    "sessions-and-security": {
+      "form-session": {
+        "title": "Active sessions",
+        "description": "View and terminate active sessions on other devices",
+        "title-button-close": "Terminate session",
+        "title-button-current": "Current"
+      },
+      "form-password": {
+        "title": "Password",
+        "description": "Change your password to enhance security",
+        "placeholder-old": "Old password",
+        "placeholder-new": "New password",
+        "placeholder-new-confirm": "Confirm new password",
+        "title-button": "Change password"
+      },
+      "menu": {
+        "title": "Sessions & Security",
+        "description": "Track and manage your sessions on authorized devices and control how you log in"
+      }
+    },
+    "language-and-country": {
+      "form": {
+        "country": {
+          "title": "Country"
+        },
+        "language": {
+          "title": "Language"
+        },
+        "title-button": "Save"
+      },
+      "menu": {
+        "title": "Language & Country",
+        "description": "Select your favorite language and country for Jenesei services"
+      }
+    },
+    "resources": {
+      "menu": {
+        "title": "Resources",
+        "description": "Explore and try the available Jenesei services"
+      },
+      "button-connect": "Connect",
+      "button-connected": "Connected",
+      "button-active": "Active",
+      "button-inactive": "Inactive",
+      "services": {
+        "jenesei_id": {
+          "title": "Jenesei ID",
+          "description": "Manage your account and access all Jenesei services with a single ID"
+        }
+      }
+    }
+  },
+  "public": {
+    "layout": {
+      "title": "Jenesei ID",
+      "description": "Build your future"
+    },
+    "sign-in": {
+      "title-button": "Sign In",
+      "title-forgot-password": "Forgot password?",
+      "title-welcome": "Welcome",
+      "title-sign-up-1": "Don’t have an account?",
+      "title-sign-up-2": "Create account"
+    },
+    "sign-up": {
+      "title": "Sign Up",
+      "title-sign-in-1": "Do you already have an account?",
+      "title-sign-in-2": "Sign in",
+      "title-confirmation": "Check your email",
+      "title-confirmation-description": "We have sent you a confirmation email to",
+      "title-spam": "Didn’t receive the email? Check spam or promotion folder",
+      "title-repeat": "Time left: {{seconds}}",
+      "title-button": "Sign Up",
+      "title-button-continue": "Continue",
+      "title-button-repeat": "Send the code again"
+    },
+    "forgot-password": {}
+  },
+  "meta": {
+    "description": "The best service for managing your account"
+  },
+  "sonner": {
+    "undo": "Close"
+  },
+  "api": {
+    "sso": {
+      "sign-in": {
+        "success": {
+          "title": "Login successful",
+          "description": "You have successfully logged in"
+        },
+        "error": {
+          "title": "Login error",
+          "description": "Failed to log in"
+        }
+      }
+    }
+  },
+  "form": {
+    "image": {
+      "placeholder": "Profile image",
+      "placeholder-input": "Upload profile image",
+      "alt": "Profile image",
+      "description": "PNG, JPEG, under 5 Mb",
+      "dialog": {
+        "buttonAdd": "Add image",
+        "dialogSave": "Save",
+        "dialogCancel": "Cancel",
+        "dialogAddImage": "Add",
+        "dialogDeleteImage": "Delete"
+      }
+    },
+    "country": {
+      "placeholder": "Select country",
+      "empty-options": "No countries found"
+    },
+    "firstName": {
+      "placeholder": "First name",
+      "placeholder-input": "Enter first name",
+      "errors": {
+        "no-spaces": "First name must not contain spaces",
+        "required": "Required field",
+        "minLength": "First name must be at least {{minLength}} characters",
+        "maxLength": "First name must not exceed {{maxLength}} characters"
+      }
+    },
+    "lastName": {
+      "placeholder": "Last name",
+      "placeholder-input": "Enter last name",
+      "errors": {
+        "no-spaces": "Last name must not contain spaces",
+        "required": "Required field",
+        "minLength": "Last name must be at least {{minLength}} characters",
+        "maxLength": "Last name must not exceed {{maxLength}} characters"
+      }
+    },
+    "language": {
+      "placeholder": "Select language"
+    },
+    "dateOfBirth": {
+      "placeholder": "Date of birth",
+      "placeholder-input": "Enter date of birth",
+      "errors": {
+        "required": "Required field",
+        "invalid": "Invalid date of birth",
+        "minAge": "Date of birth must be at least {{minAge}} years ago",
+        "maxAge": "Date of birth must be no more than {{maxAge}} years ago",
+        "future": "Date of birth cannot be in the future"
+      }
+    },
+    "username": {
+      "placeholder": "Username",
+      "placeholder-input": "Enter username",
+      "errors": {
+        "no-spaces": "Username must not contain spaces",
+        "alreadyExists": "Username is already taken",
+        "required": "Required field",
+        "minLength": "Username must be at least {{minLength}} characters",
+        "maxLength": "Username must not exceed {{maxLength}} characters",
+        "no-check": "Failed to check username uniqueness"
+      }
+    },
+    "code": {
+      "errors": {
+        "required": "Required field",
+        "length": "Not enough characters"
+      }
+    },
+    "email": {
+      "placeholder": "Email",
+      "placeholder-input": "Enter email",
+      "errors": {
+        "required": "Required field",
+        "alreadyExists": "Email is already registered",
+        "invalid": "Invalid email address",
+        "no-spaces": "Email must not contain spaces",
+        "no-check": "Failed to check email uniqueness"
+      }
+    },
+    "password": {
+      "placeholder": "Password",
+      "placeholder-confirm": "Confirm password",
+      "errors": {
+        "required": "Required field",
+        "minLength": "Password must be at least {{minLength}} characters",
+        "maxLength": "Password must not exceed {{maxLength}} characters",
+        "uppercase": "Password must contain at least one uppercase letter",
+        "lowercase": "Password must contain at least one lowercase letter",
+        "digit": "Password must contain at least one digit",
+        "special": "Password must contain at least one special character",
+        "mismatch": "Passwords do not match",
+        "no-spaces": "Password must not contain spaces",
+        "sameAsOld": "New password must not be the same as the old password"
+      }
+    }
+  },
+  "date": {
+    "months": {
+      "january": {
+        "localeLong": "January",
+        "localeShort": "Jan",
+        "value": "january"
+      },
+      "february": {
+        "localeLong": "February",
+        "localeShort": "Feb",
+        "value": "february"
+      },
+      "march": {
+        "localeLong": "March",
+        "localeShort": "Mar",
+        "value": "march"
+      },
+      "april": {
+        "localeLong": "April",
+        "localeShort": "Apr",
+        "value": "april"
+      },
+      "may": {
+        "localeLong": "May",
+        "localeShort": "May",
+        "value": "may"
+      },
+      "june": {
+        "localeLong": "June",
+        "localeShort": "Jun",
+        "value": "june"
+      },
+      "july": {
+        "localeLong": "July",
+        "localeShort": "Jul",
+        "value": "july"
+      },
+      "august": {
+        "localeLong": "August",
+        "localeShort": "Aug",
+        "value": "august"
+      },
+      "september": {
+        "localeLong": "September",
+        "localeShort": "Sep",
+        "value": "september"
+      },
+      "october": {
+        "localeLong": "October",
+        "localeShort": "Oct",
+        "value": "october"
+      },
+      "november": {
+        "localeLong": "November",
+        "localeShort": "Nov",
+        "value": "november"
+      },
+      "december": {
+        "localeLong": "December",
+        "localeShort": "Dec",
+        "value": "december"
+      }
+    },
+    "weeks": {
+      "mo": {
+        "localeLong": "Monday",
+        "localeShort": "Mon",
+        "value": "mo"
+      },
+      "tu": {
+        "localeLong": "Tuesday",
+        "localeShort": "Tue",
+        "value": "tu"
+      },
+      "we": {
+        "localeLong": "Wednesday",
+        "localeShort": "Wed",
+        "value": "we"
+      },
+      "th": {
+        "localeLong": "Thursday",
+        "localeShort": "Thu",
+        "value": "th"
+      },
+      "fr": {
+        "localeLong": "Friday",
+        "localeShort": "Fri",
+        "value": "fr"
+      },
+      "sa": {
+        "localeLong": "Saturday",
+        "localeShort": "Sat",
+        "value": "sa"
+      },
+      "su": {
+        "localeLong": "Sunday",
+        "localeShort": "Sun",
+        "value": "su"
+      }
+    },
+    "not-valid-date": "Invalid date",
+    "input": {
+      "day": "DD",
+      "month": "MM",
+      "year": "YYYY"
+    }
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "url": {
+    "title": {
+      "/pr/language-and-country": "Jen. ID - Язык и страна",
+      "/pr/personal-info": "Jen. ID - Личная информация",
+      "/pr/resources": "Jen. ID - Ресурсы",
+      "/pr/sessions-and-security": "Jen. ID - Сеансы и безопасность",
+      "/pu/sign-in": "Jen. ID - Вход",
+      "/pu/sign-up": "Jen. ID - Регистрация",
+      "/pu/forgot-password": "Jen. ID - Восстановление пароля"
+    },
+    "nav": {
+      "/pr/language-and-country": ["Аккаунт", "Язык и страна"],
+      "/pr/personal-info": ["Аккаунт", "Личная информация"],
+      "/pr/resources": ["Аккаунт", "Ресурсы"],
+      "/pr/sessions-and-security": ["Аккаунт", "Сеансы и безопасность"],
+      "/pu/sign-in": ["Авторизация", "Вход"],
+      "/pu/sign-up": ["Авторизация", "Регистрация"],
+      "/pu/forgot-password": ["Авторизация", "Восстановление пароля"]
+    }
+  },
+  "boundary": {
+    "title-1": "Произошла неизвестная ошибка",
+    "title-2": "Пожалуйста, попробуйте позже",
+    "title-button": "Перезагрузить страницу"
+  },
+  "private": {
+    "title-account": "Аккаунт",
+    "personal-info": {
+      "form": {
+        "title-button-save": "Сохранить",
+        "title-button-cancel": "Отменить"
+      },
+      "menu": {
+        "title": "Личная информация",
+        "description": "Обновите свой профиль, контактные данные и предпочтения, чтобы персонализировать свой опыт"
+      }
+    },
+    "sessions-and-security": {
+      "form-session": {
+        "title": "Активные сеансы",
+        "description": "Просмотрите и завершите активные сеансы на других устройствах",
+        "title-button-close": "Завершить сеанс",
+        "title-button-current": "Текущий сеанс"
+      },
+      "form-password": {
+        "title": "Пароль",
+        "description": "Измените свой пароль для повышения безопасности",
+        "placeholder-old": "Старый пароль",
+        "placeholder-new": "Новый пароль",
+        "placeholder-new-confirm": "Подтвердите новый пароль",
+        "title-button": "Изменить пароль"
+      },
+      "menu": {
+        "title": "Сеансы и безопасность",
+        "description": "Отслеживайте и управляйте своими сеансами и контролируйте, как вы входите в систему"
+      }
+    },
+    "language-and-country": {
+      "form": {
+        "country": {
+          "title": "Страна"
+        },
+        "language": {
+          "title": "Язык"
+        },
+        "title-button": "Сохранить"
+      },
+      "menu": {
+        "title": "Язык и страна",
+        "description": "Выберите язык и страну для использования сервисов Jenesei"
+      }
+    },
+    "resources": {
+      "menu": {
+        "title": "Ресурсы",
+        "description": "Изучите и попробуйте доступные услуги Jenesei"
+      },
+      "button-connect": "Подключить",
+      "button-connected": "Подключено",
+      "button-active": "Активно",
+      "button-inactive": "Не активно",
+      "services": {
+        "jenesei_id": {
+          "title": "Jenesei ID",
+          "description": "Управляйте своим аккаунтом и получайте доступ к сервисам Jenesei"
+        }
+      }
+    }
+  },
+  "public": {
+    "layout": {
+      "title": "Jenesei ID",
+      "description": "Построй своё будущее"
+    },
+    "sign-in": {
+      "title-button": "Войти",
+      "title-forgot-password": "Забыли пароль?",
+      "title-welcome": "Добро пожаловать",
+      "title-sign-up-1": "У вас нет аккаунта?",
+      "title-sign-up-2": "Создать аккаунт"
+    },
+    "sign-up": {
+      "title": "Создание аккаунта",
+      "title-sign-in-1": "У вас уже есть аккаунт?",
+      "title-sign-in-2": "Войти",
+      "title-confirmation": "Проверьте свою почту",
+      "title-confirmation-description": "Мы отправили вам письмо с подтверждением на адрес",
+      "title-spam": "Не получили письмо? Проверьте папку со спамом или акциями",
+      "title-repeat": "Осталось времени: {{seconds}}",
+      "title-button": "Зарегистрироваться",
+      "title-button-continue": "Продолжить",
+      "title-button-repeat": "Отправить код повторно"
+    },
+    "forgot-password": {}
+  },
+  "meta": {
+    "description": "Лучший сервис для управления вашим аккаунтом"
+  },
+  "sonner": {
+    "undo": "Закрыть"
+  },
+  "api": {
+    "sso": {
+      "sign-in": {
+        "success": {
+          "title": "Успешный вход",
+          "description": "Вы успешно вошли в систему"
+        },
+        "error": {
+          "title": "Ошибка входа",
+          "description": "Не удалось войти в систему"
+        }
+      }
+    }
+  },
+  "form": {
+    "image": {
+      "placeholder": "Изображение профиля",
+      "placeholder-input": "Выберите изображение профиля",
+      "alt": "Изображение профиля",
+      "description": "PNG, JPEG, не более 5 МБ",
+      "dialog": {
+        "buttonAdd": "Загрузить изображение",
+        "dialogSave": "Сохранить",
+        "dialogCancel": "Отменить",
+        "dialogAddImage": "Добавить",
+        "dialogDeleteImage": "Удалить"
+      }
+    },
+    "country": {
+      "placeholder": "Выберите страну",
+      "empty-options": "Нет найденных стран"
+    },
+    "language": {
+      "placeholder": "Выберите язык"
+    },
+    "dateOfBirth": {
+      "placeholder": "Дата рождения",
+      "placeholder-input": "Выберите дату рождения",
+      "errors": {
+        "required": "Обязательное поле",
+        "invalid": "Некорректная дата рождения",
+        "minAge": "Дата рождения должна быть не менее {{minAge}} лет",
+        "maxAge": "Дата рождения должна быть не более {{maxAge}} лет",
+        "future": "Дата рождения не может быть в будущем"
+      }
+    },
+    "firstName": {
+      "placeholder": "Имя",
+      "placeholder-input": "Напишите ваше имя",
+      "errors": {
+        "no-spaces": "Имя не должно содержать пробелов",
+        "required": "Обязательное поле",
+        "minLength": "Имя должно содержать не менее {{minLength}} символов",
+        "maxLength": "Имя не должно превышать {{maxLength}} символов"
+      }
+    },
+    "lastName": {
+      "placeholder": "Фамилия",
+      "placeholder-input": "Напишите вашу фамилию",
+      "errors": {
+        "no-spaces": "Фамилия не должна содержать пробелов",
+        "required": "Обязательное поле",
+        "minLength": "Фамилия должна содержать не менее {{minLength}} символов",
+        "maxLength": "Фамилия не должна превышать {{maxLength}} символов"
+      }
+    },
+    "username": {
+      "placeholder": "Логин",
+      "placeholder-input": "Напишите ваш логин",
+      "errors": {
+        "no-spaces": "Логин не должен содержать пробелов",
+        "alreadyExists": "Логин уже зарегистрирован",
+        "required": "Обязательное поле",
+        "minLength": "Логин должен содержать не менее {{minLength}} символов",
+        "maxLength": "Логин не должен превышать {{maxLength}} символов",
+        "no-check": "Не удалось проверить логин на уникальность"
+      }
+    },
+    "code": {
+      "errors": {
+        "required": "Обязательное поле",
+        "length": "Недостаточно символов"
+      }
+    },
+    "email": {
+      "placeholder": "Почта",
+      "placeholder-input": "Напишите вашу почту",
+      "errors": {
+        "required": "Обязательное поле",
+        "alreadyExists": "Почта уже зарегистрирована",
+        "invalid": "Некорректный адрес электронной почты",
+        "no-spaces": "Почта не должна содержать пробелов",
+        "no-check": "Не удалось проверить почту на уникальность"
+      }
+    },
+    "password": {
+      "placeholder": "Пароль",
+      "placeholder-confirm": "Подтвердите пароль",
+      "placeholder-old": "Старый пароль",
+      "placeholder-new": "Новый пароль",
+      "placeholder-new-confirm": "Подтвердите новый пароль",
+      "errors": {
+        "required": "Обязательное поле",
+        "minLength": "Пароль должен содержать не менее {{minLength}} символов",
+        "maxLength": "Пароль не должен превышать {{maxLength}} символов",
+        "uppercase": "Пароль должен содержать хотя бы одну заглавную букву",
+        "lowercase": "Пароль должен содержать хотя бы одну строчную букву",
+        "digit": "Пароль должен содержать хотя бы одну цифру",
+        "special": "Пароль должен содержать хотя бы один специальный символ",
+        "mismatch": "Пароли не совпадают",
+        "no-spaces": "Пароль не должен содержать пробелов",
+        "sameAsOld": "Новый пароль не должен совпадать со старым паролем"
+      }
+    }
+  },
+  "date": {
+    "months": {
+      "january": {
+        "localeLong": "Январь",
+        "localeShort": "Янв",
+        "value": "january"
+      },
+      "february": {
+        "localeLong": "Февраль",
+        "localeShort": "Фев",
+        "value": "february"
+      },
+      "march": {
+        "localeLong": "Март",
+        "localeShort": "Мар",
+        "value": "march"
+      },
+      "april": {
+        "localeLong": "Апрель",
+        "localeShort": "Апр",
+        "value": "april"
+      },
+      "may": {
+        "localeLong": "Май",
+        "localeShort": "Май",
+        "value": "may"
+      },
+      "june": {
+        "localeLong": "Июнь",
+        "localeShort": "Июн",
+        "value": "june"
+      },
+      "july": {
+        "localeLong": "Июль",
+        "localeShort": "Июл",
+        "value": "july"
+      },
+      "august": {
+        "localeLong": "Август",
+        "localeShort": "Авг",
+        "value": "august"
+      },
+      "september": {
+        "localeLong": "Сентябрь",
+        "localeShort": "Сен",
+        "value": "september"
+      },
+      "october": {
+        "localeLong": "Октябрь",
+        "localeShort": "Окт",
+        "value": "october"
+      },
+      "november": {
+        "localeLong": "Ноябрь",
+        "localeShort": "Ноя",
+        "value": "november"
+      },
+      "december": {
+        "localeLong": "Декабрь",
+        "localeShort": "Дек",
+        "value": "december"
+      }
+    },
+    "weeks": {
+      "mo": {
+        "localeLong": "Понедельник",
+        "localeShort": "Пн",
+        "value": "mo"
+      },
+      "tu": {
+        "localeLong": "Вторник",
+        "localeShort": "Вт",
+        "value": "tu"
+      },
+      "we": {
+        "localeLong": "Среда",
+        "localeShort": "Ср",
+        "value": "we"
+      },
+      "th": {
+        "localeLong": "Четверг",
+        "localeShort": "Чт",
+        "value": "th"
+      },
+      "fr": {
+        "localeLong": "Пятница",
+        "localeShort": "Пт",
+        "value": "fr"
+      },
+      "sa": {
+        "localeLong": "Суббота",
+        "localeShort": "Сб",
+        "value": "sa"
+      },
+      "su": {
+        "localeLong": "Воскресенье",
+        "localeShort": "Вс",
+        "value": "su"
+      }
+    },
+    "not-valid-date": "Некорректная дата",
+
+    "input": {
+      "day": "ДД",
+      "month": "ММ",
+      "year": "ГГГГ"
+    }
+  }
+}
