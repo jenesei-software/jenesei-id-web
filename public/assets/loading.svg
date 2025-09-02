@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="display:none;position:absolute;">
-  <symbol id="Line" viewBox="0 0 24 24">
+  <symbol id="loading-Line" viewBox="0 0 24 24">
     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
       <path stroke-dasharray="16" stroke-dashoffset="16" d="M12 3c4.97 0 9 4.03 9 9">
         <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="16;0" />
@@ -10,7 +10,7 @@
       </path>
     </g>
   </symbol>
-  <symbol id="Circle" viewBox="0 0 24 24">
+  <symbol id="loading-Circle" viewBox="0 0 24 24">
     <g fill="currentColor">
       <circle cx="12" cy="3.5" r="1.5">
         <animateTransform attributeName="transform" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="0 12 12;90 12 12;180 12 12;270 12 12" />
@@ -26,7 +26,7 @@
       </circle>
     </g>
   </symbol>
-  <symbol id="Blocks" viewBox="0 0 24 24">
+  <symbol id="loading-Blocks" viewBox="0 0 24 24">
     <rect width="7.33" height="7.33" x="1" y="1" fill="currentColor">
       <animate id="svgSpinnersBlocksWave0" attributeName="x" begin="0;svgSpinnersBlocksWave1.end+0.49s" dur="1.47s" values="1;4;1" />
       <animate attributeName="y" begin="0;svgSpinnersBlocksWave1.end+0.49s" dur="1.47s" values="1;4;1" />
@@ -82,7 +82,7 @@
       <animate attributeName="height" begin="svgSpinnersBlocksWave0.begin+0.98s" dur="1.47s" values="7.33;1.33;7.33" />
     </rect>
   </symbol>
-  <symbol id="Balls" viewBox="0 0 24 24">
+  <symbol id="loading-Balls" viewBox="0 0 24 24">
     <defs>
       <filter id="svgSpinnersGooeyBalls20">
         <feGaussianBlur in="SourceGraphic" result="y" stdDeviation="1" />
