@@ -334,6 +334,7 @@ export function PagePublicSignUp() {
                   }}
                 >
                   <Input
+                    isOutlineBoxShadow
                     variety='standard'
                     autoComplete='email'
                     placeholder={tForm('email.placeholder')}
@@ -363,6 +364,7 @@ export function PagePublicSignUp() {
                   }}
                 >
                   <Input
+                    isOutlineBoxShadow
                     variety='standard'
                     autoComplete='username'
                     placeholder={tForm('username.placeholder')}
@@ -395,6 +397,7 @@ export function PagePublicSignUp() {
                     }}
                   >
                     <DatePicker
+                      isOutlineBoxShadow
                       locale={{
                         months: Object.values(tDate('months', { returnObjects: true })) as MonthItem[],
                         weeks: Object.values(tDate('weeks', { returnObjects: true })) as WeekItem[],
@@ -434,6 +437,7 @@ export function PagePublicSignUp() {
                   }}
                 >
                   <Input
+                    isOutlineBoxShadow
                     variety='standard'
                     autoComplete='current-password'
                     type='password'
@@ -463,6 +467,7 @@ export function PagePublicSignUp() {
                   }}
                 >
                   <Input
+                    isOutlineBoxShadow
                     variety='standard'
                     autoComplete='current-password'
                     type='password'
