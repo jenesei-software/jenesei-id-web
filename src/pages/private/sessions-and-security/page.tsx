@@ -358,7 +358,7 @@ export function PagePrivateSessionsAndSecuritySessionItem(props: { session: Sess
       })}
     >
       <Stack sx={{ default: { alignItems: 'center', justifyContent: 'space-between', padding: '0px 6.5px 0px 0px' } }}>
-        <Icon type='id' name='Web' size='large' primaryColor='blueRest' />
+        <Icon type='id' name='Web' size='large' color='blueRest' />
         <Stack
           sx={(theme) => ({
             default: {

@@ -69,7 +69,7 @@ export const Nav: FC = () => {
           </TypographyLink>
 
           {idx < titles.titles.length - 1 && (
-            <Icon type="id" name="ArrowMini1" turn={-90} size="large" primaryColor="black60" />
+            <Icon type="id" name="ArrowMini1" turn={-90} size="large" color="black60" />
           )}
         </Fragment>
       ))}

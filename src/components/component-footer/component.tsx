@@ -5,7 +5,7 @@ import {
   PageRoutePrivateSessionsAndSecurity,
 } from '@local/core/router';
 
-import { Icon, IconItemProps, Ripple } from '@jenesei-software/jenesei-kit-react';
+import { addIconPropsGeneric, Icon, Ripple } from '@jenesei-software/jenesei-kit-react';
 import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
 import { Link, LinkProps, useMatches } from '@tanstack/react-router';
 import { FC } from 'react';
@@ -33,7 +33,7 @@ export const Footer: FC = () => {
 };
 const FooterItem: FC<{
   to: LinkProps['to'];
-  icon: IconItemProps<'id'>['name'];
+  icon: addIconPropsGeneric<'id'>['name'];
 }> = (props) => {
   const theme = useTheme();
   const isMatch = useMatches({
@@ -86,7 +86,7 @@ const FooterItem: FC<{
             },
           })}
         >
-          <Icon type='id' name={props.icon} size='large' primaryColor={isMatch ? 'whiteStandard' : 'black80'} />
+          <Icon type='id' name={props.icon} size='large' color={isMatch ? 'whiteStandard' : 'black80'} />
         </Stack>
       </Stack>
     </Link>

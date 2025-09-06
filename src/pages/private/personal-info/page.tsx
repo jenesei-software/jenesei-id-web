@@ -151,7 +151,7 @@ export function PagePrivatePersonalInfo() {
                   })}
                   src={field.state.value?.url || 'fake'}
                   alt={tForm('image.alt')}
-                  componentFallback={<Icon type='logo' name='Jenesei' size='100%' primaryColor='black10' />}
+                  componentFallback={<Icon type='logo' name='Jenesei' size='100%' color='black10' />}
                 />
                 <Stack
                   sx={{

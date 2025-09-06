@@ -84,7 +84,7 @@ export const Header: FC = () => {
                 },
               }}
             >
-              <Icon type='logo' name='Jenesei' size='100%' primaryColor='whiteStandard' />
+              <Icon type='logo' name='Jenesei' size='100%' color='whiteStandard' />
             </Stack>
 
             <Stack
