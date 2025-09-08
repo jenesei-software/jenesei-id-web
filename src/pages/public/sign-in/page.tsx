@@ -74,7 +74,7 @@ export function PagePublicSignIn() {
         <Typography
           sx={{
             default: {
-              variant: 'h8',
+              variant: 'h7',
               weight: 400,
               color: 'black100',
             },
@@ -85,7 +85,7 @@ export function PagePublicSignIn() {
             to={PageRoutePublicSignUp.fullPath}
             sx={{
               default: {
-                variant: 'h8',
+                variant: 'h7',
                 weight: 400,
                 color: 'blueRest',
                 cursor: 'pointer',
@@ -181,7 +181,7 @@ export function PagePublicSignIn() {
             to={PageRoutePublicForgotPassword.fullPath}
             sx={{
               default: {
-                variant: 'h8',
+                variant: 'h6',
                 weight: 400,
                 color: 'blueRest',
                 cursor: 'pointer',

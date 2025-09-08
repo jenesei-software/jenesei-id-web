@@ -112,7 +112,12 @@
       "title-button-continue": "Continue",
       "title-button-repeat": "Send the code again"
     },
-    "forgot-password": {}
+    "forgot-password": {
+      "title": "Password Recovery",
+      "title-description": "Enter the email address associated with your account and we will send you a code to reset your password",
+      "title-button": "Send Code",
+      "title-back": "Back"
+    }
   },
   "meta": {
     "description": "The best service for managing your account"

@@ -139,6 +139,36 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
       }),
     [],
   );
+  const validationPasswordRecover = useMemo(
+    () =>
+      yup.object({
+        email: yup
+          .string()
+          .trim()
+          .required(tForm('email.errors.required'))
+          .email(tForm('email.errors.invalid'))
+          .test('no-spaces', tForm('email.errors.no-spaces'), (value) => !value?.includes(' ')),
+        currentPassword: yup
+          .string()
+          .trim()
+          .required(tForm('password.errors.required'))
+          .min(8, tForm('password.errors.minLength', { minLength: 8 }))
+          .max(128, tForm('password.errors.maxLength', { maxLength: 128 }))
+          .test('no-spaces', tForm('password.errors.no-spaces'), (value) => !value?.includes(' '))
+          .test('has-uppercase', tForm('password.errors.uppercase'), (password) => /[A-Z]/.test(password || ''))
+          .test('has-lowercase', tForm('password.errors.lowercase'), (password) => /[a-z]/.test(password || ''))
+          .test('has-number', tForm('password.errors.digit'), (password) => /[0-9]/.test(password || ''))
+          .test('has-special-char', tForm('password.errors.special'), (password) =>
+            /[!()@#$%^&*_.-]/.test(password || ''),
+          ),
+        confirmPassword: yup
+          .string()
+          .trim()
+          .required(tForm('password.errors.required'))
+          .oneOf([yup.ref('currentPassword'), ''], tForm('password.errors.mismatch')),
+      }),
+    [tForm],
+  );
   const validationPasswordUpdate = useMemo(
     () =>
       yup.object({
@@ -310,6 +340,7 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
   return (
     <ValidationContext.Provider
       value={{
+        validationPasswordRecover,
         validationUser,
         validationFunctions,
         validationSignIn,

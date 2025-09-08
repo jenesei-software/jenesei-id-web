@@ -207,7 +207,7 @@ export function PagePublicSignUp() {
             <Typography
               sx={{
                 default: {
-                  variant: 'h8',
+                  variant: 'h7',
                   weight: 400,
                   color: 'black100',
                 },
@@ -218,7 +218,7 @@ export function PagePublicSignUp() {
                 to={PageRoutePublicSignIn.fullPath}
                 sx={{
                   default: {
-                    variant: 'h8',
+                    variant: 'h7',
                     weight: 400,
                     color: 'blueRest',
                   },
