@@ -1,42 +1,42 @@
-import { generateManifestIcons, pluginUpdateIcons } from '@jenesei-software/jenesei-plugin-vite'
-import basicSsl from '@vitejs/plugin-basic-ssl'
-import react from '@vitejs/plugin-react'
-import path from 'path'
-import process from 'process'
-import { defineConfig, loadEnv } from 'vite'
-import { createHtmlPlugin } from 'vite-plugin-html'
-import { VitePWA } from 'vite-plugin-pwa'
-import { viteStaticCopy } from 'vite-plugin-static-copy'
+import { generateManifestIcons, pluginUpdateIcons } from '@jenesei-software/jenesei-plugin-vite';
+import basicSsl from '@vitejs/plugin-basic-ssl';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import process from 'process';
+import { defineConfig, loadEnv } from 'vite';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import { VitePWA } from 'vite-plugin-pwa';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd())
-  const VITE_DEFAULT_NAME = env.VITE_DEFAULT_NAME
-  const VITE_DEFAULT_SHORTNAME = env.VITE_DEFAULT_SHORTNAME
-  const VITE_DEFAULT_THEME_COLOR = env.VITE_DEFAULT_THEME_COLOR
-  const VITE_DEFAULT_DESCRIPTION = env.VITE_DEFAULT_DESCRIPTION
+  const env = loadEnv(mode, process.cwd());
+  const VITE_DEFAULT_NAME = env.VITE_DEFAULT_NAME;
+  const VITE_DEFAULT_SHORTNAME = env.VITE_DEFAULT_SHORTNAME;
+  const VITE_DEFAULT_THEME_COLOR = env.VITE_DEFAULT_THEME_COLOR;
+  const VITE_DEFAULT_DESCRIPTION = env.VITE_DEFAULT_DESCRIPTION;
 
   const robotsMode = {
     prod: {
       txt: 'robots/robots.prod.txt',
-      meta: 'noindex, nofollow'
+      meta: 'noindex, nofollow',
     },
     dev: {
       txt: 'robots/robots.dev.txt',
-      meta: 'index, nofollow'
+      meta: 'index, nofollow',
     },
     test: {
       txt: 'robots/robots.test.txt',
-      meta: 'noindex, nofollow'
-    }
-  }
+      meta: 'noindex, nofollow',
+    },
+  };
 
-  const sizesBackgroundTransparent = [57, 64, 72, 76, 114, 120, 144, 152, 180, 192, 256, 384, 512]
-  const sizesBackgroundWhite = []
-  const sizesFavicon = [64]
+  const sizesBackgroundTransparent = [57, 64, 72, 76, 114, 120, 144, 152, 180, 192, 256, 384, 512];
+  const sizesBackgroundWhite = [];
+  const sizesFavicon = [64];
   return {
     server: {
       host: 'local.dev.jenesei.ru',
-      port: 3000
+      port: 3000,
     },
     build: {
       outDir: 'build',
@@ -44,24 +44,24 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              return 'vendor'
+              return 'vendor';
             }
             if (id.includes('src/pages')) {
-              const page = id.split('src/pages/')[1].split('/')[0]
-              return `page-${page}`
+              const page = id.split('src/pages/')[1].split('/')[0];
+              return `page-${page}`;
             }
             if (id.includes('src/layouts')) {
-              const layout = id.split('src/layouts/')[1].split('/')[0]
-              return `layout-${layout}`
+              const layout = id.split('src/layouts/')[1].split('/')[0];
+              return `layout-${layout}`;
             }
-          }
-        }
-      }
+          },
+        },
+      },
     },
     resolve: {
       alias: {
-        '@local': path.resolve(__dirname, './src')
-      }
+        '@local': path.resolve(__dirname, './src'),
+      },
     },
     plugins: [
       pluginUpdateIcons({
@@ -70,16 +70,16 @@ export default defineConfig(({ mode }) => {
         prefix: 'icon',
         sizesBackgroundTransparent: sizesBackgroundTransparent,
         sizesBackgroundWhite: sizesBackgroundWhite,
-        sizesFavicon: sizesFavicon
+        sizesFavicon: sizesFavicon,
       }),
       viteStaticCopy({
         targets: [
           {
             src: robotsMode[mode]?.txt,
             dest: '',
-            rename: 'robots.txt'
-          }
-        ]
+            rename: 'robots.txt',
+          },
+        ],
       }),
       createHtmlPlugin({
         minify: true,
@@ -98,9 +98,9 @@ export default defineConfig(({ mode }) => {
             icon152: `icons/icon-152x152.png`,
             icon180: `icons/icon-180x180.png`,
 
-            icon64Fav: `icons/icon-64x64-favicon.ico`
-          }
-        }
+            icon64Fav: `icons/icon-64x64-favicon.ico`,
+          },
+        },
       }),
       react(),
       basicSsl(),
@@ -112,7 +112,7 @@ export default defineConfig(({ mode }) => {
         injectRegister: false,
         workbox: {
           globPatterns: [],
-          maximumFileSizeToCacheInBytes: 0
+          maximumFileSizeToCacheInBytes: 0,
         },
         manifest: {
           display: 'standalone',
@@ -128,10 +128,10 @@ export default defineConfig(({ mode }) => {
             prefix: 'icon',
             sizesBackgroundWhite: [],
             sizesBackgroundTransparent: sizesBackgroundTransparent,
-            sizesFavicon: sizesFavicon
-          })
-        }
-      })
-    ]
-  }
-})
+            sizesFavicon: sizesFavicon,
+          }),
+        },
+      }),
+    ],
+  };
+});
