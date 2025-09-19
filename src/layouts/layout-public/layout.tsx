@@ -1,5 +1,7 @@
 import { useLanguage } from '@local/contexts/context-language';
+import { useEnvironment } from '@local/hooks/use-environment';
 
+import { Typography } from '@jenesei-software/jenesei-kit-react';
 import { SelectLanguage } from '@jenesei-software/jenesei-kit-react/component-select';
 import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
 import { ILanguageKeys } from '@jenesei-software/jenesei-kit-react/types';
@@ -8,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 export function LayoutPublic() {
   const { t } = useTranslation('translation');
-
+  const env = useEnvironment();
   const { changeLng, lng } = useLanguage();
   return (
     <Stack
@@ -18,6 +20,7 @@ export function LayoutPublic() {
           flexDirection: 'column',
           padding: '20px',
           overflow: 'auto',
+          gap: '4px',
         },
         tablet: {
           padding: '10px',
@@ -73,6 +76,16 @@ export function LayoutPublic() {
         }}
       >
         <Outlet />
+      </Stack>
+      <Stack
+        sx={{
+          default: {
+            justifyContent: 'flex-end',
+            width: '100%',
+          },
+        }}
+      >
+        <Typography sx={{ default: { variant: 'h8', color: 'black50' } }}>{env.version}</Typography>
       </Stack>
     </Stack>
   );

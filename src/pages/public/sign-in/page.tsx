@@ -181,7 +181,7 @@ export function PagePublicSignIn() {
             to={PageRoutePublicForgotPassword.fullPath}
             sx={{
               default: {
-                variant: 'h6',
+                variant: 'h7',
                 weight: 400,
                 color: 'blueRest',
                 cursor: 'pointer',
