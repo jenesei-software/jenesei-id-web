@@ -3,34 +3,34 @@ import {
   PageRoutePrivateLanguageAndCountry,
   PageRoutePrivatePersonalInfo,
   PageRoutePrivateResources,
-  PageRoutePrivateSessionsAndSecurity
-} from '@local/core/router'
+  PageRoutePrivateSessionsAndSecurity,
+} from '@local/core/router';
+import { useEnvironment } from '@local/hooks/use-environment';
 
-import { Image } from '@jenesei-software/jenesei-kit-react'
-import { Icon, IconItemProps } from '@jenesei-software/jenesei-kit-react/component-icon'
-import { Ripple } from '@jenesei-software/jenesei-kit-react/component-ripple'
-import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
-import { Typography } from '@jenesei-software/jenesei-kit-react/component-typography'
-import { useScreenWidth } from '@jenesei-software/jenesei-kit-react/context-screen-width'
-import { useIsFetching, useIsMutating } from '@tanstack/react-query'
-import { Link, LinkProps, useMatches } from '@tanstack/react-router'
-import { FC, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useTheme } from 'styled-components'
+import { addIconPropsGeneric, Image } from '@jenesei-software/jenesei-kit-react';
+import { Icon } from '@jenesei-software/jenesei-kit-react/component-icon';
+import { Ripple } from '@jenesei-software/jenesei-kit-react/component-ripple';
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
+import { Typography } from '@jenesei-software/jenesei-kit-react/component-typography';
+import { useIsFetching, useIsMutating } from '@tanstack/react-query';
+import { Link, LinkProps, useMatches } from '@tanstack/react-router';
+import { FC, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from 'styled-components';
 
 export const LeftAside: FC = () => {
-  const isFetching = useIsFetching()
-  const isMutating = useIsMutating()
-  const isLoading = useMemo(() => isFetching > 0 || isMutating > 0, [isFetching, isMutating])
-  const { t: tPrivate } = useTranslation('translation', { keyPrefix: 'private' })
-  const { t: tPublic } = useTranslation('translation', { keyPrefix: 'public' })
+  const isFetching = useIsFetching();
+  const isMutating = useIsMutating();
+  const isLoading = useMemo(() => isFetching > 0 || isMutating > 0, [isFetching, isMutating]);
+  const { t: tPrivate } = useTranslation('translation', { keyPrefix: 'private' });
+  const { t: tPublic } = useTranslation('translation', { keyPrefix: 'public' });
+  const env = useEnvironment();
 
-  const { screenActual } = useScreenWidth()
   const isMatchPrivate = useMatches({
     select(matches) {
-      return matches.some(match => match.fullPath === LayoutRoutePrivate.fullPath)
-    }
-  })
+      return matches.some((match) => match.fullPath === LayoutRoutePrivate.fullPath);
+    },
+  });
   return isMatchPrivate ? (
     <Stack
       sx={() => ({
@@ -39,8 +39,8 @@ export const LeftAside: FC = () => {
           justifyContent: 'space-between',
           alignItems: 'stretch',
           flexDirection: 'column',
-          overflow: 'hidden'
-        }
+          overflow: 'hidden',
+        },
       })}
     >
       <Stack
@@ -48,9 +48,12 @@ export const LeftAside: FC = () => {
           default: {
             alignItems: 'center',
             justifyContent: 'flex-start',
-            paddingLeft: screenActual === 'default' ? '20px' : '12px',
-            height: '68px'
-          }
+            paddingLeft: '20px',
+            height: '68px',
+          },
+          tablet: {
+            paddingLeft: '12px',
+          },
         })}
       >
         <Typography
@@ -59,15 +62,15 @@ export const LeftAside: FC = () => {
               size: 18,
               weight: 500,
               color: 'black100',
-              line: 1
-            }
+              line: 1,
+            },
           }}
         >
           {tPrivate('title-account')}
         </Typography>
       </Stack>
       <Stack
-        sx={theme => ({
+        sx={(theme) => ({
           default: {
             alignItems: 'center',
             justifyContent: 'flex-start',
@@ -75,45 +78,49 @@ export const LeftAside: FC = () => {
             flexGrow: 1,
             borderStyle: 'solid',
             borderColor: theme.palette.black05,
-            borderWidth: '2px 0px 0px 0px'
-          }
+            borderWidth: '2px 0px 0px 0px',
+          },
         })}
       >
         <LeftAsideItem
           description={tPrivate('personal-info.menu.description')}
           title={tPrivate('personal-info.menu.title')}
-          icon="Profile"
+          icon='Profile'
           to={PageRoutePrivatePersonalInfo.fullPath}
         />
         <LeftAsideItem
           description={tPrivate('sessions-and-security.menu.description')}
           title={tPrivate('sessions-and-security.menu.title')}
-          icon="Lock"
+          icon='Lock'
           to={PageRoutePrivateSessionsAndSecurity.fullPath}
         />
         <LeftAsideItem
           description={tPrivate('language-and-country.menu.description')}
           title={tPrivate('language-and-country.menu.title')}
-          icon="Language"
+          icon='Language'
           to={PageRoutePrivateLanguageAndCountry.fullPath}
         />
         <LeftAsideItem
           description={tPrivate('resources.menu.description')}
           title={tPrivate('resources.menu.title')}
-          icon="Resources"
+          icon='Resources'
           to={PageRoutePrivateResources.fullPath}
         />
       </Stack>
       <Stack
-        sx={theme => ({
+        sx={(theme) => ({
           default: {
+            position: 'relative',
             height: '84px',
-            padding: screenActual === 'default' ? '0px 26px' : '0px 32px',
+            padding: '0px 26px',
             gap: '14px',
             alignItems: 'center',
             justifyContent: 'flex-start',
-            backgroundColor: theme.palette.black100
-          }
+            backgroundColor: theme.palette.black100,
+          },
+          tablet: {
+            padding: '0px 32px',
+          },
         })}
       >
         <Stack
@@ -121,31 +128,50 @@ export const LeftAside: FC = () => {
             default: {
               width: '32px',
               minWidth: '32px',
-              height: '32px'
-            }
+              height: '32px',
+            },
           }}
         >
           {isLoading ? (
-            <Icon type="loading" name="Line" size="100%" primaryColor="whiteStandard" />
+            <Icon type='loading' name='Line' size='100%' color='whiteStandard' />
           ) : (
-            <Icon type="logo" name="Jenesei" size="100%" primaryColor="blueRest" />
+            <Icon type='logo' name='Jenesei' size='100%' color='blueRest' />
           )}
         </Stack>
 
-        {screenActual === 'default' && (
-          <Typography
-            sx={{
-              default: {
-                size: 20,
-                weight: 700,
-                color: 'whiteStandard',
-                line: 1
-              }
-            }}
-          >
-            Jenesei ID
-          </Typography>
-        )}
+        <Typography
+          sx={{
+            default: {
+              size: 20,
+              weight: 700,
+              color: 'whiteStandard',
+              line: 1,
+            },
+          }}
+          sxStandard={{
+            default: {
+              display: 'block',
+            },
+            tablet: {
+              display: 'none',
+            },
+          }}
+        >
+          Jenesei ID
+        </Typography>
+        <Stack
+          sx={{
+            default: {
+              justifyContent: 'flex-start',
+              width: '100%',
+              position: 'absolute',
+              bottom: '4px',
+              left: '4px',
+            },
+          }}
+        >
+          <Typography sx={{ default: { variant: 'h8', color: 'whiteStandard' } }}>{env.version}</Typography>
+        </Stack>
       </Stack>
     </Stack>
   ) : (
@@ -157,100 +183,97 @@ export const LeftAside: FC = () => {
           alignItems: 'stretch',
           flexDirection: 'column',
           position: 'relative',
-          overflow: 'hidden'
-        }
+          overflow: 'hidden',
+        },
       })}
     >
-      <>
-        <Image
-          src="https://id.jenesei.ru/images/auth-back-mountain.jpg"
-          alt="Mountain"
-          sxStack={theme => ({
-            default: {
-              width: '100%',
-              height: '100%',
-              position: 'absolute',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: theme.palette.black10,
-              pointerEvents: 'none'
-            }
-          })}
-        />
+      <Image
+        src='https://id.jenesei.ru/images/auth-back-mountain.jpg'
+        alt='Mountain'
+        sxStack={(theme) => ({
+          default: {
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: theme.palette.black10,
+            pointerEvents: 'none',
+          },
+        })}
+      />
+      <Stack
+        sx={{
+          default: {
+            flexGrow: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+        }}
+      >
         <Stack
           sx={{
             default: {
-              flexGrow: 1,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }
+              width: '82px',
+              height: '82px',
+            },
           }}
         >
-          <Stack
+          <Icon type='logo' name='Jenesei' size='100%' color='whiteStandard' />
+        </Stack>
+
+        <Stack
+          sx={() => ({
+            default: {
+              alignItems: 'flex-start',
+              justifyContent: 'center',
+              position: 'relative',
+              flexDirection: 'column',
+            },
+          })}
+        >
+          <Typography
             sx={{
               default: {
-                width: '82px',
-                height: '82px'
-              }
+                size: 42,
+                weight: 700,
+                color: 'whiteStandard',
+                shadow: 'shadowPulse',
+              },
             }}
           >
-            <Icon type="logo" name="Jenesei" size="100%" primaryColor="whiteStandard" />
-          </Stack>
-
-          <Stack
-            sx={() => ({
+            {tPublic('layout.title')}
+          </Typography>
+          <Typography
+            sx={{
               default: {
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-                position: 'relative',
-                flexDirection: 'column'
-              }
-            })}
+                size: 12,
+                weight: 500,
+                color: 'whiteStandard',
+                shadow: 'shadowPulse',
+              },
+            }}
           >
-            <Typography
-              sx={{
-                default: {
-                  size: 42,
-                  weight: 700,
-                  color: 'whiteStandard',
-                  shadow: 'shadowPulse'
-                }
-              }}
-            >
-              {tPublic('layout.title')}
-            </Typography>
-            <Typography
-              sx={{
-                default: {
-                  size: 12,
-                  weight: 500,
-                  color: 'whiteStandard',
-                  shadow: 'shadowPulse'
-                }
-              }}
-            >
-              {tPublic('layout.description')}
-            </Typography>
-          </Stack>
+            {tPublic('layout.description')}
+          </Typography>
         </Stack>
-      </>
+      </Stack>
     </Stack>
-  )
-}
+  );
+};
 
 const LeftAsideItem: FC<{
-  to: LinkProps['to']
-  icon: IconItemProps<'id'>['name']
-  title: string
-  description: string
-}> = props => {
-  const { screenActual } = useScreenWidth()
-  const theme = useTheme()
+  to: LinkProps['to'];
+  icon: addIconPropsGeneric<'id'>['name'];
+  title: string;
+  description: string;
+}> = (props) => {
+  const theme = useTheme();
   const isMatch = useMatches({
     select(matches) {
-      return matches.some(match => match.fullPath === props.to)
-    }
-  })
+      return matches.some((match) => match.fullPath === props.to);
+    },
+  });
   return (
     <Link to={props.to} style={{ width: '100%', height: 'fit-content', textDecoration: 'none', display: 'flex' }}>
       <Stack
@@ -268,13 +291,13 @@ const LeftAsideItem: FC<{
             alignItems: 'center',
             justifyContent: 'flex-start',
             alignSelf: 'stretch',
-            height: '84px'
-          }
+            height: '84px',
+          },
         })}
       >
         <Ripple color={theme.palette.black80} />
         <Stack
-          sx={theme => ({
+          sx={(theme) => ({
             default: {
               background: isMatch ? theme.palette.black80 : theme.palette.whiteStandard,
               borderRadius: '100px',
@@ -283,49 +306,51 @@ const LeftAsideItem: FC<{
               width: '44px',
               minWidth: '44px',
               height: '44px',
-              boxShadow: theme.effects.button
-            }
+              boxShadow: theme.effects.button,
+            },
           })}
         >
-          <Icon type="id" name={props.icon} size="large" primaryColor={isMatch ? 'whiteStandard' : 'black80'} />
+          <Icon type='id' name={props.icon} size='large' color={isMatch ? 'whiteStandard' : 'black80'} />
         </Stack>
-        {screenActual === 'default' ? (
-          <Stack
-            sx={() => ({
+        <Stack
+          sx={() => ({
+            default: {
+              display: 'flex',
+              alignItems: 'flex-start',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              gap: '4px',
+            },
+            tablet: {
+              display: 'none',
+            },
+          })}
+        >
+          <Typography
+            sx={{
               default: {
-                alignItems: 'flex-start',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                gap: '4px'
-              }
-            })}
+                size: 14,
+                weight: 500,
+                color: 'black80',
+                line: 1,
+              },
+            }}
           >
-            <Typography
-              sx={{
-                default: {
-                  size: 14,
-                  weight: 500,
-                  color: 'black80',
-                  line: 1
-                }
-              }}
-            >
-              {props.title}
-            </Typography>
-            <Typography
-              sx={{
-                default: {
-                  variant: 'h8',
-                  color: 'black50',
-                  line: 2
-                }
-              }}
-            >
-              {props.description}
-            </Typography>
-          </Stack>
-        ) : null}
+            {props.title}
+          </Typography>
+          <Typography
+            sx={{
+              default: {
+                variant: 'h8',
+                color: 'black50',
+                line: 2,
+              },
+            }}
+          >
+            {props.description}
+          </Typography>
+        </Stack>
       </Stack>
     </Link>
-  )
-}
+  );
+};

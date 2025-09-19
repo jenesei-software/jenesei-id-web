@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useUserCheckEmail, useUserCheckNickname } from '@jenesei-software/jenesei-id-web-api';
-import { DeepKeys, FormApi } from '@tanstack/react-form';
+import { FormAsyncValidateOrFn } from '@tanstack/react-form';
 import moment from 'moment';
-import { createContext, FC, useContext, useMemo } from 'react';
+import { createContext, FC, useCallback, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 
@@ -23,59 +23,88 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
   const getUserCheckNickname = useUserCheckNickname();
   const getUserCheckEmail = useUserCheckEmail();
 
-  const validationFunctions = useMemo(
+  const validationFunctions: {
+    blur: (validation: yup.ObjectSchema<any>) => FormAsyncValidateOrFn<any>;
+    change: (validation: yup.ObjectSchema<any>) => FormAsyncValidateOrFn<any>;
+  } = useMemo(
     () => ({
-      touched:
-        <TValues extends Record<string, any>>(validation: yup.ObjectSchema<any>) =>
-        async ({
-          value,
-          formApi,
-        }: {
-          value: TValues;
-          formApi: FormApi<TValues, any, any, any, any, any, any, any, any, any>;
-          signal: AbortSignal;
-        }): Promise<null | { fields: Record<string, string> }> => {
-          const touchedFields = Object.keys(formApi.fieldInfo).reduce(
-            (acc, fieldName) => {
-              const key = fieldName as DeepKeys<TValues>;
-              const fieldMeta = formApi.fieldInfo?.[key]?.instance?.getMeta();
-
-              if (fieldMeta?.isTouched) {
-                acc[key] = value[key];
-              }
-
-              return acc;
-            },
-            {} as Partial<TValues>,
-          );
-
-          try {
-            await validation.validate(touchedFields, { abortEarly: false });
-            return null;
-          } catch (validationErrors) {
-            if (validationErrors instanceof yup.ValidationError) {
-              const errors = validationErrors.inner.reduce(
-                (acc, error) => {
-                  if (
-                    error.path &&
-                    Object.prototype.hasOwnProperty.call(touchedFields, error.path) &&
-                    !acc[error.path]
-                  ) {
-                    acc[error.path] = error.message;
-                  }
-                  return acc;
-                },
-                {} as Record<string, string>,
-              );
-              return { fields: errors };
+      blur: (validation) => async (props) => {
+        const changeFields = Object.keys(props.formApi.fieldInfo).reduce(
+          (acc, fieldName) => {
+            const key = fieldName;
+            const fieldMeta = props.formApi.fieldInfo?.[key]?.instance?.getMeta();
+            if (fieldMeta?.isTouched) {
+              acc[key] = props.value[key];
             }
-            return null;
+
+            return acc;
+          },
+          {} as Record<string, string>,
+        );
+
+        try {
+          await validation.validate(changeFields, { abortEarly: false });
+          return null;
+        } catch (validationErrors) {
+          if (validationErrors instanceof yup.ValidationError) {
+            const errors = validationErrors.inner.reduce(
+              (acc, error) => {
+                if (error.path && Object.prototype.hasOwnProperty.call(changeFields, error.path) && !acc[error.path]) {
+                  acc[error.path] = error.message;
+                }
+                return acc;
+              },
+              {} as Record<string, string>,
+            );
+            return { fields: errors };
           }
-        },
+          return null;
+        }
+      },
+      change: (validation) => async (props) => {
+        const changeFields = Object.keys(props.formApi.fieldInfo).reduce(
+          (acc, fieldName) => {
+            const key = fieldName;
+            const fieldMeta = props.formApi.fieldInfo?.[key]?.instance?.getMeta();
+            if (fieldMeta?.isTouched && fieldMeta?.isDirty) {
+              acc[key] = props.value[key];
+            }
+
+            return acc;
+          },
+          {} as Record<string, string>,
+        );
+
+        try {
+          await validation.validate(changeFields, { abortEarly: false });
+          return null;
+        } catch (validationErrors) {
+          if (validationErrors instanceof yup.ValidationError) {
+            const errors = validationErrors.inner.reduce(
+              (acc, error) => {
+                if (error.path && Object.prototype.hasOwnProperty.call(changeFields, error.path) && !acc[error.path]) {
+                  acc[error.path] = error.message;
+                }
+                return acc;
+              },
+              {} as Record<string, string>,
+            );
+            return { fields: errors };
+          }
+          return null;
+        }
+      },
     }),
     [],
   );
-
+  const getError: ValidationContextProps['getError'] = useCallback((props) => {
+    const errorMessage = props.isBlurred && props.isDirty ? props.errorMap.onChange : props.errorMap.onBlur || '';
+    return {
+      errorMessage: errorMessage,
+      isError: !!errorMessage,
+      isErrorAbsolute: true,
+    };
+  }, []);
   const validationSignIn = useMemo(
     () =>
       yup.object({
@@ -109,6 +138,36 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
         password: yup.string().trim(),
       }),
     [],
+  );
+  const validationPasswordRecover = useMemo(
+    () =>
+      yup.object({
+        email: yup
+          .string()
+          .trim()
+          .required(tForm('email.errors.required'))
+          .email(tForm('email.errors.invalid'))
+          .test('no-spaces', tForm('email.errors.no-spaces'), (value) => !value?.includes(' ')),
+        currentPassword: yup
+          .string()
+          .trim()
+          .required(tForm('password.errors.required'))
+          .min(8, tForm('password.errors.minLength', { minLength: 8 }))
+          .max(128, tForm('password.errors.maxLength', { maxLength: 128 }))
+          .test('no-spaces', tForm('password.errors.no-spaces'), (value) => !value?.includes(' '))
+          .test('has-uppercase', tForm('password.errors.uppercase'), (password) => /[A-Z]/.test(password || ''))
+          .test('has-lowercase', tForm('password.errors.lowercase'), (password) => /[a-z]/.test(password || ''))
+          .test('has-number', tForm('password.errors.digit'), (password) => /[0-9]/.test(password || ''))
+          .test('has-special-char', tForm('password.errors.special'), (password) =>
+            /[!()@#$%^&*_.-]/.test(password || ''),
+          ),
+        confirmPassword: yup
+          .string()
+          .trim()
+          .required(tForm('password.errors.required'))
+          .oneOf([yup.ref('currentPassword'), ''], tForm('password.errors.mismatch')),
+      }),
+    [tForm],
   );
   const validationPasswordUpdate = useMemo(
     () =>
@@ -281,12 +340,14 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
   return (
     <ValidationContext.Provider
       value={{
+        validationPasswordRecover,
         validationUser,
         validationFunctions,
         validationSignIn,
         validationSignUp,
         validationPasswordUpdate,
         validationLanguageAndCountryCode,
+        getError,
       }}
     >
       {props.children}

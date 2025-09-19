@@ -127,7 +127,7 @@ export function PagePrivateResourcesItem(props: { resource: ResourceDto; isConne
             type="logo"
             name={RESOURCE_LIST[props.resource.resourceName].icon}
             size="100%"
-            primaryColor="blueRest"
+            color="blueRest"
             sx={{
               default: {
                 width: '36px',

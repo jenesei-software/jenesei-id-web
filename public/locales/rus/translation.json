@@ -1,13 +1,13 @@
 {
   "url": {
     "title": {
-      "/pr/language-and-country": "Jenesei ID - Язык и страна",
-      "/pr/personal-info": "Jenesei ID - Личная информация",
-      "/pr/resources": "Jenesei ID - Ресурсы",
-      "/pr/sessions-and-security": "Jenesei ID - Сеансы и безопасность",
-      "/pu/sign-in": "Jenesei ID - Вход",
-      "/pu/sign-up": "Jenesei ID - Регистрация",
-      "/pu/forgot-password": "Jenesei ID - Восстановление пароля"
+      "/pr/language-and-country": "Jen. ID - Язык и страна",
+      "/pr/personal-info": "Jen. ID - Личная информация",
+      "/pr/resources": "Jen. ID - Ресурсы",
+      "/pr/sessions-and-security": "Jen. ID - Сеансы и безопасность",
+      "/pu/sign-in": "Jen. ID - Вход",
+      "/pu/sign-up": "Jen. ID - Регистрация",
+      "/pu/forgot-password": "Jen. ID - Восстановление пароля"
     },
     "nav": {
       "/pr/language-and-country": ["Аккаунт", "Язык и страна"],
@@ -100,6 +100,12 @@
       "title-sign-up-1": "У вас нет аккаунта?",
       "title-sign-up-2": "Создать аккаунт"
     },
+    "forgot-password":{
+      "title": "Восстановление пароля",
+      "title-description": "Введите адрес электронной почты, связанный с вашей учетной записью, и мы отправим вам код для сброса пароля",
+      "title-button": "Отправить код",
+      "title-back": "Назад"
+    },
     "sign-up": {
       "title": "Создание аккаунта",
       "title-sign-in-1": "У вас уже есть аккаунт?",
@@ -111,8 +117,7 @@
       "title-button": "Зарегистрироваться",
       "title-button-continue": "Продолжить",
       "title-button-repeat": "Отправить код повторно"
-    },
-    "forgot-password": {}
+    }
   },
   "meta": {
     "description": "Лучший сервис для управления вашим аккаунтом"

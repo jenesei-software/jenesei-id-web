@@ -27,7 +27,7 @@ export function PagePrivatePersonalInfo() {
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' });
   const { t: tDate } = useTranslation('translation', { keyPrefix: 'date' });
 
-  const { validationUser, validationFunctions } = useValidation();
+  const { validationUser, validationFunctions, getError } = useValidation();
   const { isLoading, data } = useAuthProfile();
 
   const defaultValues: Pick<UserDto, 'nickname' | 'firstName' | 'lastName'> & {
@@ -52,7 +52,8 @@ export function PagePrivatePersonalInfo() {
     },
     validators: {
       onChangeAsyncDebounceMs: 500,
-      onChangeAsync: validationFunctions.touched(validationUser),
+      onChangeAsync: validationFunctions.change(validationUser),
+      onBlurAsync: validationFunctions.blur(validationUser),
     },
   });
 
@@ -150,7 +151,7 @@ export function PagePrivatePersonalInfo() {
                   })}
                   src={field.state.value?.url || 'fake'}
                   alt={tForm('image.alt')}
-                  componentFallback={<Icon type='logo' name='Jenesei' size='100%' primaryColor='black10' />}
+                  componentFallback={<Icon type='logo' name='Jenesei' size='100%' color='black10' />}
                 />
                 <Stack
                   sx={{
@@ -287,11 +288,7 @@ export function PagePrivatePersonalInfo() {
                     genre='grayBorder'
                     size='medium'
                     isNoSpaces
-                    error={{
-                      errorMessage: field.state.meta.errors?.join(','),
-                      isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                      isErrorAbsolute: true,
-                    }}
+                    error={getError(field.state.meta)}
                   />
                 </Stack>
               )}
@@ -336,11 +333,7 @@ export function PagePrivatePersonalInfo() {
                     genre='grayBorder'
                     size='medium'
                     isNoSpaces
-                    error={{
-                      errorMessage: field.state.meta.errors?.join(','),
-                      isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                      isErrorAbsolute: true,
-                    }}
+                    error={getError(field.state.meta)}
                   />
                 </Stack>
               )}
@@ -445,11 +438,7 @@ export function PagePrivatePersonalInfo() {
                   size='medium'
                   isDisabled
                   isNoSpaces
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             )}
@@ -496,11 +485,7 @@ export function PagePrivatePersonalInfo() {
                   size='medium'
                   isNoSpaces
                   isDisabled
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             )}

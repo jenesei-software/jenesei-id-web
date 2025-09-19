@@ -15,7 +15,7 @@ export function PagePublicSignIn() {
   const { t: tForm } = useTranslation('translation', { keyPrefix: 'form' });
   const { t: tSignIn } = useTranslation('translation', { keyPrefix: 'public.sign-in' });
 
-  const { validationSignIn, validationFunctions } = useValidation();
+  const { validationSignIn, validationFunctions, getError } = useValidation();
   const { mutateAsync } = useAuthSignIn();
 
   const form = useForm({
@@ -38,7 +38,8 @@ export function PagePublicSignIn() {
     },
     canSubmitWhenInvalid: false,
     validators: {
-      onBlurAsync: validationFunctions.touched(validationSignIn),
+      onChangeAsync: validationFunctions.change(validationSignIn),
+      onBlurAsync: validationFunctions.blur(validationSignIn),
     },
   });
 
@@ -73,7 +74,7 @@ export function PagePublicSignIn() {
         <Typography
           sx={{
             default: {
-              variant: 'h8',
+              variant: 'h7',
               weight: 400,
               color: 'black100',
             },
@@ -84,7 +85,7 @@ export function PagePublicSignIn() {
             to={PageRoutePublicSignUp.fullPath}
             sx={{
               default: {
-                variant: 'h8',
+                variant: 'h7',
                 weight: 400,
                 color: 'blueRest',
                 cursor: 'pointer',
@@ -129,11 +130,7 @@ export function PagePublicSignIn() {
                   genre='grayBorder'
                   size='medium'
                   isNoSpaces
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             );
@@ -164,11 +161,7 @@ export function PagePublicSignIn() {
                   genre='grayBorder'
                   size='medium'
                   isNoSpaces
-                  error={{
-                    errorMessage: field.state.meta.errors?.join(','),
-                    isError: !!field.state.meta.isTouched && !!field.state.meta.errors.length,
-                    isErrorAbsolute: true,
-                  }}
+                  error={getError(field.state.meta)}
                 />
               </Stack>
             );
@@ -188,7 +181,7 @@ export function PagePublicSignIn() {
             to={PageRoutePublicForgotPassword.fullPath}
             sx={{
               default: {
-                variant: 'h8',
+                variant: 'h7',
                 weight: 400,
                 color: 'blueRest',
                 cursor: 'pointer',
