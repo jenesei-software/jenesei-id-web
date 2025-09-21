@@ -410,6 +410,7 @@ export function PagePublicSignUp() {
                       labelPlaceholder={tForm('dateOfBirth.placeholder')}
                       id={field.name}
                       name={field.name}
+                      autoComplete="bday"
                       isOnClickClose
                       value={field.state.value}
                       onBlur={field.handleBlur}
@@ -439,7 +440,7 @@ export function PagePublicSignUp() {
                   <Input
                     isOutlineBoxShadow
                     variety='standard'
-                    autoComplete='current-password'
+                    autoComplete='new-password'
                     type='password'
                     placeholder={tForm('password.placeholder')}
                     id={field.name}
@@ -469,7 +470,7 @@ export function PagePublicSignUp() {
                   <Input
                     isOutlineBoxShadow
                     variety='standard'
-                    autoComplete='current-password'
+                    autoComplete='new-password'
                     type='password'
                     placeholder={tForm('password.placeholder-confirm')}
                     id={field.name}

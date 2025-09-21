@@ -186,7 +186,7 @@ export function PagePrivateSessionsAndSecurity() {
               >
                 <Input
                   variety='standard'
-                  autoComplete='current-password'
+                  autoComplete='new-password'
                   type='password'
                   placeholder={tPage('form-password.placeholder-new')}
                   id={field.name}
@@ -214,7 +214,7 @@ export function PagePrivateSessionsAndSecurity() {
               >
                 <Input
                   variety='standard'
-                  autoComplete='current-password'
+                  autoComplete='new-password'
                   type='password'
                   placeholder={tPage('form-password.placeholder-new-confirm')}
                   id={field.name}
