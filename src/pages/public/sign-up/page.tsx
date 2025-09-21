@@ -366,7 +366,7 @@ export function PagePublicSignUp() {
                   <Input
                     isOutlineBoxShadow
                     variety='standard'
-                    autoComplete='username'
+                    autoComplete='login'
                     placeholder={tForm('username.placeholder')}
                     type='username'
                     id={field.name}
