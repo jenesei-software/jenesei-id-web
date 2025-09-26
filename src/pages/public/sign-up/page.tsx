@@ -366,7 +366,7 @@ export function PagePublicSignUp() {
                   <Input
                     isOutlineBoxShadow
                     variety='standard'
-                    autoComplete='login'
+                    autoComplete='username'
                     placeholder={tForm('username.placeholder')}
                     type='username'
                     id={field.name}
@@ -410,6 +410,7 @@ export function PagePublicSignUp() {
                       labelPlaceholder={tForm('dateOfBirth.placeholder')}
                       id={field.name}
                       name={field.name}
+                      type="select"
                       autoComplete="bday"
                       isOnClickClose
                       value={field.state.value}
