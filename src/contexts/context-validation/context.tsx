@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useUserCheckEmail, useUserCheckNickname } from '@jenesei-software/jenesei-id-web-api';
 import { FormAsyncValidateOrFn } from '@tanstack/react-form';
+import leoProfanity from 'leo-profanity';
 import moment from 'moment';
 import { createContext, FC, useCallback, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -49,7 +50,7 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
           if (validationErrors instanceof yup.ValidationError) {
             const errors = validationErrors.inner.reduce(
               (acc, error) => {
-                if (error.path && Object.prototype.hasOwnProperty.call(changeFields, error.path) && !acc[error.path]) {
+                if (error.path && Object.hasOwn(changeFields, error.path) && !acc[error.path]) {
                   acc[error.path] = error.message;
                 }
                 return acc;
@@ -82,7 +83,7 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
           if (validationErrors instanceof yup.ValidationError) {
             const errors = validationErrors.inner.reduce(
               (acc, error) => {
-                if (error.path && Object.prototype.hasOwnProperty.call(changeFields, error.path) && !acc[error.path]) {
+                if (error.path && Object.hasOwn(changeFields, error.path) && !acc[error.path]) {
                   acc[error.path] = error.message;
                 }
                 return acc;
@@ -257,11 +258,12 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
           .required(tForm('username.errors.required'))
           .min(2, tForm('username.errors.minLength', { minLength: 2 }))
           .max(12, tForm('username.errors.maxLength', { maxLength: 12 }))
+          .test('bad-word', tForm('username.errors.bad-word'), (value) => !leoProfanity.check(value))
           .test('no-spaces', tForm('username.errors.no-spaces'), (value) => !value?.includes(' '))
           .test('login-check', tForm('username.errors.alreadyExists'), async function (v) {
             const { createError } = this;
-
-            if (!v || v.length < 2 || v.length > 12 || v.includes(' ')) {
+            
+            if (!v || v.length < 2 || v.length > 12 || v.includes(' ') || leoProfanity.check(v)) {
               return true;
             }
 

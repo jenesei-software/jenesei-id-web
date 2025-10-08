@@ -195,6 +195,7 @@
       "placeholder": "Username",
       "placeholder-input": "Enter username",
       "errors": {
+        "bad-word": "Username contains inappropriate language",
         "no-spaces": "Username must not contain spaces",
         "alreadyExists": "Username is already taken",
         "required": "Required field",

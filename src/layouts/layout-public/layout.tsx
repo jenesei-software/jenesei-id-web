@@ -37,6 +37,7 @@ export function LayoutPublic() {
         }}
       >
         <SelectLanguage
+          isToggleWhenClickSelectListOption
           labelPlaceholder={t('form.language.placeholder')}
           isShowDropdownOptionIcon
           isOnClickOptionClose

@@ -144,6 +144,7 @@ export function PagePrivateLanguageAndCountry() {
                 {tPage('form.language.title')}
               </Typography>
               <SelectLanguage
+                isToggleWhenClickSelectListOption
                 id={field.name}
                 labelPlaceholder={tForm('language.placeholder')}
                 isShowDropdownOptionIcon
@@ -290,6 +291,7 @@ export const SelectCountry: FC<SelectCountryProps> = (props) => {
 
   return (
     <Select<IOptionCountry>
+      isToggleWhenClickSelectListOption
       labelPlaceholder={tForm('country.placeholder')}
       labelEmptyOption={tForm('country.empty-options')}
       genre='blackBorder'

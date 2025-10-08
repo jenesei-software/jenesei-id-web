@@ -35,6 +35,7 @@ export const Header: FC = () => {
     >
       {isMatchPrivate ? (
         <SelectLanguage
+          isToggleWhenClickSelectListOption
           labelPlaceholder={t('form.language.placeholder')}
           isShowDropdownOptionIcon
           isOnClickOptionClose
