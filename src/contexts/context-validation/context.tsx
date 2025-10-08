@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import { ProviderValidationProps, ValidationContextProps } from '.';
 
 const ValidationContext = createContext<ValidationContextProps | null>(null);
+const latinOnlyUsernameRegex = /^[A-Za-z]+$/;
 
 export const useValidation = () => {
   const context = useContext(ValidationContext);
@@ -258,12 +259,20 @@ export const ProviderValidation: FC<ProviderValidationProps> = (props) => {
           .required(tForm('username.errors.required'))
           .min(2, tForm('username.errors.minLength', { minLength: 2 }))
           .max(12, tForm('username.errors.maxLength', { maxLength: 12 }))
+          .matches(latinOnlyUsernameRegex, tForm('username.errors.latinOnly'))
           .test('bad-word', tForm('username.errors.bad-word'), (value) => !leoProfanity.check(value))
           .test('no-spaces', tForm('username.errors.no-spaces'), (value) => !value?.includes(' '))
           .test('login-check', tForm('username.errors.alreadyExists'), async function (v) {
             const { createError } = this;
-            
-            if (!v || v.length < 2 || v.length > 12 || v.includes(' ') || leoProfanity.check(v)) {
+
+            if (
+              !v ||
+              v.length < 2 ||
+              v.length > 12 ||
+              v.includes(' ') ||
+              leoProfanity.check(v) ||
+              !latinOnlyUsernameRegex.test(v)
+            ) {
               return true;
             }
 
