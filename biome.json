@@ -38,7 +38,15 @@
         "organizeImports": {
           "level": "on",
           "options": {
-            "groups": [["@local/**"], ":BLANK_LINE:", ":PACKAGE:", ":BLANK_LINE:", ["./**"]]
+            "groups": [
+              ["@local/**"],
+              ":BLANK_LINE:",
+              ":PACKAGE:",
+              ":BLANK_LINE:",
+              ["@jenesei-software/**"],
+              ":BLANK_LINE:",
+              ["./**"]
+            ]
           }
         }
       }
