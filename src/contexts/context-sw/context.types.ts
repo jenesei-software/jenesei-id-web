@@ -8,4 +8,5 @@ export interface SWContextProps {
   isHasNewVersion: boolean;
   versionCurrent: string | null;
   versionLatest: string | null;
+  status?: 'idle' | 'loading' | 'ready' | 'error';
 }

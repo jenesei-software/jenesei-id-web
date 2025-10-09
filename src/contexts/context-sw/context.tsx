@@ -21,6 +21,7 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
   const env = useEnvironment();
   const appVersion = useMemo(() => env.version, [env.version]);
 
+  const [status, setStatus] = useState<SWContextProps['status']>('idle');
   const [isHasNewVersion, setIsHasNewVersion] = useState<SWContextProps['isHasNewVersion']>(false);
   const [isOfflineReady, setIsOfflineReady] = useState<SWContextProps['isOfflineReady']>(false);
   const [versionCurrent, setVersionCurrent] = useState<SWContextProps['versionCurrent']>(
@@ -31,6 +32,8 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
   const [updateSW, setUpdateSW] = useState<((reload?: boolean) => void) | null>(null);
 
   useEffect(() => {
+    setStatus('loading');
+
     const sw = registerSW({
       immediate: true,
       onNeedRefresh() {
@@ -40,6 +43,7 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
         setIsOfflineReady(true);
       },
       onRegisteredSW(swUrl, registration) {
+        setStatus('ready');
         if (registration?.active) {
           const swVersion =
             new URL(swUrl, location.origin).searchParams.get('__WB_REVISION__') ?? Date.now().toString();
@@ -48,6 +52,10 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
           if (swVersion !== appVersion) setIsHasNewVersion(true);
           setVersionCurrent(appVersion);
         }
+      },
+      onRegisterError(err) {
+        console.error('SW registration error', err);
+        setStatus('error');
       },
     });
 
@@ -61,6 +69,7 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
   return (
     <SWContext.Provider
       value={{
+        status,
         isHasNewVersion,
         isOfflineReady,
         onUpdate,
