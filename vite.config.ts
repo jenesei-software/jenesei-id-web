@@ -112,7 +112,7 @@ export default defineConfig(({ mode }) => {
         includeManifestIcons: false,
         injectRegister: null,
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,json}'],
           cleanupOutdatedCaches: true,
           runtimeCaching: [
             {

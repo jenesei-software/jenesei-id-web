@@ -1,6 +1,6 @@
 import { useEnvironment } from '@local/hooks/use-environment';
 
-import { createContext, FC, useCallback, useContext, useEffect, useState } from 'react';
+import { createContext, FC, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { registerSW } from 'virtual:pwa-register';
 import { ProviderSWProps, SWContextProps } from '.';
@@ -19,11 +19,13 @@ const setStoredVersion = (v: string) => localStorage.setItem(STORAGE_KEY, v);
 
 export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
   const env = useEnvironment();
-  const appVersion = env.version;
+  const appVersion = useMemo(() => env.version, [env.version]);
 
   const [isHasNewVersion, setIsHasNewVersion] = useState<SWContextProps['isHasNewVersion']>(false);
   const [isOfflineReady, setIsOfflineReady] = useState<SWContextProps['isOfflineReady']>(false);
-  const [versionCurrent, setVersionCurrent] = useState<SWContextProps['versionCurrent']>(getStoredVersion() ?? appVersion);
+  const [versionCurrent, setVersionCurrent] = useState<SWContextProps['versionCurrent']>(
+    getStoredVersion() ?? appVersion,
+  );
   const [versionLatest, setVersionLatest] = useState<SWContextProps['versionLatest']>(null);
 
   const [updateSW, setUpdateSW] = useState<((reload?: boolean) => void) | null>(null);
@@ -39,7 +41,8 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
       },
       onRegisteredSW(swUrl, registration) {
         if (registration?.active) {
-          const swVersion = new URL(swUrl, location.origin).searchParams.get('__WB_REVISION__') ?? Date.now().toString();
+          const swVersion =
+            new URL(swUrl, location.origin).searchParams.get('__WB_REVISION__') ?? Date.now().toString();
           setStoredVersion(swVersion);
           setVersionLatest(swVersion);
           if (swVersion !== appVersion) setIsHasNewVersion(true);
