@@ -18,12 +18,12 @@ function App() {
   const env = useEnvironment();
 
   return (
-    <ProviderSW>
-      <ThemeProvider theme={ThemeLight}>
-        <ProviderScreenWidth>
-          <ProviderLanguage>
-            <JeneseiGlobalStyles />
-            <LayoutErrorBoundary>
+    <ThemeProvider theme={ThemeLight}>
+      <ProviderScreenWidth>
+        <ProviderLanguage>
+          <JeneseiGlobalStyles />
+          <LayoutErrorBoundary>
+            <ProviderSW>
               <QueryClientProvider client={queryClient}>
                 <ProviderAxiosWebId queryClient={queryClient} baseURL={env.baseURL}>
                   <ProviderWSWebId socketURL={env.socketURL}>
@@ -37,11 +37,11 @@ function App() {
                   </ProviderWSWebId>
                 </ProviderAxiosWebId>
               </QueryClientProvider>
-            </LayoutErrorBoundary>
-          </ProviderLanguage>
-        </ProviderScreenWidth>
-      </ThemeProvider>
-    </ProviderSW>
+            </ProviderSW>
+          </LayoutErrorBoundary>
+        </ProviderLanguage>
+      </ProviderScreenWidth>
+    </ThemeProvider>
   );
 }
 

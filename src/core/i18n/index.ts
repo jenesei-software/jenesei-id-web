@@ -1,12 +1,10 @@
-// biome-ignore assist/source/organizeImports: <explanation>
+import { LIST_KEY_LANGUAGE } from '@jenesei-software/jenesei-kit-react';
+import { ILanguageKeys } from '@jenesei-software/jenesei-kit-react/types';
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-chained-backend';
 import HttpApi from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
-
-import { LIST_KEY_LANGUAGE } from '@jenesei-software/jenesei-kit-react';
-import { ILanguageKeys } from '@jenesei-software/jenesei-kit-react/types';
 
 import translation from '../../../public/locales/rus/translation.json';
 
