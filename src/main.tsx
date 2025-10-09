@@ -2,7 +2,6 @@ import App from '@local/app';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@local/core/i18n/index.ts';
 
 import '@fontsource/inter/100.css';
 import '@fontsource/inter/300.css';
@@ -23,6 +22,7 @@ import '@fontsource/roboto-mono/500.css';
 import '@fontsource/roboto-mono/700.css';
 
 import leoProfanity from 'leo-profanity';
+import '@local/core/i18n/index.ts';
 
 leoProfanity.loadDictionary('en');
 // leoProfanity.loadDictionary('ru');
