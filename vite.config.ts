@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => {
   const VITE_DEFAULT_SHORTNAME = env.VITE_DEFAULT_SHORTNAME;
   const VITE_DEFAULT_THEME_COLOR = env.VITE_DEFAULT_THEME_COLOR;
   const VITE_DEFAULT_DESCRIPTION = env.VITE_DEFAULT_DESCRIPTION;
+  const VITE_BASE_URL = env.VITE_BASE_URL;
 
   const robotsMode = {
     prod: {
@@ -107,12 +108,25 @@ export default defineConfig(({ mode }) => {
       VitePWA({
         filename: 'vite-sw.js', //!!! НИКОГДА НЕ МЕНЯТЬ !!!
         strategies: 'generateSW',
-        registerType: 'autoUpdate',
+        registerType: 'prompt',
         includeManifestIcons: false,
-        injectRegister: false,
+        injectRegister: null,
         workbox: {
-          globPatterns: [],
-          maximumFileSizeToCacheInBytes: 0,
+          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+          cleanupOutdatedCaches: true,
+          runtimeCaching: [
+            {
+              urlPattern: new RegExp(`^${VITE_BASE_URL}/.*$`),
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'api-cache',
+                expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 },
+              },
+            },
+          ],
+        },
+        devOptions: {
+          enabled: true,
         },
         manifest: {
           display: 'standalone',
