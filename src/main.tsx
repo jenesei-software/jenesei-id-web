@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '@local/core/i18n/index.ts';
@@ -25,8 +23,20 @@ import '@fontsource/roboto-mono/700.css';
 
 import leoProfanity from 'leo-profanity';
 
+import { registerSW } from 'virtual:pwa-register';
+
 leoProfanity.loadDictionary('en');
 // leoProfanity.loadDictionary('ru');
+
+registerSW({
+  onNeedRefresh() {
+    localStorage.setItem("sw-need-refresh", "true");
+  },
+  onOfflineReady() {
+    localStorage.setItem("sw-need-refresh", "false");
+    localStorage.setItem("sw-offline-ready", "true");
+  },
+});
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

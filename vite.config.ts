@@ -108,9 +108,9 @@ export default defineConfig(({ mode }) => {
       VitePWA({
         filename: 'vite-sw.js', //!!! НИКОГДА НЕ МЕНЯТЬ !!!
         strategies: 'generateSW',
-        registerType: 'autoUpdate',
+        registerType: 'prompt',
         includeManifestIcons: false,
-        injectRegister: 'inline',
+        injectRegister: null,
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,json}'],
           cleanupOutdatedCaches: true,
