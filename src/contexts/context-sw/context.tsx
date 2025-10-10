@@ -1,6 +1,6 @@
 import { useEnvironment } from '@local/hooks/use-environment';
 
-import { createContext, FC, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, FC, useContext, useEffect, useMemo, useState } from 'react';
 
 import { registerSW } from 'virtual:pwa-register';
 import { ProviderSWProps, SWContextProps } from '.';
