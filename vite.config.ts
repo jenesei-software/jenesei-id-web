@@ -110,7 +110,7 @@ export default defineConfig(({ mode }) => {
         strategies: 'generateSW',
         registerType: 'prompt',
         includeManifestIcons: false,
-        injectRegister: "auto",
+        injectRegister: 'auto',
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,json}'],
           cleanupOutdatedCaches: true,
@@ -121,6 +121,14 @@ export default defineConfig(({ mode }) => {
               options: {
                 cacheName: 'api-cache',
                 expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 },
+              },
+            },
+            {
+              urlPattern: /build-info\.txt$/,
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'version-cache',
+                expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 },
               },
             },
           ],

@@ -93,7 +93,7 @@ export function LayoutPublic() {
         <Typography sx={{ default: { variant: 'h8', color: 'black50' } }}>{env.version}</Typography>
         {pwa.isUpdateAvailable && (
           <Button isRadius genre='gray' size='small' onClick={() => pwa.updateApp()}>
-            Reload
+            Reload {pwa.newVersion}
           </Button>
         )}
         {pwa.isUpdateAvailable && (

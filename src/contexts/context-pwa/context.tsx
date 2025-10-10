@@ -13,13 +13,16 @@ export const usePWA = () => {
 export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   const [isOfflineReady, setIsOfflineReady] = useState(false);
   const [isUpdateAvailable, setIsUpdateAvailable] = useState(false);
+  const [newVersion, setNewVersion] = useState<string | null>(null);
 
   useEffect(() => {
     const offlineReady = localStorage.getItem('sw-offline-ready') === 'true';
     const needRefresh = localStorage.getItem('sw-need-refresh') === 'true';
+    const newVersion = localStorage.getItem('sw-new-version');
 
     setIsOfflineReady(offlineReady);
     setIsUpdateAvailable(needRefresh);
+    setNewVersion(newVersion);
 
     let prevOfflineReady = offlineReady;
     let prevNeedRefresh = needRefresh;
@@ -54,6 +57,7 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   return (
     <PWAContext.Provider
       value={{
+        newVersion,
         updateApp,
         isOfflineReady,
         isUpdateAvailable,
