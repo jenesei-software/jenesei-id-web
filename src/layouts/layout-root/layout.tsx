@@ -3,7 +3,6 @@ import { Header } from '@local/components/component-header';
 import { LeftAside } from '@local/components/component-left-aside';
 import { Nav } from '@local/components/component-nav';
 import { useSW } from '@local/contexts/context-sw';
-import { ProviderValidation } from '@local/contexts/context-validation';
 import { LayoutRoutePrivate, LayoutRoutePublic } from '@local/core/router';
 import { useEnvironment } from '@local/hooks/use-environment';
 
@@ -26,25 +25,8 @@ export function LayoutRoot() {
   useEffect(() => {
     console.table(sw);
   }, [sw]);
-  return (
-    <>
-      <ProviderValidation>
-        <LayoutRootComponent />
-      </ProviderValidation>
-      {env.mode === 'test' && (
-        <>
-          <ReactQueryDevtools buttonPosition='bottom-left' />
-          <TanStackRouterDevtools position='bottom-right' />
-        </>
-      )}
-    </>
-  );
-}
 
-const LayoutRootComponent = () => {
-  const { status } = useSW();
-  const isLoadingSW = useMemo(() => status === 'loading' || status === 'idle', [status]);
-  const { shortName } = useEnvironment();
+  const isLoadingSW = useMemo(() => sw.status === 'loading' || sw.status === 'idle', [sw.status]);
   const { t } = useTranslation('translation');
   const { isLoading, isSuccess, isFetched } = useAuthProfile();
   const isAuthenticated = useMemo(() => (isFetched ? isSuccess : undefined), [isFetched, isSuccess]);
@@ -75,69 +57,77 @@ const LayoutRootComponent = () => {
 
   const { screenActual } = useScreenWidth();
   return (
-    <ProviderSonner
-      gap={12}
-      position={screenActual === 'mobile' ? 'bottom-center' : 'bottom-right'}
-      visibleToasts={3}
-      zIndex={100}
-      default={{
-        genre: 'black',
-        button: {
-          content: t('sonner.undo'),
-        },
-      }}
-    >
-      <ProviderApp
-        defaultPreview={{ visible: !visible, defaultVisible: false }}
-        defaultTitle={shortName}
-        defaultDescription={t('meta.description')}
-        isScrollOutlet={true}
-        defaultBgColor='whiteStandard'
-        defaultStatusBarColor='whiteStandard'
-        leftAside={{
-          component: <LeftAside />,
-          isTopFooter: true,
-          isTopNav: true,
-          length: {
-            default: isMatchPrivate ? '420px' : '50dvw',
-            tablet: isMatchPrivate ? '96px' : null,
-            mobile: null,
+    <>
+      <ProviderSonner
+        gap={12}
+        position={screenActual === 'mobile' ? 'bottom-center' : 'bottom-right'}
+        visibleToasts={3}
+        zIndex={100}
+        default={{
+          genre: 'black',
+          button: {
+            content: t('sonner.undo'),
           },
-        }}
-        footer={{
-          component: <Footer />,
-          length: {
-            default: null,
-            tablet: null,
-            mobile: isMatchPrivate ? '95px' : null,
-          },
-        }}
-        nav={{
-          component: <Nav />,
-          length: {
-            default: isMatchPrivate ? '68px' : null,
-            tablet: isMatchPrivate ? '68px' : null,
-            mobile: isMatchPrivate ? '40px' : null,
-          },
-        }}
-        header={{
-          zIndex: 1,
-          component: <Header />,
-          length: {
-            default: isMatchPrivate ? null : null,
-            tablet: isMatchPrivate ? null : '170px',
-            mobile: isMatchPrivate ? null : '170px',
-          },
-        }}
-        main={{
-          zIndex: 0,
         }}
       >
-        <LayoutURLComponent />
-      </ProviderApp>
-    </ProviderSonner>
+        <ProviderApp
+          defaultPreview={{ visible: !visible, defaultVisible: false }}
+          defaultTitle={env.shortName}
+          defaultDescription={t('meta.description')}
+          isScrollOutlet={true}
+          defaultBgColor='whiteStandard'
+          defaultStatusBarColor='whiteStandard'
+          leftAside={{
+            component: <LeftAside />,
+            isTopFooter: true,
+            isTopNav: true,
+            length: {
+              default: isMatchPrivate ? '420px' : '50dvw',
+              tablet: isMatchPrivate ? '96px' : null,
+              mobile: null,
+            },
+          }}
+          footer={{
+            component: <Footer />,
+            length: {
+              default: null,
+              tablet: null,
+              mobile: isMatchPrivate ? '95px' : null,
+            },
+          }}
+          nav={{
+            component: <Nav />,
+            length: {
+              default: isMatchPrivate ? '68px' : null,
+              tablet: isMatchPrivate ? '68px' : null,
+              mobile: isMatchPrivate ? '40px' : null,
+            },
+          }}
+          header={{
+            zIndex: 1,
+            component: <Header />,
+            length: {
+              default: isMatchPrivate ? null : null,
+              tablet: isMatchPrivate ? null : '170px',
+              mobile: isMatchPrivate ? null : '170px',
+            },
+          }}
+          main={{
+            zIndex: 0,
+          }}
+        >
+          <LayoutURLComponent />
+        </ProviderApp>
+      </ProviderSonner>
+      {env.mode === 'test' && (
+        <>
+          <ReactQueryDevtools buttonPosition='bottom-left' />
+          <TanStackRouterDevtools position='bottom-right' />
+        </>
+      )}
+    </>
   );
-};
+}
 const LayoutURLComponent = () => {
   const { shortName } = useEnvironment();
   const { t: tURLTitle } = useTranslation('translation', { keyPrefix: 'url.title' });

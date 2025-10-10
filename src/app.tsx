@@ -14,6 +14,8 @@ import { JeneseiGlobalStyles, ThemeLight } from '@jenesei-software/jenesei-kit-r
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'styled-components';
 
+import { ProviderValidation } from './contexts/context-validation';
+
 function App() {
   const env = useEnvironment();
 
@@ -23,21 +25,23 @@ function App() {
         <ProviderLanguage>
           <JeneseiGlobalStyles />
           <LayoutErrorBoundary>
-            <ProviderSW>
-              <QueryClientProvider client={queryClient}>
-                <ProviderAxiosWebId queryClient={queryClient} baseURL={env.baseURL}>
-                  <ProviderWSWebId socketURL={env.socketURL}>
-                    <ProviderPermission>
-                      <ProviderGeolocation>
-                        <ProviderDialog zIndex={1000}>
-                          <LayoutRouter />
-                        </ProviderDialog>
-                      </ProviderGeolocation>
-                    </ProviderPermission>
-                  </ProviderWSWebId>
-                </ProviderAxiosWebId>
-              </QueryClientProvider>
-            </ProviderSW>
+            <QueryClientProvider client={queryClient}>
+              <ProviderAxiosWebId queryClient={queryClient} baseURL={env.baseURL}>
+                <ProviderWSWebId socketURL={env.socketURL}>
+                  <ProviderPermission>
+                    <ProviderGeolocation>
+                      <ProviderDialog zIndex={1000}>
+                        <ProviderSW>
+                          <ProviderValidation>
+                            <LayoutRouter />
+                          </ProviderValidation>
+                        </ProviderSW>
+                      </ProviderDialog>
+                    </ProviderGeolocation>
+                  </ProviderPermission>
+                </ProviderWSWebId>
+              </ProviderAxiosWebId>
+            </QueryClientProvider>
           </LayoutErrorBoundary>
         </ProviderLanguage>
       </ProviderScreenWidth>
