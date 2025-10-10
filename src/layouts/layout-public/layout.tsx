@@ -1,7 +1,8 @@
 import { useLanguage } from '@local/contexts/context-language';
+import { usePWA } from '@local/contexts/context-pwa';
 import { useEnvironment } from '@local/hooks/use-environment';
 
-import { Typography } from '@jenesei-software/jenesei-kit-react';
+import { Button, Typography } from '@jenesei-software/jenesei-kit-react';
 import { SelectLanguage } from '@jenesei-software/jenesei-kit-react/component-select';
 import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
 import { ILanguageKeys } from '@jenesei-software/jenesei-kit-react/types';
@@ -11,6 +12,8 @@ import { useTranslation } from 'react-i18next';
 export function LayoutPublic() {
   const { t } = useTranslation('translation');
   const env = useEnvironment();
+  const pwa = usePWA();
+
   const { changeLng, lng } = useLanguage();
   return (
     <Stack
@@ -81,12 +84,21 @@ export function LayoutPublic() {
       <Stack
         sx={{
           default: {
-            justifyContent: 'flex-end',
+            justifyContent: pwa.isUpdateAvailable ? 'space-between' : 'center',
             width: '100%',
+            alignItems: 'center',
           },
         }}
       >
         <Typography sx={{ default: { variant: 'h8', color: 'black50' } }}>{env.version}</Typography>
+        {pwa.isUpdateAvailable && (
+          <Button isRadius genre='gray' size='small' onClick={() => pwa.updateApp}>
+            Reload
+          </Button>
+        )}
+        {pwa.isUpdateAvailable && (
+          <Typography sx={{ default: { variant: 'h8', color: 'black50' } }}>New version available</Typography>
+        )}
       </Stack>
     </Stack>
   );

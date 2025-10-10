@@ -2,6 +2,7 @@ import { Footer } from '@local/components/component-footer';
 import { Header } from '@local/components/component-header';
 import { LeftAside } from '@local/components/component-left-aside';
 import { Nav } from '@local/components/component-nav';
+import { usePWA } from '@local/contexts/context-pwa';
 import { LayoutRoutePrivate, LayoutRoutePublic } from '@local/core/router';
 import { useEnvironment } from '@local/hooks/use-environment';
 
@@ -17,10 +18,14 @@ import { useTranslation } from 'react-i18next';
 
 export function LayoutRoot() {
   const env = useEnvironment();
+  const pwa = usePWA()
   useEffect(() => {
     console.table(env);
   }, [env]);
-
+  useEffect(() => {
+    console.table(pwa);
+  }, [pwa]);
+  
   const { t } = useTranslation('translation');
   const { isLoading, isSuccess, isFetched } = useAuthProfile();
   const isAuthenticated = useMemo(() => (isFetched ? isSuccess : undefined), [isFetched, isSuccess]);

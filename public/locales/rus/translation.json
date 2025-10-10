@@ -91,7 +91,9 @@
   "public": {
     "layout": {
       "title": "Jenesei ID",
-      "description": "Построй своё будущее"
+      "description": "Построй своё будущее",
+      "reload": "Перезагрузить",
+      "new-version": "Доступна новая версия"
     },
     "sign-in": {
       "title-button": "Войти",

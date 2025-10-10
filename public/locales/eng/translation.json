@@ -91,7 +91,9 @@
   "public": {
     "layout": {
       "title": "Jenesei ID",
-      "description": "Build your future"
+      "description": "Build your future",
+      "reload": "Reload",
+      "new-version": "New version available"
     },
     "sign-in": {
       "title-button": "Sign In",
