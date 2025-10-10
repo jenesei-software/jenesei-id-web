@@ -21,7 +21,7 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
   const env = useEnvironment();
   const appVersion = useMemo(() => env.version, [env.version]);
 
-  const [status] = useState<SWContextProps['status']>('idle');
+  const [status] = useState<SWContextProps['status']>('ready');
   const [isHasNewVersion] = useState<SWContextProps['isHasNewVersion']>(false);
   const [isOfflineReady] = useState<SWContextProps['isOfflineReady']>(false);
   const [versionCurrent] = useState<SWContextProps['versionCurrent']>(
