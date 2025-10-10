@@ -22,7 +22,7 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
 
     setIsOfflineReady(offlineReady);
     setIsUpdateAvailable(needRefresh);
-    setNewVersion(newVersion);
+    setNewVersion(newVersion ?? null);
 
     let prevOfflineReady = offlineReady;
     let prevNeedRefresh = needRefresh;
