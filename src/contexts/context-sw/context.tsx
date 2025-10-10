@@ -28,12 +28,10 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
   const [versionCurrent] = useState<SWContextProps['versionCurrent']>(envVersion ?? null);
   const [versionLatest, setVersionLatest] = useState<SWContextProps['versionLatest']>(getStoredVersion() ?? null);
 
-  const [updateSW, setUpdateSW] = useState<((reload?: boolean) => void) | null>(null);
-
   useEffect(() => {
     setStatus('loading');
 
-    const sw = registerSW({
+    registerSW({
       immediate: true,
       onNeedRefresh() {
         setIsHasNewVersion(true);
@@ -51,13 +49,7 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
         setStatus('error');
       },
     });
-
-    setUpdateSW(() => sw);
   }, [envVersion]);
-
-  const onUpdate = useCallback(() => {
-    if (updateSW) updateSW(true);
-  }, [updateSW]);
 
   return (
     <SWContext.Provider
@@ -65,7 +57,6 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
         status,
         isHasNewVersion,
         isOfflineReady,
-        onUpdate,
         versionCurrent,
         versionLatest,
       }}
