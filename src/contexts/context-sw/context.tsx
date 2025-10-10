@@ -1,8 +1,8 @@
 import { useEnvironment } from '@local/hooks/use-environment';
 
-import { createContext, FC, useCallback, useContext, useMemo, useState } from 'react';
+import { createContext, FC, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-// import { registerSW } from 'virtual:pwa-register';
+import { registerSW } from 'virtual:pwa-register';
 import { ProviderSWProps, SWContextProps } from '.';
 
 const SWContext = createContext<SWContextProps | null>(null);
@@ -15,52 +15,45 @@ export const useSW = () => {
 
 const STORAGE_KEY = 'app-sw-version';
 const getStoredVersion = () => localStorage.getItem(STORAGE_KEY);
-// const setStoredVersion = (v: string) => localStorage.setItem(STORAGE_KEY, v);
+const setStoredVersion = (v: string) => localStorage.setItem(STORAGE_KEY, v);
 
 export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
   const env = useEnvironment();
-  const appVersion = useMemo(() => env.version, [env.version]);
+  const envVersion = useMemo(() => env.version, [env.version]);
 
-  const [status] = useState<SWContextProps['status']>('ready');
-  const [isHasNewVersion] = useState<SWContextProps['isHasNewVersion']>(false);
-  const [isOfflineReady] = useState<SWContextProps['isOfflineReady']>(false);
-  const [versionCurrent] = useState<SWContextProps['versionCurrent']>(
-    getStoredVersion() ?? appVersion,
-  );
-  const [versionLatest] = useState<SWContextProps['versionLatest']>(null);
+  const [status, setStatus] = useState<SWContextProps['status']>('idle');
+  const [isHasNewVersion, setIsHasNewVersion] = useState<SWContextProps['isHasNewVersion']>(false);
+  const [isOfflineReady, setIsOfflineReady] = useState<SWContextProps['isOfflineReady']>(false);
 
-  const [updateSW] = useState<((reload?: boolean) => void) | null>(null);
+  const [versionCurrent] = useState<SWContextProps['versionCurrent']>(envVersion ?? null);
+  const [versionLatest, setVersionLatest] = useState<SWContextProps['versionLatest']>(getStoredVersion() ?? null);
 
-  // useEffect(() => {
-  //   setStatus('loading');
+  const [updateSW, setUpdateSW] = useState<((reload?: boolean) => void) | null>(null);
 
-  //   const sw = registerSW({
-  //     immediate: true,
-  //     onNeedRefresh() {
-  //       setIsHasNewVersion(true);
-  //     },
-  //     onOfflineReady() {
-  //       setIsOfflineReady(true);
-  //     },
-  //     onRegisteredSW(swUrl, registration) {
-  //       setStatus('ready');
-  //       if (registration?.active) {
-  //         const swVersion =
-  //           new URL(swUrl, location.origin).searchParams.get('__WB_REVISION__') ?? Date.now().toString();
-  //         setStoredVersion(swVersion);
-  //         setVersionLatest(swVersion);
-  //         if (swVersion !== appVersion) setIsHasNewVersion(true);
-  //         setVersionCurrent(appVersion);
-  //       }
-  //     },
-  //     onRegisterError(err) {
-  //       console.error('SW registration error', err);
-  //       setStatus('error');
-  //     },
-  //   });
+  useEffect(() => {
+    setStatus('loading');
 
-  //   setUpdateSW(() => sw);
-  // }, [appVersion]);
+    const sw = registerSW({
+      immediate: true,
+      onNeedRefresh() {
+        setIsHasNewVersion(true);
+      },
+      onOfflineReady() {
+        setIsOfflineReady(true);
+      },
+      onRegisteredSW(_swUrl, _registration) {
+        setStatus('ready');
+        setStoredVersion(envVersion);
+        setVersionLatest(envVersion);
+      },
+      onRegisterError(err) {
+        console.error('SW registration error', err);
+        setStatus('error');
+      },
+    });
+
+    setUpdateSW(() => sw);
+  }, [envVersion]);
 
   const onUpdate = useCallback(() => {
     if (updateSW) updateSW(true);
