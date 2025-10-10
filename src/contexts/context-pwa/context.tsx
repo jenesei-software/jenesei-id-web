@@ -11,6 +11,8 @@ export const usePWA = () => {
   return context;
 };
 
+let updateSWFn: (() => void) | null = null;
+
 export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   const [isOfflineReady, setIsOfflineReady] = useState(false);
   const [isUpdateAvailable, setIsUpdateAvailable] = useState(false);
@@ -73,8 +75,6 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   );
 };
 
-let updateSWFn: (() => void) | null = null;
-
 export const initSW = () => {
   const { updateSW } = registerSW({
     onNeedRefresh() {
@@ -90,6 +90,7 @@ export const initSW = () => {
     },
     onOfflineReady() {
       localStorage.setItem('sw-offline-ready', 'true');
+      localStorage.setItem('sw-need-refresh', 'false');
     },
   });
 
