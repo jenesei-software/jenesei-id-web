@@ -110,7 +110,7 @@ export default defineConfig(({ mode }) => {
         strategies: 'generateSW',
         registerType: 'prompt',
         includeManifestIcons: false,
-        injectRegister: null,
+        injectRegister: "auto",
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,json}'],
           cleanupOutdatedCaches: true,
