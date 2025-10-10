@@ -40,6 +40,10 @@ export default defineConfig(({ mode }) => {
       port: 3000,
     },
     build: {
+      minify: 'esbuild',
+      terserOptions: {
+        keep_fnames: true,
+      },
       outDir: 'build',
       rollupOptions: {
         output: {
