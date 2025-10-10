@@ -23,35 +23,12 @@ import '@fontsource/roboto-mono/700.css';
 
 import leoProfanity from 'leo-profanity';
 
-import { registerSW } from 'virtual:pwa-register';
+import { initSW } from './contexts/context-pwa';
 
 leoProfanity.loadDictionary('en');
 // leoProfanity.loadDictionary('ru');
 
-registerSW({
-  onNeedRefresh() {
-    localStorage.setItem('sw-need-refresh', 'true');
-    fetch('/build-info.txt')
-      .then((res) => res.text())
-      .then((text) => {
-        try {
-          const lines = text.split('\n');
-          const versionLine = lines.find((line) => line.startsWith('version:'));
-          const version = versionLine?.split(':')[1].trim() ?? 'unknown';
-          localStorage.setItem('sw-new-version', version);
-        } catch {
-          localStorage.setItem('sw-new-version', 'unknown');
-        }
-      })
-      .catch(() => {
-        localStorage.setItem('sw-new-version', 'unknown');
-      });
-  },
-  onOfflineReady() {
-    localStorage.setItem('sw-need-refresh', 'false');
-    localStorage.setItem('sw-offline-ready', 'true');
-  },
-});
+initSW()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
