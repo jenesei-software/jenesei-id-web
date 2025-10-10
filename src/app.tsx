@@ -1,5 +1,4 @@
 import { ProviderLanguage } from '@local/contexts/context-language';
-import { ProviderSW } from '@local/contexts/context-sw';
 import { queryClient } from '@local/core/query';
 import { useEnvironment } from '@local/hooks/use-environment';
 import { LayoutErrorBoundary } from '@local/layouts/layout-error';
@@ -31,11 +30,9 @@ function App() {
                   <ProviderPermission>
                     <ProviderGeolocation>
                       <ProviderDialog zIndex={1000}>
-                        <ProviderSW>
-                          <ProviderValidation>
-                            <LayoutRouter />
-                          </ProviderValidation>
-                        </ProviderSW>
+                        <ProviderValidation>
+                          <LayoutRouter />
+                        </ProviderValidation>
                       </ProviderDialog>
                     </ProviderGeolocation>
                   </ProviderPermission>

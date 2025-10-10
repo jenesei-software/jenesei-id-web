@@ -2,7 +2,6 @@ import { Footer } from '@local/components/component-footer';
 import { Header } from '@local/components/component-header';
 import { LeftAside } from '@local/components/component-left-aside';
 import { Nav } from '@local/components/component-nav';
-import { useSW } from '@local/contexts/context-sw';
 import { LayoutRoutePrivate, LayoutRoutePublic } from '@local/core/router';
 import { useEnvironment } from '@local/hooks/use-environment';
 
@@ -18,20 +17,15 @@ import { useTranslation } from 'react-i18next';
 
 export function LayoutRoot() {
   const env = useEnvironment();
-  const sw = useSW();
   useEffect(() => {
     console.table(env);
   }, [env]);
-  useEffect(() => {
-    console.table(sw);
-  }, [sw]);
 
-  const isLoadingSW = useMemo(() => sw.status === 'loading' || sw.status === 'idle', [sw.status]);
   const { t } = useTranslation('translation');
   const { isLoading, isSuccess, isFetched } = useAuthProfile();
   const isAuthenticated = useMemo(() => (isFetched ? isSuccess : undefined), [isFetched, isSuccess]);
 
-  const visible = useMemo(() => !!isLoading || !!isLoadingSW, [isLoading, isLoadingSW]);
+  const visible = useMemo(() => !!isLoading, [isLoading]);
   const navigate = useNavigate();
 
   const isMatchPrivate = useMatches({
