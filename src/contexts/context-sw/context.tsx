@@ -26,27 +26,18 @@ export const ProviderSW: FC<ProviderSWProps> = ({ children }) => {
   const [isOfflineReady, setIsOfflineReady] = useState<SWContextProps['isOfflineReady']>(false);
 
   const [versionCurrent] = useState<SWContextProps['versionCurrent']>(envVersion ?? null);
-  const [versionLatest, setVersionLatest] = useState<SWContextProps['versionLatest']>(getStoredVersion() ?? null);
+  const [versionLatest] = useState<SWContextProps['versionLatest']>(getStoredVersion() ?? null);
 
   useEffect(() => {
     setStatus('loading');
 
     registerSW({
-      immediate: true,
       onNeedRefresh() {
         setIsHasNewVersion(true);
       },
       onOfflineReady() {
-        setIsOfflineReady(true);
-      },
-      onRegisteredSW(_swUrl, _registration) {
-        setStatus('ready');
         setStoredVersion(envVersion);
-        setVersionLatest(envVersion);
-      },
-      onRegisterError(err) {
-        console.error('SW registration error', err);
-        setStatus('error');
+        setIsOfflineReady(true);
       },
     });
   }, [envVersion]);
