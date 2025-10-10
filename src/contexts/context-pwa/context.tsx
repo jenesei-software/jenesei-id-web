@@ -24,6 +24,8 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
     let prevOfflineReady = offlineReady;
     let prevNeedRefresh = needRefresh;
 
+    if (needRefresh) return;
+
     const interval = setInterval(() => {
       const newOfflineReady = localStorage.getItem('sw-offline-ready') === 'true';
       const newNeedRefresh = localStorage.getItem('sw-need-refresh') === 'true';
