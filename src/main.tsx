@@ -23,12 +23,9 @@ import '@fontsource/roboto-mono/700.css';
 
 import leoProfanity from 'leo-profanity';
 
-import { initSW } from './contexts/context-pwa';
 
 leoProfanity.loadDictionary('en');
 // leoProfanity.loadDictionary('ru');
-
-initSW()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

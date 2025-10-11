@@ -11,7 +11,23 @@ export const usePWA = () => {
   return context;
 };
 
-let updateSWFn: (() => void) | null = null;
+const updateSW = registerSW({
+  onNeedRefresh() {
+    fetch('/build-info.txt')
+      .then((res) => res.text())
+      .then((text) => {
+        const versionLine = text.split('\n').find((l) => l.startsWith('version:'));
+        const version = versionLine?.split(':')[1].trim() ?? 'unknown';
+
+        localStorage.setItem('sw-need-refresh', 'true');
+        localStorage.setItem('sw-new-version', version);
+      });
+  },
+  onOfflineReady() {
+    localStorage.setItem('sw-offline-ready', 'true');
+    localStorage.setItem('sw-need-refresh', 'false');
+  },
+});
 
 export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   const [isOfflineReady, setIsOfflineReady] = useState(false);
@@ -51,10 +67,10 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   }, []);
 
   const updateApp = useCallback(() => {
-    if (updateSWFn) {
+    if (updateSW) {
       localStorage.setItem('sw-need-refresh', 'false');
       localStorage.setItem('sw-offline-ready', 'false');
-      updateSWFn();
+      updateSW();
     } else {
       console.warn('updateSW() called before SW initialized');
       window.location.reload();
@@ -73,26 +89,4 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
       {children}
     </PWAContext.Provider>
   );
-};
-
-export const initSW = () => {
-  const { updateSW } = registerSW({
-    onNeedRefresh() {
-      fetch('/build-info.txt')
-        .then((res) => res.text())
-        .then((text) => {
-          const versionLine = text.split('\n').find((l) => l.startsWith('version:'));
-          const version = versionLine?.split(':')[1].trim() ?? 'unknown';
-
-          localStorage.setItem('sw-need-refresh', 'true');
-          localStorage.setItem('sw-new-version', version);
-        });
-    },
-    onOfflineReady() {
-      localStorage.setItem('sw-offline-ready', 'true');
-      localStorage.setItem('sw-need-refresh', 'false');
-    },
-  });
-
-  updateSWFn = updateSW;
 };
