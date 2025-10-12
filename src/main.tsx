@@ -23,8 +23,28 @@ import '@fontsource/roboto-mono/700.css';
 
 import leoProfanity from 'leo-profanity';
 
+import { registerSW } from 'virtual:pwa-register';
+
 leoProfanity.loadDictionary('en');
 // leoProfanity.loadDictionary('ru');
+
+export const initSW = registerSW({
+  onNeedRefresh() {
+    fetch('/build-info.txt')
+      .then((res) => res.text())
+      .then((text) => {
+        const versionLine = text.split('\n').find((l) => l.startsWith('version:'));
+        const version = versionLine?.split(':')[1].trim() ?? 'unknown';
+
+        localStorage.setItem('sw-need-refresh', 'true');
+        localStorage.setItem('sw-new-version', version);
+      });
+  },
+  onOfflineReady() {
+    localStorage.setItem('sw-offline-ready', 'true');
+    localStorage.setItem('sw-need-refresh', 'false');
+  },
+});
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

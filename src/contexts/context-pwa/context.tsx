@@ -1,7 +1,8 @@
+import { initSW } from '@local/main';
+
 import { createContext, FC, useCallback, useContext, useEffect, useState } from 'react';
 
-import { ProviderPWAProps, PWAContextProps } from './context.types';
-import { registerSW } from 'virtual:pwa-register';
+import { ProviderPWAProps, PWAContextProps } from '.';
 
 const PWAContext = createContext<PWAContextProps | null>(null);
 
@@ -10,24 +11,6 @@ export const usePWA = () => {
   if (!context) throw new Error('usePWA must be used within ProviderPWA');
   return context;
 };
-
-const sw = registerSW({
-  onNeedRefresh() {
-    fetch('/build-info.txt')
-      .then((res) => res.text())
-      .then((text) => {
-        const versionLine = text.split('\n').find((l) => l.startsWith('version:'));
-        const version = versionLine?.split(':')[1].trim() ?? 'unknown';
-
-        localStorage.setItem('sw-need-refresh', 'true');
-        localStorage.setItem('sw-new-version', version);
-      });
-  },
-  onOfflineReady() {
-    localStorage.setItem('sw-offline-ready', 'true');
-    localStorage.setItem('sw-need-refresh', 'false');
-  },
-});
 
 export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   const [isOfflineReady, setIsOfflineReady] = useState(false);
@@ -67,10 +50,10 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   }, []);
 
   const updateApp = useCallback(() => {
-    if (sw) {
+    if (initSW) {
       localStorage.setItem('sw-need-refresh', 'false');
       localStorage.setItem('sw-offline-ready', 'false');
-      console.log('sw', sw);
+      console.log('initSW', initSW);
       // update();
     } else {
       console.warn('updateSW() called before SW initialized');
