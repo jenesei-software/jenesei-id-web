@@ -28,16 +28,25 @@ import { registerSW } from 'virtual:pwa-register';
 leoProfanity.loadDictionary('en');
 // leoProfanity.loadDictionary('ru');
 
-export const initSW = registerSW({
+export const updateSW = registerSW({
   onNeedRefresh() {
     fetch('/build-info.txt')
       .then((res) => res.text())
       .then((text) => {
-        const versionLine = text.split('\n').find((l) => l.startsWith('version:'));
-        const version = versionLine?.split(':')[1].trim() ?? 'unknown';
+        try {
+          const versionLine = text.split('\n').find((l) => l.startsWith('version:'));
+          const version = versionLine?.split(':')[1].trim() ?? 'unknown';
 
+          localStorage.setItem('sw-need-refresh', 'true');
+          localStorage.setItem('sw-new-version', version);
+        } catch {
+          localStorage.setItem('sw-need-refresh', 'true');
+          localStorage.setItem('sw-new-version', 'unknown');
+        }
+      })
+      .catch(() => {
         localStorage.setItem('sw-need-refresh', 'true');
-        localStorage.setItem('sw-new-version', version);
+        localStorage.setItem('sw-new-version', 'unknown');
       });
   },
   onOfflineReady() {

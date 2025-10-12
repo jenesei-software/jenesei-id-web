@@ -1,4 +1,4 @@
-import { initSW } from '@local/main';
+import { updateSW } from '@local/main';
 
 import { createContext, FC, useCallback, useContext, useEffect, useState } from 'react';
 
@@ -50,11 +50,10 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   }, []);
 
   const updateApp = useCallback(() => {
-    if (initSW) {
+    if (updateSW) {
       localStorage.setItem('sw-need-refresh', 'false');
       localStorage.setItem('sw-offline-ready', 'false');
-      console.log('initSW', initSW);
-      // update();
+      updateSW();
     } else {
       console.warn('updateSW() called before SW initialized');
       window.location.reload();
