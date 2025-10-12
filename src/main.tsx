@@ -23,7 +23,6 @@ import '@fontsource/roboto-mono/700.css';
 
 import leoProfanity from 'leo-profanity';
 
-
 leoProfanity.loadDictionary('en');
 // leoProfanity.loadDictionary('ru');
 
