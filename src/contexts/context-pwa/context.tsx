@@ -11,7 +11,7 @@ export const usePWA = () => {
   return context;
 };
 
-const { update } = registerSW({
+const sw = registerSW({
   onNeedRefresh() {
     fetch('/build-info.txt')
       .then((res) => res.text())
@@ -67,10 +67,11 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   }, []);
 
   const updateApp = useCallback(() => {
-    if (update) {
+    if (sw) {
       localStorage.setItem('sw-need-refresh', 'false');
       localStorage.setItem('sw-offline-ready', 'false');
-      update();
+      console.log('sw', sw);
+      // update();
     } else {
       console.warn('updateSW() called before SW initialized');
       window.location.reload();
