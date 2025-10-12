@@ -22,6 +22,9 @@ declare module 'virtual:pwa-register' {
     onOfflineReady?: () => void;
   }
 
-  export type RegisterSWReturn = () => Promise<void>;
+  export interface RegisterSWReturn {
+    update: (reloadPage?: boolean) => Promise<void>;
+  }
+
   export function registerSW(options?: RegisterSWOptions): RegisterSWReturn;
 }

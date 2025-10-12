@@ -11,23 +11,7 @@ export const usePWA = () => {
   return context;
 };
 
-const updateSW = registerSW({
-  onNeedRefresh() {
-    fetch('/build-info.txt')
-      .then((res) => res.text())
-      .then((text) => {
-        const versionLine = text.split('\n').find((l) => l.startsWith('version:'));
-        const version = versionLine?.split(':')[1].trim() ?? 'unknown';
-
-        localStorage.setItem('sw-need-refresh', 'true');
-        localStorage.setItem('sw-new-version', version);
-      });
-  },
-  onOfflineReady() {
-    localStorage.setItem('sw-offline-ready', 'true');
-    localStorage.setItem('sw-need-refresh', 'false');
-  },
-});
+let updateSWFn: (() => void) | null = null;
 
 export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   const [isOfflineReady, setIsOfflineReady] = useState(false);
@@ -67,10 +51,10 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   }, []);
 
   const updateApp = useCallback(() => {
-    if (updateSW) {
+    if (updateSWFn) {
       localStorage.setItem('sw-need-refresh', 'false');
       localStorage.setItem('sw-offline-ready', 'false');
-      updateSW();
+      updateSWFn();
     } else {
       console.warn('updateSW() called before SW initialized');
       window.location.reload();
@@ -89,4 +73,26 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
       {children}
     </PWAContext.Provider>
   );
+};
+
+export const initSW = () => {
+  const { update } = registerSW({
+    onNeedRefresh() {
+    fetch('/build-info.txt')
+      .then((res) => res.text())
+      .then((text) => {
+        const versionLine = text.split('\n').find((l) => l.startsWith('version:'));
+        const version = versionLine?.split(':')[1].trim() ?? 'unknown';
+
+        localStorage.setItem('sw-need-refresh', 'true');
+        localStorage.setItem('sw-new-version', version);
+      });
+  },
+  onOfflineReady() {
+    localStorage.setItem('sw-offline-ready', 'true');
+    localStorage.setItem('sw-need-refresh', 'false');
+  },
+  });
+
+  updateSWFn = update;
 };
