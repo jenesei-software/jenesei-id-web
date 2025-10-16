@@ -92,8 +92,10 @@
     "layout": {
       "title": "Jenesei ID",
       "description": "Построй своё будущее",
-      "reload": "Перезагрузить",
-      "new-version": "Доступна новая версия"
+      "reload-auto": "Автоматическая перезагрузка через {{seconds}}",
+      "reload-now": "Перезагрузить сейчас",
+      "new-version": "Доступна новая версия - {{version}}",
+      "old-version": "Ваша старая версия - {{version}}"
     },
     "sign-in": {
       "title-button": "Войти",

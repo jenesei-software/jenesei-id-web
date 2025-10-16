@@ -29,13 +29,13 @@ function App() {
                 <ProviderWSWebId socketURL={env.socketURL}>
                   <ProviderPermission>
                     <ProviderGeolocation>
-                      <ProviderDialog zIndex={1000}>
-                        <ProviderValidation>
-                          <ProviderPWA>
+                      <ProviderPWA>
+                        <ProviderDialog zIndex={1000}>
+                          <ProviderValidation>
                             <LayoutRouter />
-                          </ProviderPWA>
-                        </ProviderValidation>
-                      </ProviderDialog>
+                          </ProviderValidation>
+                        </ProviderDialog>
+                      </ProviderPWA>
                     </ProviderGeolocation>
                   </ProviderPermission>
                 </ProviderWSWebId>

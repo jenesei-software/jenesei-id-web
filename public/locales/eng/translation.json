@@ -92,8 +92,10 @@
     "layout": {
       "title": "Jenesei ID",
       "description": "Build your future",
-      "reload": "Reload",
-      "new-version": "New version available"
+      "reload-auto": "Auto reload in {{seconds}}",
+      "reload-now": "Reload now",
+      "new-version": "New version available - {{version}}",
+      "old-version": "Your old version - {{version}}"
     },
     "sign-in": {
       "title-button": "Sign In",

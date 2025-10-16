@@ -50,6 +50,7 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   }, []);
 
   const updateApp = useCallback(() => {
+    console.log('Updating app...',updateSW);
     if (updateSW) {
       localStorage.setItem('sw-need-refresh', 'false');
       localStorage.setItem('sw-offline-ready', 'false');
