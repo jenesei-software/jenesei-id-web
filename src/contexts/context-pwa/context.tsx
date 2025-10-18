@@ -1,4 +1,4 @@
-import { updateSW } from '@local/main';
+import { swService } from '@local/main';
 
 import { createContext, FC, useCallback, useContext, useEffect, useState } from 'react';
 
@@ -18,45 +18,23 @@ export const ProviderPWA: FC<ProviderPWAProps> = ({ children }) => {
   const [newVersion, setNewVersion] = useState<string | null>(null);
 
   useEffect(() => {
-    const offlineReady = localStorage.getItem('sw-offline-ready') === 'true';
-    const needRefresh = localStorage.getItem('sw-need-refresh') === 'true';
-    const newVersion = localStorage.getItem('sw-new-version');
+    setIsOfflineReady(swService.isOfflineReady);
+    setIsUpdateAvailable(swService.isUpdateAvailable);
+    setNewVersion(swService.newVersion ?? null);
 
-    setIsOfflineReady(offlineReady);
-    setIsUpdateAvailable(needRefresh);
-    setNewVersion(newVersion ?? null);
+    const unSubscribe = swService.subscribe(() => {
+      setIsOfflineReady(swService.isOfflineReady);
+      setIsUpdateAvailable(swService.isUpdateAvailable);
+      setNewVersion(swService.newVersion ?? null);
+    });
 
-    let prevOfflineReady = offlineReady;
-    let prevNeedRefresh = needRefresh;
-
-    if (needRefresh) return;
-
-    const interval = setInterval(() => {
-      const newOfflineReady = localStorage.getItem('sw-offline-ready') === 'true';
-      const newNeedRefresh = localStorage.getItem('sw-need-refresh') === 'true';
-
-      setIsOfflineReady(newOfflineReady);
-      setIsUpdateAvailable(newNeedRefresh);
-
-      if (newOfflineReady !== prevOfflineReady || newNeedRefresh !== prevNeedRefresh) {
-        clearInterval(interval);
-      }
-
-      prevOfflineReady = newOfflineReady;
-      prevNeedRefresh = newNeedRefresh;
-    }, 1000);
-
-    return () => clearInterval(interval);
+    return () => unSubscribe();
   }, []);
 
   const updateApp = useCallback(() => {
-    console.log('Updating app...',updateSW);
-    if (updateSW) {
-      localStorage.setItem('sw-need-refresh', 'false');
-      localStorage.setItem('sw-offline-ready', 'false');
-      updateSW();
-    } else {
-      console.warn('updateSW() called before SW initialized');
+    try {
+      swService.updateApp().catch(() => window.location.reload());
+    } catch {
       window.location.reload();
     }
   }, []);
