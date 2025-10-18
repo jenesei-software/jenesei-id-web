@@ -142,7 +142,7 @@ export function LayoutRoot() {
             zIndex: 1,
             component: <Header />,
             length: {
-              default: isMatchPrivate ? null : '170px',
+              default: isMatchPrivate ? null : null,
               tablet: isMatchPrivate ? null : '170px',
               mobile: isMatchPrivate ? null : '170px',
             },
