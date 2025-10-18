@@ -1,11 +1,18 @@
-import { Typography } from '@jenesei-software/jenesei-kit-react';
+import { Typography, useApp } from '@jenesei-software/jenesei-kit-react';
 import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const Notification: FC = () => {
   const { t: tLayout } = useTranslation('translation', { keyPrefix: 'layout' });
+  const { changeStatusBarColor } = useApp();
 
+  useEffect(() => {
+    changeStatusBarColor('red100');
+    return () => {
+      changeStatusBarColor('whiteStandard');
+    };
+  }, [changeStatusBarColor]);
   return (
     <Stack
       sx={(theme) => ({
@@ -21,9 +28,7 @@ export const Notification: FC = () => {
         },
       })}
     >
-      <Typography
-        sx={{ default: { variant: 'h7', color: 'whiteStandard', family: 'Roboto', line: 1 } }}
-      >
+      <Typography sx={{ default: { variant: 'h7', color: 'whiteStandard', family: 'Roboto', line: 1 } }}>
         {tLayout('network-error')}
       </Typography>
     </Stack>
