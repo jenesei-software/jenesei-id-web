@@ -67,7 +67,6 @@ export class ClassSw {
   }
 
   private async handleNeedRefresh() {
-    // помечаем, что есть новая версия для апдейта
     this.valueIsUpdateAvailable = true;
     this.notify();
 

@@ -24,6 +24,13 @@
     "title-2": "Please try again later",
     "title-button": "Reload page"
   },
+  "layout":{
+    "reload-auto": "Auto reload in {{seconds}}",
+    "reload-now": "Reload now",
+    "new-version": "New version available - {{version}}",
+    "old-version": "Your old version - {{version}}",
+    "network-error": "Network error. Please check your internet connection."
+  },
   "private": {
     "title-account": "Account",
     "personal-info": {
@@ -91,11 +98,7 @@
   "public": {
     "layout": {
       "title": "Jenesei ID",
-      "description": "Build your future",
-      "reload-auto": "Auto reload in {{seconds}}",
-      "reload-now": "Reload now",
-      "new-version": "New version available - {{version}}",
-      "old-version": "Your old version - {{version}}"
+      "description": "Build your future"
     },
     "sign-in": {
       "title-button": "Sign In",

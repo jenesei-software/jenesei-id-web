@@ -24,6 +24,13 @@
     "title-2": "Пожалуйста, попробуйте позже",
     "title-button": "Перезагрузить страницу"
   },
+  "layout":{
+    "reload-auto": "Автоматическая перезагрузка через {{seconds}}",
+    "reload-now": "Перезагрузить сейчас",
+    "new-version": "Доступна новая версия - {{version}}",
+    "old-version": "Ваша старая версия - {{version}}",
+    "network-error": "Ошибка сети. Пожалуйста, проверьте ваше интернет-соединение."
+  },
   "private": {
     "title-account": "Аккаунт",
     "personal-info": {
@@ -91,11 +98,7 @@
   "public": {
     "layout": {
       "title": "Jenesei ID",
-      "description": "Построй своё будущее",
-      "reload-auto": "Автоматическая перезагрузка через {{seconds}}",
-      "reload-now": "Перезагрузить сейчас",
-      "new-version": "Доступна новая версия - {{version}}",
-      "old-version": "Ваша старая версия - {{version}}"
+      "description": "Построй своё будущее"
     },
     "sign-in": {
       "title-button": "Войти",
