@@ -94,7 +94,7 @@ export default defineConfig(({ mode }) => {
             icon72: `icons/icon-72x72.png`,
             icon76: `icons/icon-76x76.png`,
             icon114: `icons/icon-114x114.png`,
-            icon120: `icons/icon-1204x120.png`,
+            icon120: `icons/icon-120x120.png`,
             icon144: `icons/icon-144x144.png`,
             icon152: `icons/icon-152x152.png`,
             icon180: `icons/icon-180x180.png`,
