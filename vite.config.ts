@@ -117,11 +117,7 @@ export default defineConfig(({ mode }) => {
           runtimeCaching: [
             {
               urlPattern: new RegExp(`^${VITE_BASE_URL}/.*$`),
-              handler: 'NetworkFirst',
-              options: {
-                cacheName: 'api-cache',
-                expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 },
-              },
+              handler: 'NetworkOnly',
             },
             {
               urlPattern: /build-info\.txt$/,
