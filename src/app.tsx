@@ -23,7 +23,7 @@ function App() {
       <ProviderScreenWidth>
         <ProviderLanguage>
           <JeneseiGlobalStyles />
-          <LayoutErrorBoundary>
+          {/* <LayoutErrorBoundary> */}
             <QueryClientProvider client={queryClient}>
               <ProviderAxiosWebId queryClient={queryClient} baseURL={env.baseURL}>
                 <ProviderWSWebId socketURL={env.socketURL}>
@@ -41,7 +41,7 @@ function App() {
                 </ProviderWSWebId>
               </ProviderAxiosWebId>
             </QueryClientProvider>
-          </LayoutErrorBoundary>
+          {/* </LayoutErrorBoundary> */}
         </ProviderLanguage>
       </ProviderScreenWidth>
     </ThemeProvider>

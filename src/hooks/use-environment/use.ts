@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 const description = import.meta.env.VITE_DEFAULT_DESCRIPTION
 const version = import.meta.env.VITE_APP_VERSION
 const name = import.meta.env.VITE_DEFAULT_NAME
-const shortName = import.meta.env.VITE_DEFAULT_SHORTNAME
+const nameShort = import.meta.env.VITE_DEFAULT_NAMESHORT
 const themeColor = import.meta.env.VITE_DEFAULT_THEME_COLOR
 const mode = import.meta.env.VITE_NODE_ENV
 const baseURL = import.meta.env.VITE_BASE_URL
@@ -14,7 +14,7 @@ const cookieNameAccessToken = import.meta.env.VITE_AVAILABILITY_COOKIE_NAME
 export const useEnvironment = (): {
   description: string
   name: string
-  shortName: string
+  nameShort: string
   themeColor: string
   mode: 'dev' | 'prod' | 'test'
   version: string
@@ -27,7 +27,7 @@ export const useEnvironment = (): {
     () => ({
       description: description,
       name: name,
-      shortName: shortName,
+      nameShort: nameShort,
       themeColor: themeColor,
       mode: mode,
       version: version,

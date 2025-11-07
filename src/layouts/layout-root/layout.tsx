@@ -99,7 +99,7 @@ export function LayoutRoot() {
       >
         <ProviderApp
           defaultPreview={{ visible: !visible, defaultVisible: false }}
-          defaultTitle={env.shortName}
+          defaultTitle={env.nameShort}
           defaultDescription={t('meta.description')}
           isScrollOutlet={true}
           defaultBgColor='whiteStandard'
@@ -164,7 +164,7 @@ export function LayoutRoot() {
   );
 }
 function LayoutURLComponent() {
-  const { shortName } = useEnvironment();
+  const { nameShort } = useEnvironment();
   const { t: tURLTitle } = useTranslation('translation', { keyPrefix: 'url.title' });
   const fullPath = useRouterState({
     select: (state) => state.location.pathname.replace(/\/$/, ''),
@@ -177,9 +177,9 @@ function LayoutURLComponent() {
     if (exists) {
       changeTitle(titleTranslate);
     } else {
-      changeTitle(shortName);
+      changeTitle(nameShort);
     }
-  }, [changeTitle, shortName, fullPath, tURLTitle]);
+  }, [changeTitle, nameShort, fullPath, tURLTitle]);
   return <Outlet />;
 }
 

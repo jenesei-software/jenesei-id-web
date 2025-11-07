@@ -1,21 +1,31 @@
-import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
-import { Typography } from '@jenesei-software/jenesei-kit-react/component-typography'
-import React, { Component } from 'react'
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
+import { Typography } from '@jenesei-software/jenesei-kit-react/component-typography';
+import React, { Component } from 'react';
 
-import { LayoutErrorBoundaryProps, LayoutErrorBoundaryState, LayoutErrorWrapper } from '.'
+import { LayoutErrorBoundaryProps, LayoutErrorBoundaryState, LayoutErrorWrapper } from '.';
 
 export class LayoutErrorBoundary extends Component<LayoutErrorBoundaryProps, LayoutErrorBoundaryState> {
   constructor(props: LayoutErrorBoundaryProps) {
-    super(props)
-    this.state = { hasError: false, error: null }
+    super(props);
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error }
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('ErrorBoundary caught an error', error, errorInfo)
+    // Игнорируем ошибки, вызванные HMR / React internals
+    if (
+      error.message?.includes('removeChild') ||
+      error.message?.includes('createRoot') ||
+      error.message?.includes('ReactDOMClient')
+    ) {
+      console.warn('[LayoutErrorBoundary] Ignored transient React error:', error.message);
+      return;
+    }
+
+    console.error('ErrorBoundary caught an error', error, errorInfo);
   }
 
   render() {
@@ -28,8 +38,8 @@ export class LayoutErrorBoundary extends Component<LayoutErrorBoundaryProps, Lay
                 gap: '12px',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                alignItems: 'center'
-              }
+                alignItems: 'center',
+              },
             }}
           >
             <Typography
@@ -38,8 +48,8 @@ export class LayoutErrorBoundary extends Component<LayoutErrorBoundaryProps, Lay
                   variant: 'h6',
                   align: 'center',
                   weight: 700,
-                  color: 'black60'
-                }
+                  color: 'black60',
+                },
               }}
             >
               An unknown error occurred.
@@ -53,8 +63,8 @@ export class LayoutErrorBoundary extends Component<LayoutErrorBoundaryProps, Lay
                     variant: 'h8',
                     align: 'center',
                     weight: 700,
-                    color: 'black100'
-                  }
+                    color: 'black100',
+                  },
                 }}
               >
                 {this?.state?.error?.message}
@@ -62,9 +72,9 @@ export class LayoutErrorBoundary extends Component<LayoutErrorBoundaryProps, Lay
             )}
           </Stack>
         </LayoutErrorWrapper>
-      )
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }
