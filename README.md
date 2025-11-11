@@ -7,7 +7,7 @@
 1. install dependencies with:  
    `npm i`
 
-2. run in development mode (watch changes in the files and refresh your browser automatically):  
+2. run in dev mode (watch changes in the files and refresh your browser automatically):  
    `npm run start`
 
 3. would like to publish the project as a website? Then make a distribution build by generating static files:  
@@ -34,3 +34,5 @@
 | /src/providers  | The directory with data providers.                                                       |
 | /src/styles     | The directory for global project styles.                                               |
 | /public/        | The directory containing the HTML file of the project, the manifest file of the project, as well as all kinds of icons. |
+
+test
