@@ -46,5 +46,6 @@ jobs:
       package_manager: ${{ inputs.package_manager }}
       check_command: ${{ inputs.check_command }}
       changelog_preset: ${{ inputs.changelog_preset }}
+      github_packages_scope: "true"
     secrets:
       ACCESS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
