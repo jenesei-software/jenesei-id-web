@@ -1,5 +1,4 @@
-name: deploy-node
-
+name: release-app
 on:
   workflow_dispatch:
     inputs:
@@ -40,7 +39,7 @@ on:
 
 jobs:
   release:
-    uses: jenesei-software/.github/.github/workflows/deploy-node.yml@main
+    uses: jenesei-software/.github/.github/workflows/release-app.yml@main
     with:
       version_type: ${{ inputs.version_type }}
       explicit_version: ${{ inputs.explicit_version }}
