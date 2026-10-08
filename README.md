@@ -34,7 +34,7 @@ The build reads the environment from `VITE_NODE_ENV`:
 | ----- | ------- | ----------- | -------- |
 | `prod` | Production | `noindex, nofollow` | off |
 | `dev`  | Development | `index, nofollow` | off |
-| `test` | Staging | `noindex, nofollow` | on |
+| `test` | Test | `noindex, nofollow` | on |
 
 Any other value fails the build on purpose. There is no `--mode` flag on the build
 script, so the mode cannot drift away from `VITE_NODE_ENV`.
@@ -42,13 +42,15 @@ script, so the mode cannot drift away from `VITE_NODE_ENV`.
 Required keys are listed in `.env.template`. Real values are not kept in the
 repository. For local work copy the template to `.env.local`.
 
-`VITE_APP_VERSION` is written by the release pipeline. Do not set it by hand.
+The application version is not an env variable. Vite reads `version` from
+`package.json` and exposes it to the bundle as `__APP_VERSION__`, so it always matches
+the released version.
 
 ### Releases
 
 The pipeline does not build. It runs `check`, bumps the version in `package.json`,
 commits, tags, and publishes a GitHub Release. Run it from the Actions tab with the
-`deploy-node` workflow.
+`release-app` workflow.
 
 ### Files
 
@@ -66,5 +68,3 @@ commits, tags, and publishes a GitHub Release. Run it from the Actions tab with 
 | /src/providers  | The directory with data providers.                                                       |
 | /src/styles     | The directory for global project styles.                                               |
 | /public/        | The directory containing the HTML file of the project, the manifest file of the project, as well as all kinds of icons. |
-
-test
