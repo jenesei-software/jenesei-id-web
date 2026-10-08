@@ -14,10 +14,14 @@ dist
 
 dev-dist
 
-dev-dist
 dist-ssr
 *.local
 *.npmrc
+
+# Real env files. Values live in the deployment platform, see .env.template.
+.env
+.env.*
+!.env.template
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

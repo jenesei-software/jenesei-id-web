@@ -5,6 +5,6 @@ export type ProviderPWAProps = PropsWithChildren;
 export interface PWAContextProps {
   isOfflineReady: boolean;
   isUpdateAvailable: boolean;
-  newVersion: string | null
+  newVersion: string | null;
   updateApp: () => void;
 }

@@ -18,6 +18,38 @@
    `npx vite-bundle-visualizer -t sunburst`
    `npx vite-bundle-visualizer -t network`
 
+5. run the same checks as the release pipeline:
+   `npm run check`
+
+### Environments
+
+There is one branch and one version. Builds are produced per environment by the
+deployment platform, not by this repository. Each environment sets its own
+`VITE_*` values when it builds, so the same commit yields a different bundle per
+environment.
+
+The build reads the environment from `VITE_NODE_ENV`:
+
+| Value | Meaning | Robots meta | Devtools |
+| ----- | ------- | ----------- | -------- |
+| `prod` | Production | `noindex, nofollow` | off |
+| `dev`  | Development | `index, nofollow` | off |
+| `test` | Staging | `noindex, nofollow` | on |
+
+Any other value fails the build on purpose. There is no `--mode` flag on the build
+script, so the mode cannot drift away from `VITE_NODE_ENV`.
+
+Required keys are listed in `.env.template`. Real values are not kept in the
+repository. For local work copy the template to `.env.local`.
+
+`VITE_APP_VERSION` is written by the release pipeline. Do not set it by hand.
+
+### Releases
+
+The pipeline does not build. It runs `check`, bumps the version in `package.json`,
+commits, tags, and publishes a GitHub Release. Run it from the Actions tab with the
+`deploy-node` workflow.
+
 ### Files
 
 | Path            | Description                                                                          |

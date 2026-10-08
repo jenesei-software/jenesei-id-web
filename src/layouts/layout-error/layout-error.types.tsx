@@ -1,12 +1,12 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
-export type LayoutErrorRouterProps = object
+export type LayoutErrorRouterProps = object;
 
 export interface LayoutErrorBoundaryProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export interface LayoutErrorBoundaryState {
-  hasError: boolean
-  error: Error | null
+  hasError: boolean;
+  error: Error | null;
 }

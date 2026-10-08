@@ -1,2 +1,2 @@
-export * from './router.search'
-export * from './router'
+export * from './router';
+export * from './router.search';

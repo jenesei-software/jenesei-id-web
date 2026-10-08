@@ -3,16 +3,6 @@ name: deploy-node
 on:
   workflow_dispatch:
     inputs:
-      build_folder:
-        description: "Build output folder"
-        required: false
-        default: "build"
-        type: string
-      env_property:
-        description: "Environment property"
-        default: "VITE_APP_VERSION"
-        required: false
-        type: string
       version_type:
         description: "Version bump"
         required: false
@@ -23,6 +13,10 @@ on:
           - major
           - minor
           - patch
+      explicit_version:
+        description: "Explicit version, overrides version_type"
+        required: false
+        type: string
       package_manager:
         description: "Package manager"
         required: false
@@ -33,25 +27,25 @@ on:
           - yarn
           - bun
           - pnpm
-      add_branch_name:
-        description: 'Add branch name to version'
+      check_command:
+        description: "Check command, empty skips checks"
         required: false
-        type: boolean
-        default: true
-      add_build_number:
-        description: 'Add build number to version'
+        default: "check"
+        type: string
+      changelog_preset:
+        description: "conventional-changelog preset, empty disables changelog"
         required: false
-        type: boolean
-        default: true
+        default: "angular"
+        type: string
+
 jobs:
-  call-publisher:
+  release:
     uses: jenesei-software/.github/.github/workflows/deploy-node.yml@main
     with:
-      env_property: ${{ inputs.env_property }}
-      build_folder: ${{ inputs.build_folder }}
       version_type: ${{ inputs.version_type }}
+      explicit_version: ${{ inputs.explicit_version }}
       package_manager: ${{ inputs.package_manager }}
-      add_branch_name: ${{ inputs.add_branch_name }}
-      add_build_number: ${{ inputs.add_build_number }}
+      check_command: ${{ inputs.check_command }}
+      changelog_preset: ${{ inputs.changelog_preset }}
     secrets:
-      ACCESS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+      ACCESS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

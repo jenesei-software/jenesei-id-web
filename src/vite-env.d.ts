@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
   readonly VITE_DEFAULT_DESCRIPTION: string;
   readonly VITE_DEFAULT_NAMESHORT: string;
+  readonly VITE_DEFAULT_NAME: string;
   readonly VITE_DEFAULT_THEME_COLOR: string;
   readonly VITE_BASE_URL: string;
   readonly VITE_SOCKET_URL: string;
@@ -14,6 +15,9 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+/** Replaced at build time from package.json by vite.config.ts. */
+declare const __APP_VERSION__: string;
 
 declare module 'virtual:pwa-register' {
   export interface RegisterSWOptions {

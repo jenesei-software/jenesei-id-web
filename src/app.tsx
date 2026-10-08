@@ -3,7 +3,6 @@ import { ProviderPWA } from '@local/contexts/context-pwa';
 import { ProviderValidation } from '@local/contexts/context-validation';
 import { queryClient } from '@local/core/query';
 import { useEnvironment } from '@local/hooks/use-environment';
-import { LayoutErrorBoundary } from '@local/layouts/layout-error';
 import { LayoutRouter } from '@local/layouts/layout-router';
 
 import { ProviderAxiosWebId, ProviderWSWebId } from '@jenesei-software/jenesei-id-web-api';
@@ -24,23 +23,23 @@ function App() {
         <ProviderLanguage>
           <JeneseiGlobalStyles />
           {/* <LayoutErrorBoundary> */}
-            <QueryClientProvider client={queryClient}>
-              <ProviderAxiosWebId queryClient={queryClient} baseURL={env.baseURL}>
-                <ProviderWSWebId socketURL={env.socketURL}>
-                  <ProviderPermission>
-                    <ProviderGeolocation>
-                      <ProviderPWA>
-                        <ProviderDialog zIndex={1000}>
-                          <ProviderValidation>
-                            <LayoutRouter />
-                          </ProviderValidation>
-                        </ProviderDialog>
-                      </ProviderPWA>
-                    </ProviderGeolocation>
-                  </ProviderPermission>
-                </ProviderWSWebId>
-              </ProviderAxiosWebId>
-            </QueryClientProvider>
+          <QueryClientProvider client={queryClient}>
+            <ProviderAxiosWebId queryClient={queryClient} baseURL={env.baseURL}>
+              <ProviderWSWebId socketURL={env.socketURL}>
+                <ProviderPermission>
+                  <ProviderGeolocation>
+                    <ProviderPWA>
+                      <ProviderDialog zIndex={1000}>
+                        <ProviderValidation>
+                          <LayoutRouter />
+                        </ProviderValidation>
+                      </ProviderDialog>
+                    </ProviderPWA>
+                  </ProviderGeolocation>
+                </ProviderPermission>
+              </ProviderWSWebId>
+            </ProviderAxiosWebId>
+          </QueryClientProvider>
           {/* </LayoutErrorBoundary> */}
         </ProviderLanguage>
       </ProviderScreenWidth>

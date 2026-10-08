@@ -410,8 +410,8 @@ export function PagePublicSignUp() {
                       labelPlaceholder={tForm('dateOfBirth.placeholder')}
                       id={field.name}
                       name={field.name}
-                      type="select"
-                      autoComplete="bday"
+                      type='select'
+                      autoComplete='bday'
                       isOnClickClose
                       value={field.state.value}
                       onBlur={field.handleBlur}

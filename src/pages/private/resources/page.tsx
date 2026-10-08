@@ -1,20 +1,20 @@
-import { RESOURCE_LIST } from '@local/core/constants'
+import { RESOURCE_LIST } from '@local/core/constants';
 
 import {
   ResourceDto,
   useResourceConnect,
   useResourceList,
-  useResourceProfile
-} from '@jenesei-software/jenesei-id-web-api'
-import { Button, Icon, Preview, Separator, Typography } from '@jenesei-software/jenesei-kit-react'
-import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack'
-import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
+  useResourceProfile,
+} from '@jenesei-software/jenesei-id-web-api';
+import { Button, Icon, Preview, Separator, Typography } from '@jenesei-software/jenesei-kit-react';
+import { Stack } from '@jenesei-software/jenesei-kit-react/component-stack';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function PagePrivateResources() {
-  const { t } = useTranslation('translation')
-  const { data: dataResourceList, isLoading } = useResourceList()
-  const { data: dataResourceProfile } = useResourceProfile()
+  const { t } = useTranslation('translation');
+  const { data: dataResourceList, isLoading } = useResourceList();
+  const { data: dataResourceProfile } = useResourceProfile();
   return (
     <Stack
       sx={{
@@ -23,8 +23,8 @@ export function PagePrivateResources() {
           flexDirection: 'column',
           flexGrow: 1,
           gap: '20px',
-          position: 'relative'
-        }
+          position: 'relative',
+        },
       }}
     >
       <Stack
@@ -32,8 +32,8 @@ export function PagePrivateResources() {
           default: {
             flexDirection: 'column',
             alignItems: 'flex-start',
-            gap: '6px'
-          }
+            gap: '6px',
+          },
         }}
       >
         <Typography
@@ -42,8 +42,8 @@ export function PagePrivateResources() {
               variant: 'h6',
               weight: 700,
               color: 'black80',
-              line: 1
-            }
+              line: 1,
+            },
           }}
         >
           {t('private.resources.menu.title')}
@@ -54,8 +54,8 @@ export function PagePrivateResources() {
               variant: 'h8',
               weight: 500,
               color: 'black50',
-              line: 2
-            }
+              line: 2,
+            },
           }}
         >
           {t('private.resources.menu.description')}
@@ -70,39 +70,39 @@ export function PagePrivateResources() {
               width: '100%',
               display: 'grid',
               gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))',
-              gap: '12px'
+              gap: '12px',
             },
             tablet: {
-              gridTemplateColumns: 'repeat(3, minmax(300px, 1fr))'
+              gridTemplateColumns: 'repeat(3, minmax(300px, 1fr))',
             },
             mobile: {
-              gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))'
-            }
+              gridTemplateColumns: 'repeat(auto-fit, minmax(100%, 1fr))',
+            },
           }}
         >
           {dataResourceList?.map((resource: ResourceDto) => (
             <PagePrivateResourcesItem
               key={resource.resourceId}
               resource={resource}
-              isConnect={(dataResourceProfile ?? []).some(r => r.resourceId === resource.resourceId)}
+              isConnect={(dataResourceProfile ?? []).some((r) => r.resourceId === resource.resourceId)}
             />
           ))}
         </Stack>
       </Preview>
     </Stack>
-  )
+  );
 }
 export function PagePrivateResourcesItem(props: { resource: ResourceDto; isConnect: boolean }) {
-  const { mutate, isPending } = useResourceConnect()
-  const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.resources' })
+  const { mutate, isPending } = useResourceConnect();
+  const { t: tPage } = useTranslation('translation', { keyPrefix: 'private.resources' });
   const description = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    return tPage(`services.${props.resource.resourceName}.description`)
-  }, [props.resource.resourceName, tPage])
+    //@ts-expect-error
+    return tPage(`services.${props.resource.resourceName}.description`);
+  }, [props.resource.resourceName, tPage]);
   return (
     <Stack
-      sx={theme => ({
+      sx={(theme) => ({
         default: {
           width: '100%',
           height: '100%',
@@ -112,29 +112,29 @@ export function PagePrivateResourcesItem(props: { resource: ResourceDto; isConne
           gap: '8px',
           borderRadius: '20px',
           padding: '14px',
-          border: `1px solid ${theme.palette.grayMonica}`
+          border: `1px solid ${theme.palette.grayMonica}`,
         },
         mobile: {
           minWidth: '100%',
           width: '100%',
-          padding: '8px'
-        }
+          padding: '8px',
+        },
       })}
     >
       {RESOURCE_LIST[props.resource.resourceName] && (
         <Stack sx={{ default: { alignItems: 'center', justifyContent: 'space-between' } }}>
           <Icon
-            type="logo"
+            type='logo'
             name={RESOURCE_LIST[props.resource.resourceName].icon}
-            size="100%"
-            color="blueRest"
+            size='100%'
+            color='blueRest'
             sx={{
               default: {
                 width: '36px',
                 height: '36px',
                 minWidth: '36px',
-                maxWidth: '36px'
-              }
+                maxWidth: '36px',
+              },
             }}
           />
           <Typography
@@ -143,8 +143,8 @@ export function PagePrivateResourcesItem(props: { resource: ResourceDto; isConne
                 variant: 'h5',
                 weight: 700,
                 color: 'blueRest',
-                line: 1
-              }
+                line: 1,
+              },
             }}
           >
             {RESOURCE_LIST[props.resource.resourceName].name}
@@ -158,8 +158,8 @@ export function PagePrivateResourcesItem(props: { resource: ResourceDto; isConne
               variant: 'h8',
               weight: 500,
               color: 'black60',
-              line: 3
-            }
+              line: 3,
+            },
           }}
         >
           {description}
@@ -167,7 +167,7 @@ export function PagePrivateResourcesItem(props: { resource: ResourceDto; isConne
       </Stack>
       <Stack
         sx={{
-          default: { alignItems: 'center', justifyContent: 'flex-start', gap: '12px' }
+          default: { alignItems: 'center', justifyContent: 'flex-start', gap: '12px' },
         }}
       >
         <Button
@@ -176,22 +176,22 @@ export function PagePrivateResourcesItem(props: { resource: ResourceDto; isConne
           isOnlyIcon={isPending}
           isRadius
           genre={props.isConnect ? 'greenTransparent' : 'gray'}
-          size="small"
+          size='small'
           icons={[
             {
               type: 'loading',
               name: 'Line',
-              isHidden: !isPending
-            }
+              isHidden: !isPending,
+            },
           ]}
           onClick={() => mutate({ body: { resourceId: props.resource.resourceId } })}
         >
           {props.isConnect ? tPage('button-connected') : tPage('button-connect')}
         </Button>
-        <Button isRadius isDisabled genre={props.resource.isActive ? 'greenTransparent' : 'gray'} size="small">
+        <Button isRadius isDisabled genre={props.resource.isActive ? 'greenTransparent' : 'gray'} size='small'>
           {props.resource.isActive ? tPage('button-active') : tPage('button-inactive')}
         </Button>
       </Stack>
     </Stack>
-  )
+  );
 }

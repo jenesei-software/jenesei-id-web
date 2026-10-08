@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const LayoutErrorWrapper = styled.div`
   background-color: white;
@@ -15,7 +15,7 @@ export const LayoutErrorWrapper = styled.div`
   height: 100vh;
   overflow: hidden;
   gap: 16px;
-`
+`;
 
 export const LayoutErrorTitlesContainer = styled.div`
   display: flex;
@@ -23,4 +23,4 @@ export const LayoutErrorTitlesContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 8px;
-`
+`;
